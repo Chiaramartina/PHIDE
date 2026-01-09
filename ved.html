@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHIDE Catalogue</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-white text-[#010435] font-['Inter']">
+<div id="root"></div>
+
+<script type="text/babel">
+
+/* ================= NAVBAR ================= */
+
+function Navbar() {
+  return (
+    <nav className="fixed top-0 left-0 w-full bg-white border-b border-black z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="index.html" className="text-xl font-semibold">PHIDE</a>
+        <div className="hidden md:flex gap-6">
+          <a href="catalogue.html" className="hover:text-[#5b0909]">Catalogue</a>
+          <a href="documentation.html" className="hover:text-[#5b0909]">Documentation</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+/* ================= MAIN APP ================= */
+
+function CatalogueApp() {
+  const [books, setBooks] = React.useState([]);
+  const [selected, setSelected] = React.useState(null);
+  const [showSchedule, setShowSchedule] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch("/books.json")
+      .then(r => r.json())
+      .then(setBooks);
+  }, []);
+
+  return (
+    <>
+      <Navbar />
+
+      <main className="pt-24 max-w-7xl mx-auto px-6">
+        <h1 className="text-5xl font-serif mb-10">CATALOGUE</h1>
+
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {books.map(b => (
+            <div
+              key={b.id}
+              onClick={() => { setSelected(b); setShowSchedule(false); }}
+              className="cursor-pointer border border-black p-4 hover:shadow-lg transition"
+            >
+              <div className="h-52 bg-gray-100 mb-3 overflow-hidden">
+                <img src={b.cover} className="w-full h-full object-cover" />
+              </div>
+              <p className="font-semibold">{b.title}</p>
+              <p className="text-sm text-gray-500">{b.author}</p>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {/* MODAL */}
+      {selected && (
+        <Modal
+          book={selected}
+          showSchedule={showSchedule}
+          setShowSchedule={setShowSchedule}
+          close={() => setSelected(null)}
+        />
+      )}
+    </>
+  );
+}
+
+/* ================= MODAL ================= */
+
+function Modal({ book, close, showSchedule, setShowSchedule }) {
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-end md:items-center">
+      <div className="bg-white w-full md:max-w-4xl max-h-[85vh] overflow-auto relative p-6">
+
+        <button
+          className="absolute top-4 right-4 text-3xl"
+          onClick={close}
+        >
+          ×
+        </button>
+
+        <div className="flex gap-6">
+          <img
+            src={book.cover}
+            className="hidden md:block w-48 h-32 object-cover border"
+          />
+
+          <div className="flex-grow">
+            <h2 className="text-3xl font-serif mb-1">“{book.title}”</h2>
+            <p className="text-gray-500 mb-4">{book.author}</p>
+
+            <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+              <div><strong>Curator</strong><br />{book.Curator}</div>
+              <div><strong>Institution</strong><br />{book.Institution}</div>
+              <div><strong>Published</strong><br />{book.date}</div>
+              <div><strong>Language</strong><br />{book.language}</div>
+            </div>
+
+            <div className="flex gap-3 mb-6">
+              <a
+                href={book.URL}
+                target="_blank"
+                className="px-3 py-1 bg-[#5b0909] text-white rounded"
+              >
+                URL
+              </a>
+
+              <button
+                onClick={() => setShowSchedule(!showSchedule)}
+                className="px-3 py-1 bg-[#29341d] text-white rounded"
+              >
+                Schedule
+              </button>
+            </div>
+
+            {showSchedule && <PHIDESchedule phide={book.phide} />}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ================= PHIDE SCHEDULE ================= */
+
+function PHIDESchedule({ phide }) {
+  const [open, setOpen] = React.useState(null);
+
+  return (
+    <div className="border-t border-black pt-6 space-y-4">
+
+      <Accordion title="Editorial Model" open={open==="editorial"} onClick={()=>setOpen(open==="editorial"?null:"editorial")}>
+        <ul className="list-disc ml-5">
+          <li><strong>Type:</strong> {phide.editorialModel.type}</li>
+          <li><strong>Purpose:</strong> {phide.editorialModel.purpose}</li>
+          <li><strong>Text conception:</strong> {phide.editorialModel.textConception}</li>
+        </ul>
+      </Accordion>
+
+      <Accordion title="Philosophical Content" open={open==="content"} onClick={()=>setOpen(open==="content"?null:"content")}>
+        <ul className="list-disc ml-5">
+          <li>Critical apparatus: {phide.philosophicalContent.criticalApparatus ? "Yes" : "No"}</li>
+          <li>Commentary: {phide.philosophicalContent.commentary}</li>
+          <li>Intertextuality: {phide.philosophicalContent.intertextuality.join(", ")}</li>
+        </ul>
+      </Accordion>
+
+      <Accordion title="Digital Features" open={open==="features"} onClick={()=>setOpen(open==="features"?null:"features")}>
+        <ul className="list-disc ml-5">
+          {phide.digitalFeatures.map((f,i)=>(
+            <li key={i}>{f}</li>
+          ))}
+        </ul>
+      </Accordion>
+
+      <Accordion title="Data & Reuse" open={open==="data"} onClick={()=>setOpen(open==="data"?null:"data")}>
+        <ul className="list-disc ml-5">
+          <li>Encoding: {phide.dataReuse.encoding}</li>
+          <li>Download: {phide.dataReuse.download}</li>
+          <li>License: {phide.dataReuse.license}</li>
+        </ul>
+      </Accordion>
+
+      <div className="bg-gray-100 border-l-4 border-[#5b0909] p-4 italic">
+        <strong>PHIDE analytical note:</strong><br/>
+        {phide.phideNote}
+      </div>
+    </div>
+  );
+}
+
+/* ================= ACCORDION ================= */
+
+function Accordion({ title, open, onClick, children }) {
+  return (
+    <div>
+      <button
+        onClick={onClick}
+        className="w-full text-left font-semibold text-lg"
+      >
+        {title}
+      </button>
+      {open && <div className="mt-2 text-sm">{children}</div>}
+    </div>
+  );
+}
+
+/* ================= RENDER ================= */
+
+ReactDOM.createRoot(document.getElementById("root")).render(<CatalogueApp />);
+
+</script>
+</body>
+</html>

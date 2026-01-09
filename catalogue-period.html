@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catalogue</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- React + ReactDOM + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body class="bg-white text-[#010435] font-['Inter']">
+
+  <div id="navbar-root"></div>
+  <div id="main-root"></div>
+
+<script type="text/babel">
+
+/* ================= NAVBAR ================= */
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+
+  return (
+    <nav className="w-full bg-white border-b border-black fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
+
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
+
+          <div className="hidden md:flex space-x-6 items-center">
+            <div className="relative">
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5b0909]">
+                Catalogue
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow">
+                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                </div>
+              )}
+            </div>
+
+            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+          </div>
+
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="/catalogue.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/map.html" className="block">Map</a>
+          <a href="/documentation.html" className="block">Documentation</a>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+
+/* ================= MAIN ================= */
+function MainContent() {
+
+  const cards = [
+    { title: "All", href: "catalogue.html", bg: "#F0F0F0", size: "h-72 md:h-80" },
+    { title: "Ancient Philosophy", href: "catalogue.html?epoch=ancient philosophy", bg: "#F8E9D9" },
+    { title: "Medieval Philosophy", href: "catalogue.html?epoch=medieval philosophy", bg: "#F3F3EC" },
+    { title: "Modern Philosophy", href: "catalogue.html?epoch=modern philosophy", bg: "#ECE9F1" },
+    { title: "Contemporary Philosophy", href: "catalogue.html?epoch=contemporary philosophy", bg: "#E8F2DF" },
+  ];
+
+  return (
+    <main className="pt-28 pb-10">
+
+      {/* ALL CARD */}
+      <div className="max-w-4xl mx-auto px-6 mb-10">
+        <a
+          href={cards[0].href}
+          style={{ backgroundColor: cards[0].bg }}
+          className={`relative ${cards[0].size} rounded-3xl p-12 flex items-center justify-center text-center hover:scale-105 transition transform shadow-lg overflow-hidden`}
+        >
+
+          <img
+            src="all.png"
+            alt="All"
+            className="absolute inset-0 w-full h-full object-cover opacity-20 hover:opacity-50 transition-opacity duration-300 z-0 pointer-events-none"
+          />
+
+          <h2 className="text-4xl md:text-5xl font-semibold font-['Playfair Display'] z-10">
+            All
+          </h2>
+        </a>
+      </div>
+
+
+      {/* OTHER CARDS */}
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {cards.slice(1).map((card, index) => (
+          <a
+            key={index}
+            href={card.href}
+            style={{ backgroundColor: card.bg }}
+            className="relative h-56 md:h-64 rounded-2xl p-6 flex items-center justify-center text-center hover:scale-105 transition transform overflow-hidden shadow-md"
+          >
+            
+            {card.title === "Modern Philosophy" && (
+              <img src="med1.png" className="absolute inset-0 w-full h-full object-cover opacity-20 z-0" />
+            )}
+
+            {card.title === "Contemporary Philosophy" && (
+              <img src="con.png" className="absolute inset-0 w-full h-full object-cover opacity-20 z-0" />
+            )}
+
+            {card.title === "Medieval Philosophy" && (
+              <img src="medievale.png" className="absolute inset-0 w-full h-full object-cover opacity-20 z-0" />
+            )}
+
+            {card.title === "Ancient Philosophy" && (
+              <img src="antica.png" className="absolute inset-0 w-full h-full object-cover opacity-20 z-0" />
+            )}
+
+            <h2 className="text-2xl md:text-3xl font-semibold z-10">{card.title}</h2>
+
+          </a>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+
+/* ================= RENDER ================= */
+ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
+
+</script>
+
+</body>
+</html>

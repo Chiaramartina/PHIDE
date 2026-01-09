@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Catalogo Digitale Filosofico</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+
+  <!-- SPAZIO PER EVITARE SOVRAPPOSIZIONE NAVBAR -->
+  <div class="h-0"></div>
+
+  <!-- STRUTTURA PAGINA -->
+  <main class="max-w-7xl mx-auto px-4 py-10">
+
+    <!-- HERO -->
+    <section class="text-center mb-10">
+      <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
+
+      <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">SCHEDA DESCRITTIVA</h1>
+
+      <div class="w-full h-1 bg-[#010435] rounded-full mt-4"></div>
+    </section>
+
+<style>
+body { 
+    font-family: 'Playfair Display', serif; 
+    background-color: #f9f9f9; 
+    color: #333; 
+    margin: 0; 
+    padding-top: 4rem; /* compensare navbar fissa */
+}
+
+/* ===== SEZIONE PRINCIPALE ===== */
+.container {
+    max-width: 1300px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.container h1 {
+    font-weight: 700;
+    margin-top: 2rem;
+    color: #2b2b2b;
+}
+
+.container p {
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ===== TABLE WRAPPER ===== */
+.table-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem 1rem;
+    background-color: #ffffff; 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+/* Mantieni la tabella centrata */
+.table-wrapper table {
+    margin: 0 auto;
+}
+
+.table-wrapper table th,
+.table-wrapper table td {
+    min-width: 50px;
+}
+
+.table-wrapper th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Centra e rende i bottoni della paginazione più compatti */
+.dataTables_wrapper .dataTables_paginate {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate ul {
+    display: flex !important;
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate li {
+    margin: 0 0.2rem; /* spazio ridotto tra i bottoni */
+}
+
+.dataTables_wrapper .dataTables_paginate li a {
+    display: block;
+    padding: 0.35rem 0.6rem; /* leggero padding */
+    text-align: center;
+    background-color: transparent; /* piatto */
+    color: #020435!important;      /* colore testo blu */
+    border: 1px solid #020435;      /* contorno blu */
+    border-radius: 0;                /* niente arrotondamento */
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.dataTables_wrapper .dataTables_paginate li a:hover,
+.dataTables_wrapper .dataTables_paginate li.active a {
+    background-color: #3e2814;
+    color: #fff !important;
+}
+
+
+
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+    text-align: right;
+    margin-bottom: 0.5rem;
+}
+/* ===== BUTTONS ===== */
+.table-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0 3rem;
+}
+
+.table-buttons button {
+    background-color: #5a3e1b;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.table-buttons button:hover {
+    background-color: #3e2814;
+}
+
+/* ===== DATATABLES ===== */
+.dataTables_length label, .dataTables_filter label {
+    color: #2b2b2b;
+    font-weight: 500;
+}
+
+.dataTables_length select, .dataTables_filter input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    color: #333;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR TAILWIND -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#010435] shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center h-16">
+      <a href="/index.html" class="text-white text-xl" style="font-family: 'Playfair Display', serif;">PHIDE</a>
+      <div class="flex flex-grow justify-center space-x-8">
+        <a href="/index.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">Home</a>
+        <a href="/caso.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">Catalogue</a>
+        <a href="/about.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">About</a>
+        <a href="/contact.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">Contact</a>
+      </div>
+      <div class="w-[100px]"></div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+    <hr class="my-6">
+
+    <div class="table-wrapper">
+        <div id="table-container"></div>
+    </div>
+    
+</div>
+
+<footer class="text-center mt-4 mb-4">
+  <p>© Edizioni Digitali Filosofiche — Catalogo</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.csv.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="js/csv_to_html_table.js"></script>
+
+<script>
+function format_link(link) {
+  return link ? `<a href='${link}' target='_blank'>${link}</a>` : "";
+}
+
+CsvToHtmlTable.init({
+  csv_path: "data/Health Clinics in Chicago.csv",
+  element: "table-container",
+  allow_download: true,
+  csv_options: { separator: ",", delimiter: '"' },
+  datatables_options: {
+      paging: true,
+      pageLength: 10, 
+      autoWidth: false,
+      scrollX: true
+  },
+  custom_formatting: [[4, format_link]],
+  onComplete: function() {
+      const dTable = $('#table-container table').DataTable();
+
+      $('#prevPage').off('click').on('click', function(){
+          dTable.page('previous').draw('page');
+      });
+
+      $('#nextPage').off('click').on('click', function(){
+          dTable.page('next').draw('page');
+      });
+  }
+});
+</script>
+</body>
+</html>

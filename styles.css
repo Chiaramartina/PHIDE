@@ -1,0 +1,402 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+
+:root {
+  --primary-color: #010435;
+  --text-dark:#9c9696;
+  --white: #fafafa;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn {
+  position: absolute;
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background-color:#fafafa;
+}
+
+/* Sfondo rotante a destra */
+body::after {
+  content: "";
+  position: fixed;
+  top: -10%;
+  right: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, #5b0909, #330202); /* colori diversi o simili */
+  z-index: -2;
+  animation: rotate-bg-right 2s linear forwards; /* durata 2s, si ferma */
+}
+
+@keyframes rotate-bg-right {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-90deg); } /* ruota in senso opposto di 90° */
+}
+
+
+ body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, #29341d, #07110a);
+  z-index: -2;
+  animation: rotate-bg 2s linear forwards; /* durata 2s, si ferma */
+}
+
+@keyframes rotate-bg {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(90deg); } /* ruota di 90° in 2 secondi */
+}
+
+
+.container {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  overflow: hidden;
+}
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centra la navbar orizzontalmente */
+  padding: 1rem 0;
+}
+
+.nav__links {
+  display: flex;
+  list-style: none;
+  gap: 3rem; /* spazio tra i link */
+  padding: 0;
+  margin: 0;
+}
+
+.nav__links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.nav__links a.logo {
+  font-weight: 700; /* evidenzia "Home" */
+}
+
+
+.nav__left a {
+  color: var(--text-dark);
+}
+
+.nav__right a {
+  color: var(--white);
+}
+
+.nav__links a:hover {
+  color: var(--primary-color);
+}
+
+.letter-s {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25rem;
+  line-height: 40rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.container img {
+  position: absolute;
+  width: 100%;
+  max-width: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.8));
+}
+
+.container h4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 5rem;
+  color: var(--white);
+  letter-spacing: 25px;
+}
+
+.text__left {
+  transform: translate(calc(-50% - 250px), -50%);
+}
+
+.text__right {
+  transform: translate(calc(-50% + 250px), -50%);
+}
+
+.container .explore {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 225px));
+  color: var(--text-dark);
+  background-color: transparent;
+  border: 1px solid var(--text-dark);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+}
+
+.container .print {
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%) rotate(90deg);
+  padding: calc(1rem - 4px) calc(2rem - 4px);
+  color: var(--text-dark);
+  background-color: transparent;
+  border: 1px solid var(--text-dark);
+}
+
+.container .catalog {
+  top: 25%;
+  left: 0;
+  transform: translate(0, -50%) rotate(-90deg);
+  padding: calc(1rem - 4px) calc(2rem - 4px);
+  color: var(--text-dark);
+  background-color: transparent;
+  border: 1px solid var(--text-dark);
+}
+
+.container h5 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.container h5::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 100px;
+  top: 50%;
+}
+
+.feature-1 {
+  color: var(--white);
+  transform: translate(calc(-50% - 300px), calc(-50% - 200px));
+}
+
+.feature-2 {
+  color: var(--white);
+  transform: translate(calc(-50% + 300px), calc(-50% - 200px));
+}
+
+.feature-3 {
+  color: var(--white);
+  transform: translate(calc(-50% - 300px), calc(-50% + 200px));
+}
+
+.feature-4 {
+  color: var(--white);
+  transform: translate(calc(-50% + 300px), calc(-50% + 200px));
+}
+
+.feature-1::after,
+.feature-3::after {
+  right: 0;
+  transform: translate(calc(100% + 40px), -50%);
+  background-color: var(--text-dark);
+}
+
+.feature-2::after,
+.feature-4::after {
+  left: 0;
+  transform: translate(calc(-100% - 40px), -50%);
+  background-color: var(--text-dark);
+}
+
+.footer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding-inline: 1rem;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.footer__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer__links li {
+  opacity: 0;
+  animation: fade__in 0.3s ease-in-out forwards;
+}
+
+.footer__links li:nth-child(1) {
+  animation-delay: 6s;
+}
+.footer__links li:nth-child(2) {
+  animation-delay: 6.5s;
+}
+.footer__links li:nth-child(3) {
+  animation-delay: 7s;
+}
+
+@keyframes fade__in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.footer__links a {
+  color: var(--white);
+}
+
+.footer__links a:hover {
+  color: var(--primary-color);
+}
+
+@media (width > 540px) {
+}
+@media (width > 768px) {
+}
+@media (width > 1024px) {
+}
+
+
+
+
+/* wrapper e sticky (come prima) */
+.horizontal-section { width:100%; position:relative; }
+.horizontal-sticky { position:sticky; top:0; height:100vh; width:100%; overflow:hidden; }
+.horizontal-row { display:flex; height:100%; will-change:transform; }
+
+/* pannelli standard: più larghi */
+.panel { min-width:120vw; height:100vh; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-sizing:border-box; padding:5%; }
+.panel-text { background: #fafafa; }
+.panel-text .content { max-width:600px; }
+
+/* PANNELLO IMMAGINE */
+.panel-image {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: #fafafa;
+  position: relative;
+  overflow: visible;
+}
+
+/* immagine più larga e alta */
+.spanning-img {
+  width: 80vw;      /* più larga */
+  max-width: 500px;
+  height: auto;
+  max-height: 50vh;  /* più alta */
+  object-fit: cover;
+  display: block;
+
+  /* centrata inizialmente più a sinistra */
+  transform: translateX(-40vw);  
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+@media (max-width:900px) {
+  .panel { min-width:140vw; }
+  .spanning-img { width: 90vw; max-height: 50vh; transform: translateX(-45vw); }
+}
+
+@media (max-width:560px) {
+  .panel { min-width:160vw; }
+  .spanning-img { width: 90vw; max-height: 40vh; transform: translateX(-40vw); }
+}
+
+.nav__links li.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 2px 0;
+  margin: 0;
+  background-color: transparent;
+  box-shadow: 0 4px 6px transparent;
+  width: 120px; /* menu più stretto */
+  border-radius: 4px;
+}
+
+.dropdown-menu li {
+  padding: 8px 1px; /* meno padding a destra, più a sinistra */
+  text-align: left; /* garantisce allineamento a sinistra */
+}
+
+
+.dropdown-menu li:last-child {
+  border-bottom: none; /* rimuove la linea sotto l’ultimo elemento */
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.stats {left:0;
+    display: flex;
+    margin-right:rem;
+    margin-bottom: 1rem;
+}
+
+
+
+.stat-item {padding-right:3em;
+    display: block;
+    font-weight: normal;
+}
+
+.description {
+    color: #333;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Branding Alternatives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #fafafa;
+      color: #222;
+    }
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #010435;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    nav a.brand {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      text-transform: none;
+      text-decoration: none;
+    }
+    nav .nav-links a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav .nav-links a:hover {
+      color: #ffebc2;
+    }
+
+    /* MAIN CONTAINER */
+    .main-container {
+      max-width: 1100px;
+      margin: 100px auto 0 auto;
+      padding: 40px 20px;
+    }
+
+    .title-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .title-section p {
+      color: #555;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+    .metadata {
+      margin-bottom: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+    .metadata div {
+      margin-bottom: 4px;
+    }
+
+    .image-container img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+
+    .content {
+      display: flex;
+      gap: 40px;
+    }
+    .article {
+      flex: 3;
+    }
+    .article h2 {
+      font-size: 26px;
+      margin-top: 24px;
+    }
+    .article p {
+      line-height: 1.6;
+      color: #444;
+    }
+    .sidebar {
+      flex: 1;
+      padding-left: 20px;
+      border-left: 1px solid #ddd;
+      font-size: 14px;
+      color: #444;
+    }
+
+    /* BUTTONS */
+    .btn {
+      margin-bottom: 20px;
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    footer {
+      padding: 40px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="/index.html" class="brand">PHIDE</a>
+    <div class="nav-links">
+      <a href="/index.html">Home</a>
+      <a href="/caso.html">Catalogue</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-container">
+    <div class="title-section">
+      <button class="btn">Go Back</button>
+      <h1>Things to Look for<br>When Comparing<br>Branding Alternatives</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+      <div class="metadata">
+        <div>📅 14 June 2022</div>
+        <div>Category: Design, Branding</div>
+        <div>Reading time: 10 min</div>
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img src="photo/benjamin.png" alt="Main image" />
+    </div>
+
+    <div class="content">
+      <div class="article">
+        <h2>Elit ullamcorper dignissim</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</p>
+
+        <h2>Hendrerit dolor magna</h2>
+        <p>Tristique sollicitudin nibh sit amet commodo...</p>
+
+        <h2>Hendrerit dolor magna</h2>
+        <p>Tristique sollicitudin nibh sit amet commodo...</p>
+      </div>
+
+      <div class="sidebar">
+        <h3>Author</h3>
+        <p>Guy Hawkins<br>Short bio text lorem ipsum dolor sit amet...</p>
+        <h4>Share</h4>
+        <p>Social icons here</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 — All rights reserved
+  </footer>
+
+</body>
+</html>

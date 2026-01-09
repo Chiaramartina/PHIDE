@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background: #ffffff;
+  color: #111;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 55%;
+  left: 62%;
+  width: 900px;
+  height: 900px;
+background: radial-gradient(
+  circle,
+  rgb(60, 78, 110) 0%,
+  rgba(60, 78, 110, 0.85) 30%,
+  rgba(40, 55, 85, 0.45) 55%,
+  rgba(25, 35, 60, 0.15) 70%,
+  transparent 78%
+);
+  transform: translate(-50%, -50%) scale(0.9);
+  filter: blur(25px);
+  animation: glowPulseStrong 4.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* NAVBAR */
+  .navbar {
+    min-height: 40px; /* Riduce l'altezza minima */
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  /* Assicura che i link siano neri su sfondo trasparente */
+  .nav-link, .navbar-brand {
+    color: black !important;
+  }
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 80px 64px;
+  min-height: calc(100vh - 120px);
+}
+
+.hero-content {
+  max-width: 1200px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  margin: 60px 0;
+  font-weight: 400;
+}
+
+.hero-small {
+  max-width: 320px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.hero-small.top {
+  margin-left: auto;
+}
+
+.hero-small.bottom {
+  margin-top: 40px;
+}
+
+/* SCROLL */
+.scroll-indicator {
+  position: absolute;
+  right: 64px;
+  bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.scroll-indicator .line {
+  width: 1px;
+  height: 60px;
+  background: #111;
+  margin-top: 10px;
+}
+
+@keyframes glowPulseStrong {
+  0% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0.7;
+  }
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 24px 40px;
+  }
+  .hero {
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar nav {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .navbar nav a {
+    margin: 8px 0;
+  }
+
+  .hero {
+    padding: 50px 24px;
+  }
+
+  .hero-small {
+    max-width: 100%;
+  }
+
+  .scroll-indicator {
+    right: 24px;
+    bottom: 24px;
+  }
+}
+
+/* Stili per la Seconda Sezione */
+.stats-section {
+  padding: 100px 0;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.display-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  color: #333;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.counter-wrapper {
+  /* Font molto grande e Bold come nell'immagine */
+  font-size: clamp(4rem, 10vw, 6.5rem); 
+  font-weight: 800; /* Extra bold per dare forza al numero */
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.04em; /* Stringe leggermente le lettere per un look più design */
+  line-height: 1;
+  color: #000;
+  margin-top: 20px;
+}
+
+.counter-label {
+  /* La scritta "editions" leggermente più piccola rispetto al numero ma comunque leggibile */
+  font-size: 0.45em; /* Proporzionale al numero */
+  font-weight: 700;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.description-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.arrow-line {
+  font-size: 2rem;
+  margin-left: 20px;
+  font-weight: 300;
+}
+
+/* Cerchio rotante opzionale per il "Read More" */
+.circle-badge {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.display-main {
+  font-family: 'Playfair Display', serif;
+  /* Ridotto leggermente: il massimo ora è 2.2rem invece di 2.8rem */
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem); 
+  line-height: 1.3;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+  max-width: 850px; /* Allargato un po' per farlo stare su meno righe */
+  margin-top: 40px; /* Spazio dal bordo superiore */
+  margin-bottom: 40px;
+}
+#counter {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; /* Per rendere il "12" grassetto come nell'immagine */
+}
+

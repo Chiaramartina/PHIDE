@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Map</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body class="bg-white text-[#010435]" style="font-family: 'Playfair Display', serif; text-transform: none;">
+
+  <!-- REACT NAVBAR -->
+  <div id="navbar-root"></div>
+
+  <!-- SPAZIO PER EVITARE SOVRAPPOSIZIONE NAVBAR -->
+  <div class="h-20"></div>
+
+  <!-- STRUTTURA PAGINA -->
+  <main class="max-w-7xl mx-auto px-4 py-10">
+
+    <!-- HERO -->
+    <section class="text-center mb-10">
+      <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
+
+      <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">Mappa delle Digital Scholarly Editions Filosofiche</h1>
+
+      <div class="w-full h-1 bg-[#010435] rounded-full mt-4"></div>
+    </section>
+
+    <!-- CONTENUTO PRINCIPALE -->
+    <section class="min-h-[400px] border border-[#010435] p-6">
+      <h2 class="text-2xl font-semibold mb-4">Mappa delle Digital Scholarly Editions Filosofiche</h2>
+      <div id="map" class="w-full h-[60vh] rounded-xl shadow-lg"></div>
+    </section>
+
+    <!-- LEAFLET JS/CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+      const editions = [
+        {
+          title: "Hannah Arendt. Kritische Gesamtausgabe",
+          author: "Hannah Arendt",
+          curator: "Ingo Garlich",
+          institution: "Freie Universität Berlin",
+          country: "Germany",
+          position: [52.4502, 13.2871],
+          url: "https://hannah-arendt-edition.net/home?lang=de"
+        },
+        {
+          title: "Nietzsche Source",
+          author: "Friedrich Nietzsche",
+          curator: "Paolo D’Iorio",
+          institution: "École Normale Supérieure / Universität Basel",
+          country: "France & Switzerland",
+          position: [48.8422, 2.3441],
+          url: "http://www.nietzschesource.org/"
+        },
+        {
+          title: "Wittgenstein Source",
+          author: "Ludwig Wittgenstein",
+          curator: "Alois Pichler, Joseph Wang",
+          institution: "Wittgenstein Archives, University of Bergen",
+          country: "Norway",
+          position: [60.3900, 5.3221],
+          url: "https://wittgensteinsource.org"
+        }
+      ];
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const map = L.map('map').setView([50.5, 10], 4);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+        }).addTo(map);
+
+        editions.forEach(item => {
+          const marker = L.marker(item.position).addTo(map);
+          marker.bindPopup(`
+            <strong>${item.title}</strong><br>
+            Autore: ${item.author}<br>
+            Curatore: ${item.curator}<br>
+            Istituzione: ${item.institution}<br>
+            Paese: ${item.country}<br><br>
+            <a href="${item.url}" target="_blank">Visita il progetto</a>
+          `);
+        });
+      });
+    </script>
+
+<!-- React Navbar Script -->
+ <script type="text/babel">
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+
+  return (
+    <nav className="w-full bg-white border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
+
+          {/* Logo */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">
+            PHIDE
+          </a>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-6 items-center">
+
+            {/* Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+              >
+                Catalogue
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow">
+                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                    Schedule
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+          </div>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="/catalogue.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/map.html" className="block">Map</a>
+          <a href="/documentation.html" className="block">Documentation</a>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+
+    ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHIDE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <!-- REACT NAVBAR -->
+  <div id="navbar-root"></div>
+
+  <!-- HERO -->
+  <section class="hero" style="min-height: 100vh; padding-top: 80px;">
+    <div class="hero-content">
+      <p class="hero-small top">
+        PHIDE is a digital catalogue of scholarly editions of philosophical texts from different historical periods.
+      </p>
+      <h1>
+        PHIDE: Philosophical<br>
+        digital edition<br>
+        catalogue
+      </h1>
+      <p class="hero-small bottom">
+        PHIDE aims to provide a comprehensive overview of the current landscape of digital scholarly editions in philosophy, highlighting their features, methodologies, and contributions to the field.
+      </p>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <hr class="h-px bg-black border-0 m-0">
+
+
+  <!-- SECOND SECTION -->
+  <section class="stats-section">
+    <div class="container-fluid px-md-5">
+      <div class="row">
+        <div class="col-12 col-lg-10">
+          <h4 class="display-main">
+            Initiated in 2025, our platform provides a user-friendly gateway to the Catalogue. It offers advanced tools to navigate, filter, and organize philosophical projects, ensuring that key research data is always accessible and easy to manage
+          </h4>
+        </div>
+      </div>
+
+      <div class="row mt-5 align-items-start">
+        <div class="col-12 col-md-6">
+          <div class="counter-wrapper">
+            <span id="counter">0</span><span class="counter-label">editions</span>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 offset-md-1">
+          <p class="description-text">
+            To see more, visit the Catalogue section
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- LINEA DIVISORIA -->
+<hr class="h-px bg-black border-0 m-0">
+
+<!-- THIRD SECTION: WHAT DO YOU WANT TO DO (FULL SCREEN EQUILIBRATO) -->
+<section class="what-do-you-want" style="height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 0 20px;">
+
+ <div class="container" style="display: flex; gap: 60px; flex-wrap: wrap; justify-content: center; align-items: flex-start;">
+
+  <div class="card" onclick="goTo('catalogs')" style="width: 400px; height: 550px; border-radius: 20%; background: radial-gradient(circle at center, rgba(242,166,90,0.6), rgba(255,255,255,0.9) 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 25px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 25px; box-sizing: border-box; overflow: hidden;">
+    <div class="icon" style="font-size: 72px; margin-bottom: 20px;">
+      <img src="" alt="cat" style="width: 72px; height: 72px;">
+    </div>
+    <div class="text" style="font-size: 20px; text-align: center; margin-bottom: 15px;">Creation</div>
+    <div class="arrow" style="font-size: 16px; line-height: 1.5; overflow-y: auto; max-height: 350px; text-align: justify;">
+      Le edizioni digitali di testi filosofici sono sempre più numerose, ma spesso difficili da individuare e comprendere, soprattutto per studenti e studiosi che non possiedono competenze specifiche. Questo progetto nasce per colmare tale lacuna, offrendo un catalogo accessibile e intuitivo, pensato per facilitare l’orientamento e la comprensione delle edizioni digitali in ambito filosofico.
+    </div>
+  </div>
+
+  <div class="card" onclick="goTo('catalogs')" style="width: 400px; height: 550px; border-radius: 25%; background: radial-gradient(circle at center, rgba(242,166,90,0.6), rgba(255,255,255,0.9) 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 25px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 25px; box-sizing: border-box; overflow: hidden;">
+    <div class="icon" style="font-size: 72px; margin-bottom: 20px;">
+      <img src="" alt="cat" style="width: 72px; height: 72px;">
+    </div>
+    <div class="text" style="font-size: 20px; text-align: center; margin-bottom: 15px;">Preservation</div>
+    <div class="arrow" style="font-size: 16px; line-height: 1.5; overflow-y: auto; max-height: 350px; text-align: justify;">
+      Il catalogo è sviluppato come un’applicazione web interattiva e user-friendly, che permette di esplorare i progetti attraverso funzionalità di navigazione, ricerca e filtraggio basate sia su criteri quali autori, periodi. L’obiettivo è rendere accessibili progetti, senza richiedere competenze tecniche avanzate, privilegiando chiarezza, semplicità e trasparenza descrittiva.
+    </div>
+  </div>
+
+  <div class="card" onclick="goTo('catalogs')" style="width: 400px; height: 550px; border-radius: 25%; background: radial-gradient(circle at center, rgba(242,166,90,0.6), rgba(255,255,255,0.9) 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 25px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 25px; box-sizing: border-box; overflow: hidden;">
+    <div class="icon" style="font-size: 72px; margin-bottom: 20px;">
+      <img src="" alt="cat" style="width: 72px; height: 72px;">
+    </div>
+    <div class="text" style="font-size: 20px; text-align: center; margin-bottom: 15px;">Digital representation</div>
+    <div class="arrow" style="font-size: 16px; line-height: 1.5; overflow-y: auto; max-height: 350px; text-align: justify;">
+      Il catalogo raccoglie e descrive edizioni digitali scientifiche di testi filosofici, documentandone i modelli editoriali, le scelte metodologiche e le modalità di rappresentazione digitale. Concepite come una risorsa in costante aggiornamento, le schede del catalogo sono aperte a contributi esterni da parte della comunità scientifica, con l’intento di supportare la ricerca, la didattica e la conservazione della memoria delle edizioni digitali filosofiche.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function goTo(section) {
+    alert("Vai alla sezione: " + section);
+    // oppure window.location.href = 'link_alla_sezione';
+  }
+</script>
+
+
+
+  <script>
+    function goTo(section) {
+      alert("Hai cliccato: " + section);
+      // window.location.href = section + ".html";
+    }
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'scale(1.07)';
+        card.style.boxShadow = '0 25px 50px rgba(0,0,0,0.2)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+        card.style.boxShadow = 'none';
+      });
+    });
+  </script>
+</section>
+
+<script>
+  const circles = document.querySelectorAll('.action-circle');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.4
+  });
+
+  circles.forEach(circle => observer.observe(circle));
+</script>
+
+
+  <!-- React Navbar Script -->
+<script type="text/babel">
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+
+  return (
+    <nav className="w-full bg-white border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
+
+          {/* Logo */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">
+            PHIDE
+          </a>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-6 items-center">
+
+            {/* Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+              >
+                Catalogue
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow">
+                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                    Schedule
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+          </div>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="/catalogue.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/map.html" className="block">Map</a>
+          <a href="/documentation.html" className="block">Documentation</a>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+
+    ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+  </script>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- FOOTER -->
+<footer class="bg-[#020435] text-white py-10">
+  <div class="container mx-auto px-4">
+    <div class="row">
+
+      <!-- Logo e descrizione -->
+      <div class="col-12 col-md-4 mb-6 md:mb-0">
+        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
+        <p class="text-gray-200">
+          Digital catalogue of scholarly editions of philosophical texts. Explore projects, maps, and schedules in a single platform.
+        </p>
+      </div>
+
+      <!-- Contatti -->
+      <div class="col-12 col-md-4">
+        <h3 class="text-xl font-semibold mb-3">Contact</h3>
+        <p class="text-gray-200 mb-1">Email: <a href="mailto:info@phide.com" class="hover:text-[#F2A65A]">info@phide.com</a></p>
+        <p class="text-gray-200 mb-1">Phone: <a href="tel:+390000000000" class="hover:text-[#F2A65A]">+39 000 000 0000</a></p>
+        <p class="text-gray-200">Address: Via Filosofia 1, 00100 Roma, Italy</p>
+      </div>
+
+    </div>
+
+    <hr class="border-gray-500 my-6">
+
+    <div class="text-center text-gray-300">
+      &copy; 2025 PHIDE. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+[
+  {
+    "title": "Hannah Arendt. Kritische Gesamtausgabe",
+    "author": "Hannah Arendt",
+    "date": "2020",
+    "Curator": "Ingo Garlich",
+    "Institution": "Freie universitat",
+    "cover": "/photo/hannaharendt.png",
+    "URL": "https://hannah-arendt-edition.net/home?lang=de"
+    
+  },
+  {
+  "id": "nietzsche-source",
+  "title": "Nietzsche Source",
+  "author": "Friedrich Nietzsche",
+  "Curator": "Paolo D’Iorio",
+  "Institution": "CNRS (Centre national de la recherche scientifique)",
+  "date": "2009",
+  "language": "DE",
+  "epoch": "modern philosophy",
+  "branch": ["Pratical Philosophy", "History of Philosophy", "Aesthetics"],
+  "cover": "/photo/nietzsche.png",
+  "URL": "http://www.nietzschesource.org/",
+
+  "phide": {
+    "Content": {
+      "Writing support": "Published works / private publications / authorized manuscripts / posthumous writings / posthumous fragments / letters ",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "criticalApparatus": true,
+      "advanced search": true,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "Only facsimiles",
+      "license": true
+
+    }
+  }
+}
+,
+
+  {
+    "title": "Wittgenstein Source",
+    "author": "Ludwig Wittgenstein",
+    "date": "2015",
+    "Curator": "Alois Pichler, Joseph Wang",
+    "Institution": "University of Bergen, Wittgenstein Archives at the University of Bergen",
+    "cover": "/photo/wittgensteinsource.png",
+    "URL": "http://www.wittgensteinsource.org/#I2Rlc2NfYnZAaWQqcmVzSWQqdHlwZSpjb2xsYXBzZWQqcXN0cmluZyp0aXRsZSp2ZXJ0aWNhbFRpdGxlKmNsb3NhYmxlKmNvbGxhcHNhYmxlKmRyYWdnYWJsZSptYXhpbWl6YWJsZSptaW5XaWR0aCptYXhXaWR0aCpwb3NpdGlvbnxidkBpaGd6Km1lbnUqbmF2aWdhdGlvbiowKkwyRm5iM0poWDNOb2IzZGZiV1Z1ZFE9PSpSVmhRVEU5U1JRPT0qUlZoUVRFOVNSUT09KjAqMSowKjAqMjI2KjIyNiow",
+
+  "phide": {
+    "Content": {
+      "Writing support": "Manuscript / Typescript / Dictation / Notebook ",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI 5",
+      "download": "Only facsimiles",
+      "license": true
+
+    }
+  }
+  },
+   {
+    "title": "Kant Opus Postumum Online Edition",
+    "author": "Immanuel Kant",
+    "date": "2013",
+    "Curator": "Eckart Förster, Jacqueline Karl",
+    "Institution": "Berlin-Brandenburgische Akademie der Wissenschaften (BBAW)",
+    "cover": "/photo/opus.png",
+    "URL": "https://telota.bbaw.de/kant_op/"
+  },
+  {
+    "title": "Walter Benjamin Digital — Writings and Literaty Estate. Volume 11: Berliner Chronik / Berliner Kindheit um neunzehnhundert Facsimiles of the manuscripts and transcriptions",
+    "author": "Walter Benjamin",
+    "date": "2008",
+    "Curator": "Christoph Gödde, Henri Lonitz, Thomas Rahn",
+    "Institution": "Hamburger Stiftung zur Förderung von Wissenschaft und Kultur / Walter-Benjamin-Archiv",
+    "cover": "/photo/benjamin.png",
+    "URL": "https://www.walterbenjamin-digital.de"
+    
+  },
+  {
+    "title": "Hume Texts Online",
+    "author": "David Humee",
+    "date": "2005",
+    "Curator": "Amyas Merivale, Peter Millican",
+    "Institution": "",
+    "cover": "/photo/hume.png",
+    "URL": "https://davidhume.org"
+  },
+  {
+    "title": "Correspondance de Pierre Bayle",
+    "author": "Pierre Bayle",
+    "date": "2017",
+    "Curator": "Antony McKenna",
+    "Institution": "Université Jean Monnet Saint-Etienne, Université de Montpellier",
+    "cover": "/",
+    "URL": "https://bayle-correspondance.univ-st-etienne.fr/?lang=fr",
+
+  "phide": {
+    "Content": {
+      "Writing support": "Manuscripts / letters ",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI ",
+      "download": false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Schopenhauer's Library Annotations and marks in his Spanish books",
+    "author": "Arthur Schopenhauer",
+    "date": "2017",
+    "Curator": "José Luis Losada Palenzuela",
+    "Institution": "University of Wrocławv",
+    "cover": "/photo/schopenhauer.png",
+    "URL": "https://schopenhauer.uni.wroc.pl/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Book",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced search": false,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "TXML-TEI ",
+      "download":  true,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "MEGAdigital - Online-Abteilung der historisch-kritischen Gesamtausgabe von Karl Marx und Friedrich Engels",
+    "author": "Karl Marx, Friedrich Engels",
+    "date": "2016",
+    "Curator": "Gerald Hubmann",
+    "Institution": "Berlin-Brandenburgische Akademie der Wissenschaften (BBAW)",
+    "cover": "/photo/megadigital.png",
+    "URL": "https://megadigital.bbaw.de/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Letter / manuscript / notebook",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": true,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI ",
+      "download":  false,
+      "license": true
+
+    }
+  }
+    
+  },
+  {
+    "title": "Leibniz-Edition Potsdam II",
+    "author": "Gottfried Wilhelm Leibniz",
+    "date": "2001",
+    "Curator": "Harald Siebert",
+    "Institution": "Berlin‑Brandenburgische Akademie der Wissenschaften (BBAW)",
+    "cover": "/photo/leibniz.png",
+    "URL": "https://leibnizp2.bbaw.de/de"
+  },
+  {
+    "title": "Søren Kierkegaards Skrifter",
+    "author": "Søren Kierkegaard",
+    "date": "2007",
+    "Curator": "Karsten Kynde",
+    "Institution": "University of Copenhagen",
+    "cover": "/photo/kierkegaards.png",
+    "URL": "https://teol.ku.dk/skc/sks/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": false
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI ",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+   {
+    "title": "Ferdinand Ebner: Gesammelte Werke. Online Edition",
+    "author": "Ferdinand Ebner ",
+    "date": "2014",
+    "Curator": "Walter Methlagl",
+    "Institution": "Forschungsinstitut Brenner-Archiv (FIBA), Universität Innsbruck",
+    "cover": "/photo/ferdinand.png",
+    "URL": "https://wfe.sbg.ac.at/exist/apps/Frontpage/index.html"
+  },
+  {
+    "title": "Guillelmus Autissiodorensis Summa de officiis ecclesiasticis. Kritisch-digitale Erstausgabe",
+    "author": "Hannah Arendt",
+    "date": "2020",
+    "Curator": "Ingo Garlich",
+    "Institution": "Freie universitat",
+    "cover": "/photo/hannaharendt.png",
+    "URL": "https://hannah-arendt-edition.net/home?lang=de"
+    
+  },
+  {
+    "title": "Les Pensées de Blaise Pascal",
+    "author": "Blaise Pascal",
+    "date": "2011",
+    "Curator": "Dominique Descotes, Gilles Proust",
+    "Institution": "Université Blaise Pascal",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://www.penseesdepascal.fr",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": true
+    },
+    "Features": {
+      "advanced search": false,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": false,
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Renan Source",
+    "author": "Ernest Renan",
+    "date": "2023",
+    "Curator": "Domenico Paone",
+    "Institution": "Institut des textes et manuscrits modernes: Item",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://www.renansource.org",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript / letter",
+      "facsimiles": true
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": true,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  "partly",
+      "license": true
+
+    }
+  }
+  },
+  {
+    "title": "Johann Georg Hamann: Kommentierte Briefausgabe",
+    "author": "Johann Georg Hamann",
+    "date": "2015",
+    "Curator": "Janina Reibold",
+    "Institution": "Germanistisches Seminar Universität Heidelberg, Theodor Springmann Stiftung",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "https://www.hamann-ausgabe.de",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": false
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": true,
+      "glossary": true
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Pico della Mirandola: De hominis dignitate",
+    "author": "Pico della Mirandola",
+    "date": "2015",
+    "Curator": "Massimo Riva",
+    "Institution": "Germanistisches Seminar Universität Heidelberg, Theodor Springmann Stiftung",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://www.brown.edu/Departments/Italian_Studies/pico/index.html",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": false
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": true,
+      "glossary": true
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Lament of St. Anselm",
+    "author": "Anselmo d'Aosta",
+    "date": "2017",
+    "Curator": "Andrew Kraebel",
+    "Institution": "University of Pennsylvania, Trinity University",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://library.trinity.edu/lament/index.html",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript, Codex",
+      "facsimiles": true
+    },
+    "Features": {
+      "advanced search": false,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Magistri Guillelmi Autissiodorensis Summa de officiis ecclesiasticis",
+    "author": "Guglielmo d'Auxerre",
+    "date": "2000",
+    "Curator": "Franz Fischer",
+    "Institution": "Cologne Center for eHumanities, Institut für Dokumentologie und Editorik",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://guillelmus.uni-koeln.de/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": true
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": true,
+      "glossary": true
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": true
+
+    }
+  }
+  },
+  {
+    "title": "Galileo Galilei's Notes on Motion",
+    "author": "Galileo Galilei",
+    "date": "1988",
+    "Curator": "Isabella Truci, Paolo Galluzzi, Jürgen Renn",
+    "Institution": "Max Planck Institute for the History of Science",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://www.mpiwg-berlin.mpg.de/Galileo_Prototype/MAIN.HTM",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": true
+    },
+    "Features": {
+      "advanced search": false,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": false,
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "The Newton Project",
+    "author": "Isaac Newton",
+    "date": "1998-present",
+    "Curator": "Robert Iliffe",
+    "Institution": "University of Sussex",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://www.newtonproject.sussex.ac.uk/prism.php?id=1",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": false
+    },
+    "Features": {
+      "advanced search": false,
+      "indices": true,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  true,
+      "license": true
+
+    }
+  }
+  },
+    {
+    "title": "Opera Aesthetica Szerdahelyana / Szerdahely György Alajos esztétikai írásai",
+    "author": "György Alajos Szerdahely",
+    "date": "2013-not provided",
+    "Curator": "Debreceni Egyetem, Magyar Tudományos Akadémia Könyvtára",
+    "Institution": "University of Sussex",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://deba.unideb.hu/deba/szerdahely/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Print",
+      "facsimiles": false
+    },
+    "Features": {
+      "advanced search": false,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Darwin Online: Online Variorum of Darwin’s Origin of Species",
+    "author": "Charles Darwin",
+    "date": "2008-2012",
+    "Curator": "Barbara Bordalejo",
+    "Institution": "University of Birmingham, University of Saskatchewan",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://darwin-online.org.uk/Variorum/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Printed book",
+      "facsimiles": "partly"
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": false,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  },
+  {
+    "title": "Darwin Correspondence Project",
+    "author": "Charles Darwin",
+    "date": "2002-present",
+    "Curator": "James A. Secord",
+    "Institution": "University of Cambridge American, Council of Learned Societies",
+    "cover": "/photo/nietzschesource.png",
+    "URL": "http://www.darwinproject.ac.uk/",
+
+    "phide": {
+    "Content": {
+      "Writing support": "Manuscript / letter",
+      "facsimiles": false
+    },
+    "Features": {
+      "advanced search": true,
+      "indices": true,
+      "glossary": false
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download":  false,
+      "license": false
+
+    }
+  }
+  }
+
+  
+]

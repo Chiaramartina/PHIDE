@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <title>PHIDE</title>
+  </head>
+  
+  <body class="snap-y snap-mandatory overflow-y-scroll">
+    <div class="container">
+      <nav>
+        <ul class="nav__links nav__left">
+          <li><a href="./index.html" class="logo">Home</a></li>
+          <li class="dropdown">
+            <a href="./catalogue.html">Catalogue</a>
+            <ul class="dropdown-menu">
+              <li><a href="./catalogue.html">Card</a></li>
+              <li><a href="./scheda.html">Scheda</a></li>
+            </ul>
+          </li>
+          <li><a href="./map.html">Map</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+          <span class="letter-s">PHIDE</span>
+          <h4 class="text__left"></h4>
+          <h4 class="text__right"></h4>
+          <button class="btn explore">EXPLORE MORE</button>
+          <button class="btn print">PRINT</button>
+          <button class="btn catalog">CATALOG</button>
+          <h5 class="feature-1">Philosophical</h5>
+          <h5 class="feature-2">Digital</h5>
+          <h5 class="feature-3">Edition</h5>
+          <h5 class="feature-4">Catalogue</h5>
+        </div>
+
+    <section class="w-full min-h-screen flex items-center px-12 bg-cover bg-center" style="background-image: url('sec.png');">
+  <div class="max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-20">
+
+    <!-- TESTO SINISTRA -->
+    <div class="max-w-md">
+      <p class="uppercase tracking-widest text-sm mb-4">
+        Project Stats
+      </p>
+      <p class="text-lg leading-relaxed">
+        Seven internationally recognized designers contributed to the project,
+        shaping a curated selection of objects within a purpose-designed house.
+      </p>
+    </div>
+
+    <!-- NUMERO DESTRA -->
+    <div class="ml-auto text-right relative left-[120px]">
+      <h1 class="text-[270px] md:text-[350px] leading-none font text-[#020435]">
+        <span class="designer-counter" data-target="47">0</span>
+      </h1>
+
+      <div class="flex justify-end">
+        <span class="uppercase tracking-widest text-sm text-gray-700">
+          Editions
+        </span>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</section>
+
+
+
+
+
+<script>
+  const counters = document.querySelectorAll('.designer-counter');
+
+  const animateCounter = (counter) => {
+    const target = +counter.dataset.target;
+    let current = 0;
+
+    const update = () => {
+      current++;
+      counter.textContent = current;
+
+      if (current < target) {
+        setTimeout(update, 80);
+      }
+    };
+
+    update();
+  };
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach(counter => observer.observe(counter));
+</script>
+
+
+        
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
