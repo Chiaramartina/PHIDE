@@ -178,24 +178,28 @@ function Navbar() {
 
             {/* Dropdown */}
             <div className="relative">
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
-              >
-                Catalogue
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+            >
+              Browse
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-              {dropdownOpen && (
-                <div className="absolute mt-2 w-48 bg-white border rounded shadow">
-                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
-                    Schedule
-                  </a>
-                </div>
-              )}
-            </div>
+            {dropdownOpen && (
+              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Catalogue
+                </a>
+                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Schedule
+                </a>
+              </div>
+            )}
+          </div>
+
 
             <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
             <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
@@ -220,7 +224,8 @@ function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="/catalogue.html" className="block">Catalogue</a>
+          <a href="" className="block">Browse</a>
+           <a href="/catalogue-period.html" className="block">Catalogue</a>
           <a href="/scheda.html" className="block">Scheda</a>
           <a href="/map.html" className="block">Map</a>
           <a href="/documentation.html" className="block">Documentation</a>
