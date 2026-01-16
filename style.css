@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Playfair Display', serif;
-  background: #ffffff;
+  background: #E7E5E4;
   color: #111;
   min-height: 100vh;
   overflow-x: hidden;
@@ -21,10 +21,10 @@ body::before {
   height: 900px;
 background: radial-gradient(
   circle,
-  rgb(60, 78, 110) 0%,
-  rgba(60, 78, 110, 0.85) 30%,
-  rgba(40, 55, 85, 0.45) 55%,
-  rgba(25, 35, 60, 0.15) 70%,
+  rgb(0, 0, 0) 0%,
+  rgba(0, 0, 0, 0.85) 30%,
+  rgba(0, 0, 0, 0.45) 55%,
+  rgba(0, 0, 0, 0.15) 70%,
   transparent 78%
 );
   transform: translate(-50%, -50%) scale(0.9);
@@ -156,7 +156,7 @@ background: radial-gradient(
 /* Stili per la Seconda Sezione */
 .stats-section {
   padding: 100px 0;
-  background-color: #FFFFFF;
+  background-color:#E7E5E4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

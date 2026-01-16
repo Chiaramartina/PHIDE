@@ -9,38 +9,46 @@
     "URL": "https://hannah-arendt-edition.net/home?lang=de"
     
   },
-  {
-  "id": "nietzsche-source",
+ {
+  "ID": 1,
   "title": "Nietzsche Source",
   "author": "Friedrich Nietzsche",
-  "Curator": "Paolo D’Iorio",
-  "Institution": "CNRS (Centre national de la recherche scientifique)",
-  "date": "2009",
-  "language": "DE",
-  "epoch": "modern philosophy",
-  "branch": ["Pratical Philosophy", "History of Philosophy", "Aesthetics"],
+  "curator": "Paolo D'Iorio",
   "cover": "/photo/nietzsche.png",
-  "URL": "http://www.nietzschesource.org/",
-
-  "phide": {
-    "Content": {
-      "Writing support": "Published works / private publications / authorized manuscripts / posthumous writings / posthumous fragments / letters ",
-      "facsimiles": "yes"
-    },
-    "Features": {
-      "criticalApparatus": true,
-      "advanced search": true,
-      "indices": false,
-      "glossary": false
-    },
-    "dataReuse": {
-      "encoding": "XML-TEI",
-      "download": "Only facsimiles",
-      "license": true
-
+  "institution": {
+    "name": "CNRS (Centre national de la recherche scientifique)",
+    "website": "http://www.cnrs.fr",
+    "latitude": 48.847597,
+    "longitude": 2.264004,
+    "located_at": {
+      "place": "Auteuil",
+      "geonames_id": 6545275,
+      "latitude": 48.84694,
+      "longitude": 2.26366,
+      "country": "France"
     }
+  },
+  "date": "not provided",
+  "language": "GER",
+  "URL": "http://www.nietzschesource.org/",
+  "epoch": "Modern",
+  "branch": "",
+  "Content": {
+    "Writing support": "Manuscript, Book, letter",
+    "facsimiles": "yes"
+  },
+  "Features": {
+    "advanced_search": "yes",
+    "index": "no",
+    "glossary": "no"
+  },
+  "dataReuse": {
+    "encoding": "XML-TEI",
+    "download": "only image",
+    "license": "Creative commons"
   }
 }
+
 ,
 
   {

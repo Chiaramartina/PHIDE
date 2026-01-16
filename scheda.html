@@ -1,242 +1,270 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Catalogo Digitale Filosofico</title>
+  <meta charset="UTF-8">
+  <title>Schedule</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding-top: 80px;
+      background-color: #E7E5E4;
+      margin: 0;
+    }
 
-  <!-- SPAZIO PER EVITARE SOVRAPPOSIZIONE NAVBAR -->
-  <div class="h-0"></div>
+    .container {
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
 
-  <!-- STRUTTURA PAGINA -->
-  <main class="max-w-7xl mx-auto px-4 py-10">
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #010435;
+    }
 
-    <!-- HERO -->
-    <section class="text-center mb-10">
-      <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
+    .table-wrapper {
+      overflow-x: auto;
+    }
 
-      <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">SCHEDA DESCRITTIVA</h1>
+    table.dataTable {
+      width: auto !important;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      background-color: #fff;
+    }
 
-      <div class="w-full h-1 bg-[#010435] rounded-full mt-4"></div>
-    </section>
+    table.dataTable th, table.dataTable td {
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 8px;
+    }
 
-<style>
-body { 
-    font-family: 'Playfair Display', serif; 
-    background-color: #f9f9f9; 
-    color: #333; 
-    margin: 0; 
-    padding-top: 4rem; /* compensare navbar fissa */
-}
+    table.dataTable th:last-child,
+    table.dataTable td:last-child {
+      border-right: none;
+    }
 
-/* ===== SEZIONE PRINCIPALE ===== */
-.container {
-    max-width: 1300px;
-    margin: 2rem auto;
-    text-align: center;
-}
-
-.container h1 {
-    font-weight: 700;
-    margin-top: 2rem;
-    color: #2b2b2b;
-}
-
-.container p {
-    line-height: 1.6;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* ===== TABLE WRAPPER ===== */
-.table-wrapper {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem 1rem;
-    background-color: #ffffff; 
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    overflow-x: auto;
-}
-
-/* Mantieni la tabella centrata */
-.table-wrapper table {
-    margin: 0 auto;
-}
-
-.table-wrapper table th,
-.table-wrapper table td {
-    min-width: 50px;
-}
-
-.table-wrapper th {
-    background-color: #f0f0f0;
-    color: #333;
-    font-weight: 600;
-}
-
-.table-wrapper tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-/* Centra e rende i bottoni della paginazione più compatti */
-.dataTables_wrapper .dataTables_paginate {
-    display: flex !important;
-    justify-content: center !important;
-    margin-top: 1rem;
-}
-
-.dataTables_wrapper .dataTables_paginate ul {
-    display: flex !important;
-    padding-left: 0;
-    list-style: none;
-    margin: 0;
-}
-
-.dataTables_wrapper .dataTables_paginate li {
-    margin: 0 0.2rem; /* spazio ridotto tra i bottoni */
-}
-
-.dataTables_wrapper .dataTables_paginate li a {
-    display: block;
-    padding: 0.35rem 0.6rem; /* leggero padding */
-    text-align: center;
-    background-color: transparent; /* piatto */
-    color: #020435!important;      /* colore testo blu */
-    border: 1px solid #020435;      /* contorno blu */
-    border-radius: 0;                /* niente arrotondamento */
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.2s;
-}
-
-.dataTables_wrapper .dataTables_paginate li a:hover,
-.dataTables_wrapper .dataTables_paginate li.active a {
-    background-color: #3e2814;
-    color: #fff !important;
+table.dataTable thead {
+  background-color: #e2e8f0; /* header azzurro chiaro */
 }
 
 
 
+    .dt-buttons {
+      margin-bottom: 15px;
+    }
 
-.dataTables_wrapper .dataTables_filter {
-    float: right;
-    text-align: right;
-    margin-bottom: 0.5rem;
-}
-/* ===== BUTTONS ===== */
-.table-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1.5rem 0 3rem;
-}
-
-.table-buttons button {
-    background-color: #5a3e1b;
-    color: #fff;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.table-buttons button:hover {
-    background-color: #3e2814;
-}
-
-/* ===== DATATABLES ===== */
-.dataTables_length label, .dataTables_filter label {
-    color: #2b2b2b;
-    font-weight: 500;
-}
-
-.dataTables_length select, .dataTables_filter input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0.25rem 0.5rem;
-    color: #333;
-}
-
-</style>
+    table.dataTable thead input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 4px 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAVBAR TAILWIND -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-[#010435] shadow-lg">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center h-16">
-      <a href="/index.html" class="text-white text-xl" style="font-family: 'Playfair Display', serif;">PHIDE</a>
-      <div class="flex flex-grow justify-center space-x-8">
-        <a href="/index.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">Home</a>
-        <a href="/caso.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">Catalogue</a>
-        <a href="/about.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">About</a>
-        <a href="/contact.html" class="text-white hover:text-[#ffebc2] px-3 py-2 text-sm font-medium transition">Contact</a>
-      </div>
-      <div class="w-[100px]"></div>
-    </div>
-  </div>
-</nav>
+<div id="navbar-root"></div>
 
 <div class="container">
-
-    <hr class="my-6">
-
-    <div class="table-wrapper">
-        <div id="table-container"></div>
-    </div>
-    
+  <h1></h1>
+  <div class="table-wrapper">
+    <table id="catalog" class="display">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Curator</th>
+          <th>Institution</th>
+          <th>Place</th>
+          <th>Country</th>
+          <th>Date</th>
+          <th>Language</th>
+          <th>Epoch</th>
+          <th>Branch</th>
+          <th>Writing Support</th>
+          <th>Facsimiles</th>
+          <th>Advanced Search</th>
+          <th>Index</th>
+          <th>Glossary</th>
+          <th>Encoding</th>
+          <th>Download</th>
+          <th>License</th>
+        </tr>
+        <tr>
+          <!-- Filtri -->
+          <th><input></th><th><input></th><th><input></th><th><input></th>
+          <th><input></th><th><input></th><th><input></th><th><input></th>
+          <th><input></th><th><input></th><th><input></th><th><input></th>
+          <th><input></th><th><input></th><th><input></th><th><input></th>
+          <th><input></th><th><input></th><th><input></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
 </div>
 
-<footer class="text-center mt-4 mb-4">
-  <p>© Edizioni Digitali Filosofiche — Catalogo</p>
-</footer>
+<!-- JS Libraries -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.csv.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="js/csv_to_html_table.js"></script>
+<!-- React -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<script>
-function format_link(link) {
-  return link ? `<a href='${link}' target='_blank'>${link}</a>` : "";
-}
+<!-- React Navbar -->
+<script type="text/babel">
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-CsvToHtmlTable.init({
-  csv_path: "data/Health Clinics in Chicago.csv",
-  element: "table-container",
-  allow_download: true,
-  csv_options: { separator: ",", delimiter: '"' },
-  datatables_options: {
-      paging: true,
-      pageLength: 10, 
-      autoWidth: false,
-      scrollX: true
-  },
-  custom_formatting: [[4, format_link]],
-  onComplete: function() {
-      const dTable = $('#table-container table').DataTable();
+  return (
+    <nav className="w-full bg-[#E7E5E4] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
 
-      $('#prevPage').off('click').on('click', function(){
-          dTable.page('previous').draw('page');
-      });
+          {/* Logo */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">
+            PHIDE
+          </a>
 
-      $('#nextPage').off('click').on('click', function(){
-          dTable.page('next').draw('page');
-      });
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-6 items-center">
+
+            {/* Dropdown */}
+            <div className="relative">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+            >
+              Browse
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Catalogue
+                </a>
+                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Schedule
+                </a>
+              </div>
+            )}
+          </div>
+
+
+            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+          </div>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="" className="block">Browse</a>
+           <a href="/catalogue-period.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/map.html" className="block">Map</a>
+          <a href="/documentation.html" className="block">Documentation</a>
+        </div>
+      )}
+    </nav>
+  );
   }
-});
+
+  ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
 </script>
+
+<!-- DataTables JS con CSV esterno -->
+<script>
+  fetch('data/list_digital_edition.csv')
+    .then(response => response.text())
+    .then(csv => {
+      const parsed = Papa.parse(csv, {
+        header: true,
+        skipEmptyLines: true
+      });
+
+      const data = parsed.data;
+
+      const table = $('#catalog').DataTable({
+        data: data,
+        dom: 'Bfrtip',
+        buttons: ['csvHtml5','excelHtml5','json'],
+        columns: [
+          { data: 'ID' },
+          { data: 'title' },
+          { data: 'author' },
+          { data: 'curator' },
+          { data: 'institution_name' },
+          { data: 'located_at' },
+          { data: 'part_of' },
+          { data: 'date' },
+          { data: 'language' },
+          { data: 'epoch' },
+          { data: 'branch' },
+          { data: 'writing_support' },
+          { data: 'facsimiles' },
+          { data: 'advanced_search' },
+          { data: 'index' },
+          { data: 'glossary' },
+          { data: 'encoding' },
+          { data: 'download' },
+          { data: 'creative_commons_license' }
+        ],
+        orderCellsTop: true,
+        fixedHeader: true
+      });
+
+      // Filtri per colonna
+      $('#catalog thead tr:eq(1) th').each(function(i){
+        $('input', this).on('keyup change', function(){
+          if(table.column(i).search() !== this.value){
+            table.column(i).search(this.value, true, false, true).draw();
+          }
+        });
+      });
+    });
+</script>
+
 </body>
 </html>

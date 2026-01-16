@@ -73,42 +73,6 @@
 <!-- LINEA DIVISORIA -->
 <hr class="h-px bg-black border-0 m-0">
 
-<!-- THIRD SECTION: WHAT DO YOU WANT TO DO (FULL SCREEN EQUILIBRATO) -->
-<section class="what-do-you-want" style="height: 100vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; padding: 0 20px;">
-
- <div class="container" style="display: flex; gap: 60px; flex-wrap: wrap; justify-content: center; align-items: flex-start;">
-
-  <div class="card" onclick="goTo('catalogs')" style="width: 400px; height: 550px; border-radius: 20%; background: radial-gradient(circle at center, rgba(242,166,90,0.6), rgba(255,255,255,0.9) 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 25px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 25px; box-sizing: border-box; overflow: hidden;">
-    <div class="icon" style="font-size: 72px; margin-bottom: 20px;">
-      <img src="" alt="cat" style="width: 72px; height: 72px;">
-    </div>
-    <div class="text" style="font-size: 20px; text-align: center; margin-bottom: 15px;">Creation</div>
-    <div class="arrow" style="font-size: 16px; line-height: 1.5; overflow-y: auto; max-height: 350px; text-align: justify;">
-      Le edizioni digitali di testi filosofici sono sempre più numerose, ma spesso difficili da individuare e comprendere, soprattutto per studenti e studiosi che non possiedono competenze specifiche. Questo progetto nasce per colmare tale lacuna, offrendo un catalogo accessibile e intuitivo, pensato per facilitare l’orientamento e la comprensione delle edizioni digitali in ambito filosofico.
-    </div>
-  </div>
-
-  <div class="card" onclick="goTo('catalogs')" style="width: 400px; height: 550px; border-radius: 25%; background: radial-gradient(circle at center, rgba(242,166,90,0.6), rgba(255,255,255,0.9) 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 25px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 25px; box-sizing: border-box; overflow: hidden;">
-    <div class="icon" style="font-size: 72px; margin-bottom: 20px;">
-      <img src="" alt="cat" style="width: 72px; height: 72px;">
-    </div>
-    <div class="text" style="font-size: 20px; text-align: center; margin-bottom: 15px;">Preservation</div>
-    <div class="arrow" style="font-size: 16px; line-height: 1.5; overflow-y: auto; max-height: 350px; text-align: justify;">
-      Il catalogo è sviluppato come un’applicazione web interattiva e user-friendly, che permette di esplorare i progetti attraverso funzionalità di navigazione, ricerca e filtraggio basate sia su criteri quali autori, periodi. L’obiettivo è rendere accessibili progetti, senza richiedere competenze tecniche avanzate, privilegiando chiarezza, semplicità e trasparenza descrittiva.
-    </div>
-  </div>
-
-  <div class="card" onclick="goTo('catalogs')" style="width: 400px; height: 550px; border-radius: 25%; background: radial-gradient(circle at center, rgba(242,166,90,0.6), rgba(255,255,255,0.9) 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.4), rgba(255,255,255,0.4) 1px, transparent 1px, transparent 25px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 25px; box-sizing: border-box; overflow: hidden;">
-    <div class="icon" style="font-size: 72px; margin-bottom: 20px;">
-      <img src="" alt="cat" style="width: 72px; height: 72px;">
-    </div>
-    <div class="text" style="font-size: 20px; text-align: center; margin-bottom: 15px;">Digital representation</div>
-    <div class="arrow" style="font-size: 16px; line-height: 1.5; overflow-y: auto; max-height: 350px; text-align: justify;">
-      Il catalogo raccoglie e descrive edizioni digitali scientifiche di testi filosofici, documentandone i modelli editoriali, le scelte metodologiche e le modalità di rappresentazione digitale. Concepite come una risorsa in costante aggiornamento, le schede del catalogo sono aperte a contributi esterni da parte della comunità scientifica, con l’intento di supportare la ricerca, la didattica e la conservazione della memoria delle edizioni digitali filosofiche.
-    </div>
-  </div>
-
-</div>
 
 <script>
   function goTo(section) {
@@ -164,7 +128,7 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   return (
-    <nav className="w-full bg-white border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+    <nav className="w-full bg-[#E7E5E4] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
 

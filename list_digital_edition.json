@@ -1,0 +1,2244 @@
+[
+  {
+    "ID": 1,
+    "title": "Schopenhauer's Library *Annotations and marks in his Spanish books",
+    "author": "Arthur Schopenhauer",
+    "curator": "José Luis Losada \r\nPalenzuela",
+    "cover": "/photo/schopenhauer.png",
+    "institution": {
+      "name": "University of Wrocław",
+      "website": "https://international.uni.wroc.pl/en/s3.php",
+      "latitude": "51.11454",
+      "longitude": "17.034477",
+      "located_at": {
+        "place": "Wrocław",
+        "geonames_id": "3081368",
+        "latitude": "51.11034",
+        "longitude": "17.03714"
+      }
+    },
+    "date": "2017",
+    "language": "\"SPA\"",
+    "URL": "http://www.schopenhauer.uni.wroc.pl/",
+    "epoch": "Modern",
+    "branch": "Metaphysics, Ethics, Aesthetics",
+    "Content": {
+      "Writing support": "Book",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": null
+    }
+  },
+  {
+    "ID": 2,
+    "title": "MEGAdigital - Online-Abteilung der historisch-kritischen \r\nGesamtausgabe von Karl Marx und Friedrich Engels",
+    "author": "Karl Marx, Friedrich Engels",
+    "curator": "Gerald Hubmann",
+    "cover": "/photo/megadigital.png",
+    "institution": {
+      "name": "Berlin-Brandenburgische Akademie der Wissenschaften",
+      "website": "https://www.bbaw.de/",
+      "latitude": "52.51389",
+      "longitude": "13.3941",
+      "located_at": {
+        "place": "Berlin-Brandenburg",
+        "geonames_id": "2950159",
+        "latitude": "52.52",
+        "longitude": "13.405"
+      }
+    },
+    "date": "2016",
+    "language": "\"GER\"",
+    "URL": "https://megadigital.bbaw.de",
+    "epoch": "Modern",
+    "branch": "Political Philosophy, Philosophy of History, Practical Philosophy",
+    "Content": {
+      "Writing support": "Letter, Manuscript, Notebook",
+      "facsimiles": "partly"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 3,
+    "title": "Søren Kierkegaards Skrifter",
+    "author": "Søren Kierkegaards",
+    "curator": " Karsten Kynd",
+    "cover": "/photo/kierkegaards.png",
+    "institution": {
+      "name": "University of Copenhagen",
+      "website": "https://www.ku.dk/en",
+      "latitude": "55.6761",
+      "longitude": "12.5683",
+      "located_at": {
+        "place": "Copenhagen",
+        "geonames_id": "2618425",
+        "latitude": "55.6761",
+        "longitude": "12.5683"
+      }
+    },
+    "date": "2007",
+    "language": "\"DAN\"",
+    "URL": "https://tekster.kb.dk",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, Ethics, Moral Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "partly XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 4,
+    "title": "Les Pensées de Blaise Pascal",
+    "author": "Blaise Pascal",
+    "curator": "Dominique Descotes, Gilles Proust",
+    "cover": "/photo/pascal.png",
+    "institution": {
+      "name": "Université Blaise Pascal / Bibliothèque nationale de France",
+      "website": "http://www.univ-bpclermont.fr",
+      "latitude": "45.7785",
+      "longitude": "3.087",
+      "located_at": {
+        "place": "Paris",
+        "geonames_id": "2988507",
+        "latitude": "48.8339",
+        "longitude": "2.3768"
+      }
+    },
+    "date": "not provided",
+    "language": "\"FRE\"",
+    "URL": "http://www.penseesdepascal.fr",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, Ethics, Metaphysics",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 5,
+    "title": "Renan Source",
+    "author": "Ernest Renan",
+    "curator": "Domenico Paone",
+    "cover": "/photo/renan.png",
+    "institution": {
+      "name": "Institut des textes et manuscrits modernes: Item",
+      "website": "https://www.item.ens.fr",
+      "latitude": "48.8566",
+      "longitude": "2.3522",
+      "located_at": {
+        "place": "Paris",
+        "geonames_id": "2988507",
+        "latitude": "48.8566",
+        "longitude": "2.3768"
+      }
+    },
+    "date": "2023",
+    "language": "\"FRE\"",
+    "URL": "http://www.renansource.org",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, History of Philosophy, Moral Philosophy",
+    "Content": {
+      "Writing support": "Letter, manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "partial",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 6,
+    "title": "Johann Georg Hamann: Kommentierte Briefausgabe",
+    "author": "Johann Georg Hamann",
+    "curator": "Janina Reibold",
+    "cover": "/photo/hamann.png",
+    "institution": {
+      "name": "Germanistisches Seminar Universität Heidelberg, Theodor Springmann Stiftung",
+      "website": "https://www.gs.uni-heidelberg.de/en",
+      "latitude": "49.4094",
+      "longitude": "8.6946",
+      "located_at": {
+        "place": "Heidelberg",
+        "geonames_id": "2811313",
+        "latitude": "49.4094",
+        "longitude": "8.6946"
+      }
+    },
+    "date": "2015",
+    "language": " \"GER\"",
+    "URL": "https://hamann-ausgabe.de",
+    "epoch": "Modern",
+    "branch": "Philosophy of Language, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "yes"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 7,
+    "title": "\r\nschleiermacher digital: Briefwechsel, Tageskalender, Vorlesungen von Friedrich Schleiermacher 1808–1834",
+    "author": "Friedrich Daniel Ernst Schleiermacher",
+    "curator": "Isabelle Lüke, Andreas Arndt, Simon Gerber, Sarah Schmidt",
+    "cover": "/photo/schlei.png",
+    "institution": {
+      "name": "Berlin-Brandenburgische Akademie der Wissenschaften",
+      "website": "https://www.bbaw.de",
+      "latitude": "52.52",
+      "longitude": "13.4049",
+      "located_at": {
+        "place": "Berlin",
+        "geonames_id": "2950159",
+        "latitude": "52.52",
+        "longitude": "13.4049"
+      }
+    },
+    "date": "2020",
+    "language": "\"GER\"",
+    "URL": "https://schleiermacher-digital.de/index.xql",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, Moral Philosophy",
+    "Content": {
+      "Writing support": "Letters, daily calendar, lectures",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "yes"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 8,
+    "title": "Lament of St. Anselm",
+    "author": "Anselm of Canterbury",
+    "curator": "Andrew Kraebel",
+    "cover": "/photo/anselm.png",
+    "institution": {
+      "name": "University of Pennsylvania, Trinity University",
+      "website": "https://www.upenn.edu",
+      "latitude": "39.9526",
+      "longitude": "-75.1652",
+      "located_at": {
+        "place": "Philadelphia",
+        "geonames_id": "4560349",
+        "latitude": "39.9526",
+        "longitude": "75.1652"
+      }
+    },
+    "date": "not provided",
+    "language": "\"ENM\"",
+    "URL": "https://lib.trinity.edu/lament/index.html",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript, Codex",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 9,
+    "title": "Magistri Guillelmi Autissiodorensis Summa de officiis ecclesiasticis",
+    "author": "Guillelmus Autissiodorensis",
+    "curator": "Franz Fischer",
+    "cover": "/photo/magistri.png",
+    "institution": {
+      "name": "Cologne Center for eHumanities, Institut für Dokumentologie und Editorik",
+      "website": "https://cceh.uni-koeln.de",
+      "latitude": "50.9375",
+      "longitude": "6.9603",
+      "located_at": {
+        "place": "Cologne",
+        "geonames_id": "2921044",
+        "latitude": "50.9375",
+        "longitude": "6.9603"
+      }
+    },
+    "date": "2000",
+    "language": "\"LAT\"",
+    "URL": "https://guillelmus.uni-koeln.de/tcrit/tcrit_prologus",
+    "epoch": "Medieval",
+    "branch": "Moral Philosophy, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "yes"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "not provided",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 10,
+    "title": "Galileo Galilei's Notes on Motion",
+    "author": "Galileo Galilei",
+    "curator": "Isabella Truci, Paolo Galluzzi, Jürgen Renn",
+    "cover": "/photo/galileo.png",
+    "institution": {
+      "name": "Max Planck Institute for the History of Science",
+      "website": "https://www.google.com/search?client=safari&rls=en&q=Max+Planck+Institute+for+the+History+of+Science&ie=UTF-8&oe=UTF-8",
+      "latitude": "52.520008",
+      "longitude": "13.404954",
+      "located_at": {
+        "place": "Berlin",
+        "geonames_id": "52.520008",
+        "latitude": "13.404954",
+        "longitude": "6.9603"
+      }
+    },
+    "date": "not provided",
+    "language": "\"ITA\"",
+    "URL": "https://www.mpiwg-berlin.mpg.de/Galileo_Prototype/MAIN.HTM",
+    "epoch": "Modern",
+    "branch": "Philosophy of Science, Philosophy of Physics, Philosophy of Nature, Philosophy History",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "not provided",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 11,
+    "title": "The Newton Project",
+    "author": "Isaac Newton",
+    "curator": "Robert Iliffe",
+    "cover": "/photo/newton.png",
+    "institution": {
+      "name": "University of Sussex",
+      "website": "https://www.sussex.ac.uk",
+      "latitude": "50.8595",
+      "longitude": "-0.0877",
+      "located_at": {
+        "place": "Falmer",
+        "geonames_id": "2657832",
+        "latitude": "50.8595",
+        "longitude": "-0.0877"
+      }
+    },
+    "date": "not provided",
+    "language": "\"LAT\"",
+    "URL": "https://www.newtonproject.ox.ac.uk",
+    "epoch": "Modern",
+    "branch": "Philosophy of Science, Philosophy of Physics, Metaphysics, Philosophy History",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 12,
+    "title": "Opera Aesthetica Szerdahelyana / Szerdahely György Alajos \r\nesztétikai írásai",
+    "author": "György Szerdahely",
+    "curator": "Debreczeni Attila",
+    "cover": "/photo/opera.png",
+    "institution": {
+      "name": "Debreceni Egyetem / Magyar Tudományos Akadémia Könyvtára",
+      "website": "https://deba.unideb.hu/deba/szerdahely/",
+      "latitude": "47.5316",
+      "longitude": "21.6273",
+      "located_at": {
+        "place": "Debrecen",
+        "geonames_id": "3054643",
+        "latitude": "47.5316",
+        "longitude": "21.6273"
+      }
+    },
+    "date": "2013",
+    "language": "\"LAT\"",
+    "URL": "https://www.google.com/search?client=safari&rls=en&q=Max+Planck+Institute+for+the+History+of+Science&ie=UTF-8&oe=UTF-8",
+    "epoch": "Modern",
+    "branch": "Aesthetics, Philosophy of Art, Practical Philosophy",
+    "Content": {
+      "Writing support": "Print",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 13,
+    "title": "Darwin Online: Online Variorum of Darwin’s Origin of Species",
+    "author": "Charles Darwin",
+    "curator": "Barbara Bordalejo",
+    "cover": "/photo/darwin.png",
+    "institution": {
+      "name": "University of Birmingham / University of Saskatchewan",
+      "website": "http://www.birmingham.ac.uk",
+      "latitude": "52.4508",
+      "longitude": "-1.93",
+      "located_at": {
+        "place": "Birmingham",
+        "geonames_id": "2655603",
+        "latitude": "52.4508",
+        "longitude": "-1.93"
+      }
+    },
+    "date": "2008",
+    "language": "\"ENG\"",
+    "URL": "http://darwin-online.org.uk/Variorum/",
+    "epoch": "Modern",
+    "branch": "Philosophy of Biology, Philosophy of Science, Philosophy of Nature",
+    "Content": {
+      "Writing support": "Printed book",
+      "facsimiles": "partly"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 14,
+    "title": "Darwin Correspondence Project",
+    "author": "Charles Darwin",
+    "curator": "James A. Secord",
+    "cover": "/photo/darwin_correspondence.png",
+    "institution": {
+      "name": "University of Cambridge / American Council of Learned Societies",
+      "website": "http://www.cam.ac.uk",
+      "latitude": "52.2043",
+      "longitude": "0.1218",
+      "located_at": {
+        "place": "Cambridge",
+        "geonames_id": "2655057",
+        "latitude": "52.2043",
+        "longitude": "0.1218"
+      }
+    },
+    "date": "2002",
+    "language": "\"ENG\"",
+    "URL": "http://www.darwinproject.ac.uk/",
+    "epoch": "Modern",
+    "branch": "Philosophy of Biology, Philosophy of Science, Philosophy of Nature",
+    "Content": {
+      "Writing support": "Manuscript, Letter",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 15,
+    "title": "Kant – Opus Postumum Online Edition",
+    "author": "Immanuel Kant",
+    "curator": "Prof. Dr. Volker Gerhardt,\r\nDr. Jacqueline Karl",
+    "cover": "/photo/opus.png",
+    "institution": {
+      "name": "Berlin-Brandenburgische Akademie der \r\nWissenschaften (BBAW)",
+      "website": "https://www.bbaw.de",
+      "latitude": "52.5186",
+      "longitude": "13.4015",
+      "located_at": {
+        "place": "Berlin",
+        "geonames_id": "2950159",
+        "latitude": "52.5186",
+        "longitude": "13.4015"
+      }
+    },
+    "date": "2013",
+    "language": "\"GER\"",
+    "URL": "https://telota.bbaw.de/kant_op/index.html",
+    "epoch": "Modern",
+    "branch": "Epistemology, Ethics, Aesthetics, Metaphysics, Practical Philosophy, Moral Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 16,
+    "title": "Nietzsche Source",
+    "author": "Friedrich Nietzsche",
+    "curator": "Paolo D'Iorio",
+    "cover": null,
+    "institution": {
+      "name": "CNRS (Centre national de la recherche scientifique)",
+      "website": "http://www.cnrs.fr",
+      "latitude": "48.847597",
+      "longitude": "2.264004",
+      "located_at": {
+        "place": "Auteuil",
+        "geonames_id": "6545275",
+        "latitude": "48.84694",
+        "longitude": "2.26366"
+      }
+    },
+    "date": "not provided",
+    "language": "\"GER\"",
+    "URL": "http://www.nietzschesource.org/",
+    "epoch": "Modern",
+    "branch": "Practical Philosophy, Aesthetics, Metaphysics Moral Philosophy",
+    "Content": {
+      "Writing support": "Manuscript, Book, letter",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "only image",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 17,
+    "title": "\r\nWalter Benjamin Digital — Writings and Literaty Estate. Volume 11: Berliner Chronik / Berliner Kindheit um neunzehnhundert Facsimiles of the manuscripts and transcriptions",
+    "author": "\r\nWalter Benjamin",
+    "curator": "Nadine Werner,\r\nBurkhardt Lindner",
+    "cover": null,
+    "institution": {
+      "name": "\"Hamburger Stiftung zur Förderung von \r\nWissenschaft und Kultur\"",
+      "website": "https://h-w-s.org/",
+      "latitude": "53.551086",
+      "longitude": "9.993682",
+      "located_at": {
+        "place": "Hamburg",
+        "geonames_id": "2911298",
+        "latitude": "53.551086",
+        "longitude": "9.993682"
+      }
+    },
+    "date": "2016",
+    "language": "\"GER\"",
+    "URL": "https://walter-benjamin.online/",
+    "epoch": "Contemporary",
+    "branch": "Aesthetics, Philosophy of History",
+    "Content": {
+      "Writing support": "Manuscript, letter, \r\ndocument (notes, Notes, \r\nwork notes, archive \r\nmaterials)",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 18,
+    "title": "\r\ndavidhume.org",
+    "author": "David Hume",
+    "curator": "Henry Merivale, Peter Millican ",
+    "cover": null,
+    "institution": {
+      "name": "University of Oxford",
+      "website": "https://www.ox.ac.uk/",
+      "latitude": "51.754816",
+      "longitude": "-1.254367",
+      "located_at": {
+        "place": "Oxford",
+        "geonames_id": "2640729",
+        "latitude": "51.754816",
+        "longitude": "-1.254367"
+      }
+    },
+    "date": "2011",
+    "language": "\"ENG\"",
+    "URL": "https://davidhume.org/",
+    "epoch": "Modern",
+    "branch": "Epistemology, Ethics, Philosophy of Religion, Moral Philosophy, Practical Philosophy",
+    "Content": {
+      "Writing support": "Manuscript, Book, Letter",
+      "facsimiles": "partial"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 19,
+    "title": "Briefportal Leibniz. Ausgewählte Briefe in HTML",
+    "author": "Gottfried Wilhelm Leibniz",
+    "curator": "ot provided",
+    "cover": null,
+    "institution": {
+      "name": "Göttinger Akademie der Wissenschaften / \r\nNiedersächsische Staats- und Universitätsbibliothek \r\nGöttingen",
+      "website": "https://www.sub.uni-goettingen.de/sub-aktuell/",
+      "latitude": "51.5333",
+      "longitude": "9.9333",
+      "located_at": {
+        "place": "Göttingen",
+        "geonames_id": "2921044",
+        "latitude": "51.5333",
+        "longitude": "9.9333"
+      }
+    },
+    "date": "2016",
+    "language": "\"GER\"",
+    "URL": "https://leibniz-briefportal.adw-goe.de",
+    "epoch": "Modern",
+    "branch": "Metaphysics, Logic, Philosophy of Science, Epistemology",
+    "Content": {
+      "Writing support": "Letter",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML",
+      "download": "yes (PDF)",
+      "license": null
+    }
+  },
+  {
+    "ID": 20,
+    "title": "\r\nEin Sermon von Ablass und Gnade: a digital edition",
+    "author": "Martin Luther",
+    "curator": "Christiane Rehagen",
+    "cover": null,
+    "institution": {
+      "name": "Taylor Institution Library, University of Oxford",
+      "website": "https://www.ox.ac.uk/",
+      "latitude": "51.754816",
+      "longitude": "-1.254367",
+      "located_at": {
+        "place": "Oxford",
+        "geonames_id": "2640729",
+        "latitude": "51.754816",
+        "longitude": "-1.254367"
+      }
+    },
+    "date": "2018",
+    "language": "\"ENG\"",
+    "URL": "https://editions.mml.ox.ac.uk/editions/ablassgnade6/",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Book",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "TEI/XML",
+      "download": "yes ",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 21,
+    "title": "Ahiqar – The Story of Ahiqar in its Syriac and Arabic Tradition",
+    "author": "/",
+    "curator": "Reinhard G. Kratz; Aly Elrefaei; Simon Birol",
+    "cover": null,
+    "institution": {
+      "name": "Georg-August-Universität Göttingen / \r\nNiedersächsische Staats- und Universitätsbibliothek Göttingen",
+      "website": "https://www.uni-goettingen.de/de/theologische+fakult%C3%A4t/19855.html",
+      "latitude": "51.54128",
+      "longitude": "9.9158",
+      "located_at": {
+        "place": "Göttingen",
+        "geonames_id": "2918632",
+        "latitude": "51.54128",
+        "longitude": "9.9158"
+      }
+    },
+    "date": "2021",
+    "language": "\"SYR, ARA\"",
+    "URL": "https://ahiqar.uni-goettingen.de",
+    "epoch": "Ancient",
+    "branch": "Philosophy of Religion, Philosophy of Culture",
+    "Content": {
+      "Writing support": "Manuscript, Inscription",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "partial",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 22,
+    "title": "Correspondance Barbeyrac ",
+    "author": "Jean Barbeyrac",
+    "curator": "Ed. by Béla Kapossy, Béatrice Lovis, Petter Korkman, Taina Pierrier, Meri Päivärinne et. al.",
+    "cover": null,
+    "institution": {
+      "name": "Lumières.Lausanne / University of Helsinki",
+      "website": "https://lumieres.unil.ch/fiches/biblio/9469/",
+      "latitude": "46.5197",
+      "longitude": "6.6323",
+      "located_at": {
+        "place": "Lausanne / Helsinki",
+        "geonames_id": "2659994",
+        "latitude": "46.5197",
+        "longitude": "6.6323"
+      }
+    },
+    "date": "2017",
+    "language": "\"FRA\"",
+    "URL": "https://lumieres.unil.ch/projets/barbeyrac/",
+    "epoch": "Modern",
+    "branch": "Philosophy of Law, Ethics, Political Philosophy",
+    "Content": {
+      "Writing support": "Letter",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 23,
+    "title": "Rudolf Carnap Digital\"",
+    "author": "Rudolf Carnap",
+    "curator": "Lois M. Rendl and Roman Jordan",
+    "cover": null,
+    "institution": {
+      "name": "Institut Wiener Kreis (Universität Wien)",
+      "website": "https://wienerkreis.univie.ac.at/",
+      "latitude": "48.210033",
+      "longitude": "16.363449",
+      "located_at": {
+        "place": "Vienna",
+        "geonames_id": "2761369",
+        "latitude": "48.210033",
+        "longitude": "16.363449"
+      }
+    },
+    "date": "2022",
+    "language": "2022",
+    "URL": "https://valep.vc.univie.ac.at/valepPlus/project/62",
+    "epoch": "Contemporary",
+    "branch": "Philosophy of Computing, Logic, Epistemology, Philosophy of Science",
+    "Content": {
+      "Writing support": "Manuscript, Book, letter, memo",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": null
+    }
+  },
+  {
+    "ID": 24,
+    "title": "Four Early Chan Texts from Dunhuang – A TEI-based Edition 早期禪宗文獻四部",
+    "author": "/",
+    "curator": "Marcus Bingenheimer, Chang Po-Yung",
+    "cover": null,
+    "institution": {
+      "name": "Shin Wen Feng 新文豐",
+      "website": "https://www.swfc.com.tw/",
+      "latitude": "25.033",
+      "longitude": "121.5654",
+      "located_at": {
+        "place": "Taipei",
+        "geonames_id": "1668341",
+        "latitude": "25.033",
+        "longitude": "121.5654"
+      }
+    },
+    "date": "2018",
+    "language": "\"CHI\"",
+    "URL": "https://zenodo.org/record/1133490",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, Ethics, Philosophical Anthropology",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 25,
+    "title": "\r\nA. C. Chavannes et sa \"Science générale de l'homme\" (1788)",
+    "author": "Alexandre César Chavannes",
+    "curator": "Christian Grosse, Béla Kapossy",
+    "cover": null,
+    "institution": {
+      "name": "Christian Grosse, Béla Kapossy",
+      "website": "https://lumieres.unil.ch/fiches/biblio/9469/",
+      "latitude": "46.519653",
+      "longitude": "6.632273",
+      "located_at": {
+        "place": "Lausanne",
+        "geonames_id": "2660646",
+        "latitude": "46.519653",
+        "longitude": "6.632273"
+      }
+    },
+    "date": "2019",
+    "language": "\"FRE\"",
+    "URL": "https://lumieres.unil.ch/projets/chavannes/",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, Practical Philosophy",
+    "Content": {
+      "Writing support": "Book",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 26,
+    "title": "Ferdinand Ebner: Gesammelte Werke. Online Edition",
+    "author": "Ferdinand Ebner",
+    "curator": "Richard Hörmann",
+    "cover": null,
+    "institution": {
+      "name": "Universität Salzburg",
+      "website": "https://www.plus.ac.at/",
+      "latitude": "47.80949",
+      "longitude": "13.05501",
+      "located_at": {
+        "place": "Salzburg",
+        "geonames_id": "2778065",
+        "latitude": "47.80949",
+        "longitude": "13.05501"
+      }
+    },
+    "date": "2014",
+    "language": "\"GER\"",
+    "URL": "http://wfe.sbg.ac.at/exist/apps/Frontpage/index.html",
+    "epoch": "Contemporary",
+    "branch": "Philosophy of Language",
+    "Content": {
+      "Writing support": "Works, letters, notes, poems",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "TEI/XML",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 27,
+    "title": "Giambattista Vico: Orationes. Digital ed. of the ms. XIII B 55 of the National Library of Naples",
+    "author": "\r\nGiambattista Vico",
+    "curator": "Maria Luisa Colangelo",
+    "cover": null,
+    "institution": {
+      "name": "Basilicata University Press",
+      "website": "https://bup.unibas.it/",
+      "latitude": "40.639722",
+      "longitude": "15.805556",
+      "located_at": {
+        "place": "Potenza",
+        "geonames_id": "3175395",
+        "latitude": "40.639722",
+        "longitude": "15.805556"
+      }
+    },
+    "date": "2020",
+    "language": "\"LAT\"",
+    "URL": "https://eng-bup.unibas.it/library/DH",
+    "epoch": "Modern",
+    "branch": "Philosophy of History, Philosophy of Culture, Political Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "vico"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": null
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 28,
+    "title": "EvQ",
+    "author": "/",
+    "curator": "Shady Hekmat Nasser",
+    "cover": null,
+    "institution": {
+      "name": "Harvard University",
+      "website": "https://www.harvard.edu",
+      "latitude": "42.377",
+      "longitude": "-71.1167",
+      "located_at": {
+        "place": "Cambridge",
+        "geonames_id": "4930956",
+        "latitude": "42.3736",
+        "longitude": "-71.1097"
+      }
+    },
+    "date": "2023",
+    "language": "\"AR\"",
+    "URL": "https://erquran.org",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, Moral Philosophy",
+    "Content": {
+      "Writing support": "Work",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 29,
+    "title": "\r\nStephanus Galdeti: Contra scismaticos Pars 3",
+    "author": "Stephanus Galdeti",
+    "curator": "Mihai Maga",
+    "cover": null,
+    "institution": {
+      "name": "Babeș-Bolyai University",
+      "website": "https://www.ubbcluj.ro/en/",
+      "latitude": "46.76938",
+      "longitude": "23.58997",
+      "located_at": {
+        "place": "Cluj-Napoca",
+        "geonames_id": "686963",
+        "latitude": "46.77",
+        "longitude": "23.59"
+      }
+    },
+    "date": "2024",
+    "language": "\"LAT\"",
+    "URL": "https://www.dhcluj.ro/digitaleditions/",
+    "epoch": "Medieval",
+    "branch": "Moral Philosophy, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript, Book",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "only image",
+      "license": null
+    }
+  },
+  {
+    "ID": 30,
+    "title": "Guillelmus Autissiodorensis, Summa de officiis ecclesiasticis. Kritisch-digitale Erstausgabe",
+    "author": "Guglielmo d'Auxerre",
+    "curator": "Franz Fischer",
+    "cover": null,
+    "institution": {
+      "name": "Cologne Center for eHumanities / Institut für Dokumentologie und Editorik",
+      "website": "https://cceh.uni-koeln.de",
+      "latitude": "50.9413",
+      "longitude": "6.9583",
+      "located_at": {
+        "place": "Cologne",
+        "geonames_id": "2921044",
+        "latitude": "50.9375",
+        "longitude": "6.9603"
+      }
+    },
+    "date": "2000",
+    "language": "\"LAT\"",
+    "URL": "https://guillelmus.uni-koeln.de/tcrit/tcrit_prologus",
+    "epoch": "Medieval",
+    "branch": "Moral Philosophy, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "yes"
+    },
+    "dataReuse": {
+      "encoding": " partly",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 31,
+    "title": "\r\nHannah Arendt. Kritische Gesamtausgabe",
+    "author": "Hannah Arendt",
+    "curator": "Hannah Gerlach,  Ingo Kieslich",
+    "cover": null,
+    "institution": {
+      "name": "Freie Universität Berlin",
+      "website": "https://www.fu-berlin.de",
+      "latitude": "52.4525",
+      "longitude": "13.3153",
+      "located_at": {
+        "place": "Berlin",
+        "geonames_id": "2950159",
+        "latitude": "52.52",
+        "longitude": "13.405"
+      }
+    },
+    "date": "2023",
+    "language": "\"GER, ENG\"",
+    "URL": "https://hannah-arendt-edition.net/home?lang=de",
+    "epoch": "Contemporary",
+    "branch": "Political Philosophy, Ethics, Practical Philosophy, Philosophy of History",
+    "Content": {
+      "Writing support": "Manuscript, Typoscript, Book",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 32,
+    "title": "Ludvig Holbergs Skrifter",
+    "author": "Ludvig Holbergs ",
+    "curator": "Eiliv Vinje, Peter Zeeberg, Karen Skovgaard-Petersen",
+    "cover": null,
+    "institution": {
+      "name": "Society for Danish Language and Literature / University of Bergen",
+      "website": "https://www.uib.no/en",
+      "latitude": "59.9139",
+      "longitude": "10.7522",
+      "located_at": {
+        "place": "Bergen/Kopenhagen",
+        "geonames_id": "3161732",
+        "latitude": "60.39299",
+        "longitude": "5.32415"
+      }
+    },
+    "date": "2015",
+    "language": "\"DAN\"",
+    "URL": "http://holbergsskrifter.dk/",
+    "epoch": "Modern",
+    "branch": "Practical Philosophy, Ethics, Aesthetics, Political Philosophy",
+    "Content": {
+      "Writing support": "Works, letter",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 33,
+    "title": "\r\nHugh of Saint Victor's De quinque septenis (On the Five Sevens) and Its Versification in Samuel Presbiter's De oratione dominica (On the Lord's Prayer)",
+    "author": "Hugh of Saint Victor; Samuel Presbiter",
+    "curator": "Andrew Dunning",
+    "cover": null,
+    "institution": {
+      "name": "University of Oxford",
+      "website": "https://www.ox.ac.uk/",
+      "latitude": "51.754816",
+      "longitude": "1.254367",
+      "located_at": {
+        "place": "Oxford",
+        "geonames_id": "2640729",
+        "latitude": "51.75202",
+        "longitude": "-1.25773"
+      }
+    },
+    "date": "2016",
+    "language": "\"LAT\"",
+    "URL": "http://scholarlyediting.org/2016/editions/intro.dunning.html",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, Moral Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 34,
+    "title": "\r\nAnonymus Magister Artium Pragensis: Recommendationes Recommendatio baccalaureorum artium: Invitati ascendant",
+    "author": "/",
+    "curator": "Mihai Maga",
+    "cover": null,
+    "institution": {
+      "name": "Babeș-Bolyai University",
+      "website": "https://www.ubbcluj.ro/en/",
+      "latitude": "46.769379",
+      "longitude": "23.589954",
+      "located_at": {
+        "place": "Cluj-Napoca",
+        "geonames_id": "686963",
+        "latitude": "46.77121",
+        "longitude": "23.62364"
+      }
+    },
+    "date": "2020",
+    "language": "\"LAT\"",
+    "URL": "https://www.dhcluj.ro/digitaleditions/?file=APRIA",
+    "epoch": "Medieval",
+    "branch": "Practical Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "only image",
+      "license": null
+    }
+  },
+  {
+    "ID": 35,
+    "title": "The Greek Bible in Byzantine Judaism",
+    "author": "/",
+    "curator": "Nicholas de Lange; Harold Short",
+    "cover": null,
+    "institution": {
+      "name": "University of Cambridge / Centre for Computing in the Humanities (CCH)",
+      "website": "https://www.cam.ac.uk/",
+      "latitude": "52.204267",
+      "longitude": "0.114908",
+      "located_at": {
+        "place": "Cambridge",
+        "geonames_id": "52.20534",
+        "latitude": "0.12182",
+        "longitude": "0.12182"
+      }
+    },
+    "date": "2010",
+    "language": null,
+    "URL": "https://www.gbbj.org/",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, History of Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "yes"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 36,
+    "title": "\r\nKritische Gesamtausgabe der Schriften und Briefe Andreas Bodensteins von Karlstadt",
+    "author": "Andreas Bodenstein von Karlstadt",
+    "curator": "Thomas Kaufmann",
+    "cover": null,
+    "institution": {
+      "name": "Herzog August Bibliothek Wolfenbüttel",
+      "website": "https://www.hab.de/",
+      "latitude": "52.1649",
+      "longitude": "10.5417",
+      "located_at": {
+        "place": "Wolfenbüttel",
+        "geonames_id": "2806914",
+        "latitude": "52.1649",
+        "longitude": "10.5417"
+      }
+    },
+    "date": "2012",
+    "language": "\"LAT; GER\"",
+    "URL": "http://diglib.hab.de/edoc/ed000216/start.htm",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Works, letters",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": null
+    }
+  },
+  {
+    "ID": 37,
+    "title": "Lucula noctis Project",
+    "author": "Iohannes Dominic",
+    "curator": "Chris Nighman",
+    "cover": null,
+    "institution": {
+      "name": "Wilfrid Laurier University",
+      "website": "https://www.wlu.ca/",
+      "latitude": "43.4668",
+      "longitude": "-80.5228",
+      "located_at": {
+        "place": "Waterloo, Ontario",
+        "geonames_id": "6173331",
+        "latitude": "43.4668",
+        "longitude": "-80.5164"
+      }
+    },
+    "date": "2015",
+    "language": "\"LAT\"",
+    "URL": "http://web.wlu.ca/history/cnighman/LN/index.html",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 38,
+    "title": "\r\nMontedite - Édition en ligne des pensées de Montesquieu",
+    "author": "Charles-Louis de Secondat/Montesquieu",
+    "curator": "Carole Dornier",
+    "cover": null,
+    "institution": {
+      "name": "Presses universitaires de Caen",
+      "website": " https://www.puc-ed.fr",
+      "latitude": "49.182863",
+      "longitude": "-0.370679",
+      "located_at": {
+        "place": "Caen",
+        "geonames_id": "2984370",
+        "latitude": "49.182863",
+        "longitude": "-0.370679"
+      }
+    },
+    "date": "2013",
+    "language": "\"FR\"",
+    "URL": "https://www.unicaen.fr/services/puc/sources/Montesquieu/",
+    "epoch": "Modern",
+    "branch": "Political Philosophy, Ethics, Philosophy of Law",
+    "Content": {
+      "Writing support": "Manuscript, Notebooks",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 39,
+    "title": "\r\nBibliothek der Neologie",
+    "author": "Carl Friedrich Bahrdt / Johann Salomo Semler, Johann August Ernesti, Johann Jakob Griesbach, Gottfried Leß, Johann Peter Miller, Johann August Nösselt, August Friedrich Wilhelm Sack, Gotthilf Samuel Steinbart, Wilhelm Abraham Teller, Johann Gottlieb Töllner",
+    "curator": "Albrecht Beutel",
+    "cover": null,
+    "institution": {
+      "name": "Universität Münster",
+      "website": "https://www.uni-muenster.de/de/",
+      "latitude": "51.961",
+      "longitude": "7.625",
+      "located_at": {
+        "place": "Münster",
+        "geonames_id": "2867714",
+        "latitude": "51.961",
+        "longitude": "7.625"
+      }
+    },
+    "date": "2016",
+    "language": "\"GER\"",
+    "URL": "https://bdn-edition.de/",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, Moral Philosophy, History of Philosophy",
+    "Content": {
+      "Writing support": "Manuscripts",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 40,
+    "title": "\r\nNotker III. von St. Gallen: De interpretatione. Elektronische Teiledition",
+    "author": "Notker Labeo",
+    "curator": "Harald Saller",
+    "cover": null,
+    "institution": {
+      "name": "Graduiertenkolleg Textkritik, München",
+      "website": "https://www.textkritik.uni-muenchen.de/",
+      "latitude": "48.137154",
+      "longitude": "11.576124",
+      "located_at": {
+        "place": "München",
+        "geonames_id": "2867714",
+        "latitude": "48.137154",
+        "longitude": "11.576124"
+      }
+    },
+    "date": "2004",
+    "language": "\"GER\"",
+    "URL": "https://www.edkomp.uni-muenchen.de/Notker/Demo-CD/edition_frame.html",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, Logic, Moral Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 41,
+    "title": "\r\n\r\nLes manuscrits arabes des lettres de Paul de Tarse",
+    "author": "/",
+    "curator": "Sara Schulthess, Claire Clivaz",
+    "cover": null,
+    "institution": {
+      "name": "Université de Lausanne/ Vital-IT (Swiss Institute of Bioinformatics)",
+      "website": "https://www.unil.ch/unil/fr/home.html",
+      "latitude": "46.5197",
+      "longitude": "6.6323",
+      "located_at": {
+        "place": "Lausanne",
+        "geonames_id": "2659994",
+        "latitude": "46.5197",
+        "longitude": "6.6323"
+      }
+    },
+    "date": "2016",
+    "language": "\"AR\"",
+    "URL": "https://tarsian.vital-it.ch/#folio_103r",
+    "epoch": "/",
+    "branch": "Philosophy of Religion, Philosophy of History",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 42,
+    "title": "Petrus Plaoul - Editio Critica Commentarii in libris Sententiarum",
+    "author": "Petrus Plaoul",
+    "curator": "Jeffrey C. Witt",
+    "cover": null,
+    "institution": {
+      "name": "Boston College",
+      "website": "https://www.bc.edu",
+      "latitude": "42.3355",
+      "longitude": "-71.1685",
+      "located_at": {
+        "place": "Boston ",
+        "geonames_id": "4930956",
+        "latitude": "42.3355",
+        "longitude": "-71.1685"
+      }
+    },
+    "date": "2011",
+    "language": "\"LAT\"",
+    "URL": "https://scta.info/resource/peter-plaoul",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscripts",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "yes"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 43,
+    "title": "Saint Patrick's Confessio",
+    "author": "Saint Patrick",
+    "curator": "Franz Fischer, Anthony Harvey",
+    "cover": null,
+    "institution": {
+      "name": "Royal Irish Academy",
+      "website": "https://www.ria.ie",
+      "latitude": "53.339444",
+      "longitude": "-6.254167",
+      "located_at": {
+        "place": "Dublin",
+        "geonames_id": "3313829",
+        "latitude": "53.333056",
+        "longitude": "-6.248889"
+      }
+    },
+    "date": "2008",
+    "language": "\"LAT\"",
+    "URL": "http://www.confessio.ie/",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript, Print",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 44,
+    "title": "\r\nCodex Sinaiticus",
+    "author": "/",
+    "curator": "Claire Breay, Leander Seige, Father Justin, Ekaterina Krushelnitskaya",
+    "cover": null,
+    "institution": {
+      "name": "British Librar, National Library of Russia, St. Catherine's Monastery, Leipzig University Library",
+      "website": "https://www.bl.uk",
+      "latitude": "0.127676",
+      "longitude": "2643743",
+      "located_at": {
+        "place": "London",
+        "geonames_id": "2643743",
+        "latitude": "51.507222",
+        "longitude": "-0.1275"
+      }
+    },
+    "date": "2003",
+    "language": "GRC",
+    "URL": "http://codexsinaiticus.org/en/",
+    "epoch": "Ancient",
+    "branch": "Philosophy of Religion, History of Philosophy, Moral Philosophy",
+    "Content": {
+      "Writing support": "Codex",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": null
+    }
+  },
+  {
+    "ID": 45,
+    "title": "\r\nSigismundus de Pyzdry: Principia in Sententiarum Quaestio in Principium I Sententiarum",
+    "author": "Sigismundus de Pyzdry",
+    "curator": "Mihai Maga",
+    "cover": null,
+    "institution": {
+      "name": "Babeș-Bolyai University",
+      "website": "https://www.ubbcluj.ro/en/",
+      "latitude": "46.769379",
+      "longitude": "23.589954",
+      "located_at": {
+        "place": "Cluj-Napoca",
+        "geonames_id": "686963",
+        "latitude": "46.77121",
+        "longitude": "23.62364"
+      }
+    },
+    "date": "2020",
+    "language": "\"LAT\"",
+    "URL": "https://www.dhcluj.ro/digitaleditions/?file=APRIA",
+    "epoch": "Medieval",
+    "branch": "Moral Philosophy, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "only image",
+      "license": null
+    }
+  },
+  {
+    "ID": 46,
+    "title": "Stanislaus de Scarbimiria: Recommendacio rectoris Universitatis, Ottonis, scholastici Cracoviensis",
+    "author": "Stanisław of Skarbimierz",
+    "curator": "Mihai Maga",
+    "cover": null,
+    "institution": {
+      "name": "Babeș-Bolyai University",
+      "website": "https://www.ubbcluj.ro/en/",
+      "latitude": "46.769379",
+      "longitude": "23.589954",
+      "located_at": {
+        "place": "Cluj-Napoca",
+        "geonames_id": "686963",
+        "latitude": "46.77121",
+        "longitude": "23.62364"
+      }
+    },
+    "date": "2020",
+    "language": "\"LAT\"",
+    "URL": "https://www.dhcluj.ro/digitaleditions/?file=APRIA",
+    "epoch": "Medieval",
+    "branch": "Political Philosophy, Moral Philosophy",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "only image",
+      "license": null
+    }
+  },
+  {
+    "ID": 47,
+    "title": "The Richard Rufus of Cornwall Project",
+    "author": "Richardus Rufus",
+    "curator": "Rega Wood ",
+    "cover": null,
+    "institution": {
+      "name": "Stanford University",
+      "website": "http://rrp.stanford.edu",
+      "latitude": "37.4275",
+      "longitude": "-122.1697",
+      "located_at": {
+        "place": "Stanford",
+        "geonames_id": "5392171",
+        "latitude": "37.4275",
+        "longitude": "-122.1697"
+      }
+    },
+    "date": "2013",
+    "language": "\"LAT\"",
+    "URL": "https://rrp.stanford.edu/index.shtml",
+    "epoch": "Medieval",
+    "branch": "Metaphysics, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscripts",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 48,
+    "title": "\r\nThe Collected Letters of Bertrand Russell: An Electronic Edition",
+    "author": "Bertrand Russell",
+    "curator": "Nicholas Griffin, James Chartrand",
+    "cover": null,
+    "institution": {
+      "name": "McMaster University",
+      "website": "https://www.mcmaster.ca",
+      "latitude": "43.2609",
+      "longitude": "-79.9192",
+      "located_at": {
+        "place": "Hamilton",
+        "geonames_id": "5969783",
+        "latitude": "43.2609",
+        "longitude": "-79.9192"
+      }
+    },
+    "date": "2006",
+    "language": "\"ENG\"",
+    "URL": "https://russell.humanities.mcmaster.ca",
+    "epoch": "Contemporary",
+    "branch": "Logic, Philosophy of Language, Epistemology, Philosophy of Mathematics, Ethics",
+    "Content": {
+      "Writing support": "Letters",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 49,
+    "title": "A Digital Comparative Edition and Partial Translation of the Shorter Chinese Saṃyukta Āgama (T.100)",
+    "author": "/",
+    "curator": "Marcus Bingenheimer and Aming Tu 杜正民",
+    "cover": null,
+    "institution": {
+      "name": "Dharma Drum Buddhist College",
+      "website": "https://en.bs.dila.edu.tw",
+      "latitude": "25.0173",
+      "longitude": "121.4628",
+      "located_at": {
+        "place": "New Taipei",
+        "geonames_id": "1668262",
+        "latitude": "25.0173",
+        "longitude": "121.4628"
+      }
+    },
+    "date": "2005",
+    "language": "\"CHI/ENG\"",
+    "URL": "https://bza.dila.edu.tw",
+    "epoch": "Ancient",
+    "branch": "Philosophy of Religion, Moral Philosophy, Philosophy of Culture",
+    "Content": {
+      "Writing support": "Collection of texts",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+    {
+    "ID": 50,
+    "title": "Pico della Mirandola: De hominis dignitate",
+    "author": "Pico della Mirandola",
+    "curator": "Massimo Riva",
+    "cover": "/photo/pico.png",
+    "institution": {
+      "name": "Brown University, Università degli Studi di Bologna, Biblioteca Comunale dell'Archiginnasio di Bologna",
+      "website": "https://www.brown.edu",
+      "latitude": "41.8268",
+      "longitude": "-71.4025",
+      "located_at": {
+        "place": "Providence, Rhode Island, USA",
+        "geonames_id": "5229499",
+        "latitude": "41.8268",
+        "longitude": "71.4025"
+      }
+    },
+    "date": "not provided",
+    "language": "\"LAT\"",
+    "URL": "https://www.brown.edu/Departments/Italian_Studies/pico/",
+    "epoch": "Medieval",
+    "branch": "Moral Philosophy, Philosophical Anthropology, Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "not provided",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 51,
+    "title": "Zwischen Theologie, frühmoderner Naturwissenschaft und politischer Korrespondenz: Die sozinianischen Briefwechsel",
+    "author": "/",
+    "curator": "Kęstutis Daugirdas, Andreas Kuczera, Julian Jarosch, Patrick Toschka",
+    "cover": null,
+    "institution": {
+      "name": "Johannes a Lasco Bibliothek / Akademie der Wissenschaften und der Literatur",
+      "website": "https://www.jalb.de/22758-438-0-73.html",
+      "latitude": "53.3673",
+      "longitude": "7.2086",
+      "located_at": {
+        "place": "Emden/Mainz",
+        "geonames_id": "2930597",
+        "latitude": "53.3673",
+        "longitude": "7.2086"
+      }
+    },
+    "date": "2021",
+    "language": " \"GER\"",
+    "URL": "https://sozinianer.mni.thm.de/home",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion, Philosophy of Science, History of Philosophy",
+    "Content": {
+      "Writing support": "Letters, daily calendar, lectures",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "TEI-XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 52,
+    "title": "Corpus Thomisticum",
+    "author": "Thomas von Aquin",
+    "curator": "Enrique Alarcón",
+    "cover": null,
+    "institution": {
+      "name": "Universidad de Navarra",
+      "website": "https://www.unav.edu",
+      "latitude": "42.8138",
+      "longitude": "-1.6458",
+      "located_at": {
+        "place": "Pamplona",
+        "geonames_id": "3117800",
+        "latitude": "42.8138",
+        "longitude": "-1.6458"
+      }
+    },
+    "date": "2000",
+    "language": "\"LAT\"",
+    "URL": "https://www.corpusthomisticum.org",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, Metaphysics",
+    "Content": {
+      "Writing support": "Manuscripts",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 53,
+    "title": "Wenzelsbibel Digital",
+    "author": "/",
+    "curator": "Manfred Kern",
+    "cover": null,
+    "institution": {
+      "name": "Paris Lodron Universität Salzburg / Österreichischen Nationalbibliothek",
+      "website": "https://www.onb.ac.at",
+      "latitude": "47.8095",
+      "longitude": "13.055",
+      "located_at": {
+        "place": "Salzburg",
+        "geonames_id": "2766824",
+        "latitude": "47.8095",
+        "longitude": "13.055"
+      }
+    },
+    "date": "2022",
+    "language": "\"GER\"",
+    "URL": "https://edition.onb.ac.at/fedora/objects/context:wenbibel/methods/sdef:Context/get",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 54,
+    "title": "Forschungsdaten Wilhelm Windelband",
+    "author": "Wilhelm Windelband",
+    "curator": "Gerald Hartung, Jörn Bohr",
+    "cover": null,
+    "institution": {
+      "name": "Institut für Grundlagenforschung zur Philosophiegeschichte (IGP), Bergische Universität Wuppertal",
+      "website": "https://igp.uni-wuppertal.de",
+      "latitude": "51.2562",
+      "longitude": "7.1508",
+      "located_at": {
+        "place": "Wuppertal",
+        "geonames_id": "2805753",
+        "latitude": "51.2562",
+        "longitude": "7.1508"
+      }
+    },
+    "date": "2022",
+    "language": "\"GER\"",
+    "URL": "https://igp.uni-wuppertal.de/de/philosophiegeschichtsschreibung-grundlagenforschung-und-methodenreflexion/philosophiehistorische-grundlagenforschung-i-wilhelm-windelband/",
+    "epoch": "Contemporary",
+    "branch": "Philosophy of History, Epistemology",
+    "Content": {
+      "Writing support": "Manuscript",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "yes",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 55,
+    "title": "Wittgenstein's Nachlass - The Bergen Electronic Edition (BEE)",
+    "author": "Ludwig Wittgenstein",
+    "curator": "not provided",
+    "cover": null,
+    "institution": {
+      "name": "Intelex Corporation",
+      "website": "http://www.nlx.com/home",
+      "latitude": "38.897676",
+      "longitude": "-77.03653",
+      "located_at": {
+        "place": "Charlottesville",
+        "geonames_id": "4782977",
+        "latitude": "38.0293",
+        "longitude": "-78.4767"
+      }
+    },
+    "date": "1998",
+    "language": "\"GER, ENG\"",
+    "URL": "https://www.nlx.com/home",
+    "epoch": "Contemporary",
+    "branch": "Philosophy of Language, Logic, Epistemology",
+    "Content": {
+      "Writing support": "Manuscript, Typescript, Dictation, Notebook",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 56,
+    "title": "Wittgenstein Source",
+    "author": "Ludwig Wittgenstein",
+    "curator": "Alois Pichler",
+    "cover": null,
+    "institution": {
+      "name": "Wittgenstein Archives, University of Bergen",
+      "website": "https://www.uib.no/en",
+      "latitude": "60.3894",
+      "longitude": "5.3221",
+      "located_at": {
+        "place": "Bergen",
+        "geonames_id": "3161732",
+        "latitude": "60.3894",
+        "longitude": "5.3221"
+      }
+    },
+    "date": "2015",
+    "language": "\"GER\"",
+    "URL": "http://www.wittgensteinsource.org",
+    "epoch": "Contemporary",
+    "branch": "Philosophy of Language, Logic, Epistemology",
+    "Content": {
+      "Writing support": "Manuscripts, notebooks, letters",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "yes",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "XML-TEI",
+      "download": "partialy",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 57,
+    "title": "\r\nAdam Wodeham - Editio Critica Electronica Ordinationis Oxoniensis",
+    "author": "Adam Wodeham",
+    "curator": "not provided",
+    "cover": null,
+    "institution": {
+      "name": "not provided",
+      "website": "not provided",
+      "latitude": "not provided",
+      "longitude": "not provided",
+      "located_at": {
+        "place": "not provided",
+        "geonames_id": "not provided",
+        "latitude": "not provided",
+        "longitude": "not provided"
+      }
+    },
+    "date": "2013",
+    "language": "\"LAT\"",
+    "URL": "https://web.archive.org/web/20170610090514/http://adamwodeham.org/text/questions/wodehamordinatio",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Work",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": "Creative commons"
+    }
+  },
+  {
+    "ID": 58,
+    "title": "\r\nHuldrych Zwingli Briefe: Digitale Texte",
+    "author": "Huldrych Zwingli",
+    "curator": "Christian Moser",
+    "cover": null,
+    "institution": {
+      "name": "Universität Zürich",
+      "website": "https://www.uzh.ch/de.html",
+      "latitude": "47.3769",
+      "longitude": "8.5417",
+      "located_at": {
+        "place": "Zürich",
+        "geonames_id": "2657896",
+        "latitude": "47.376886",
+        "longitude": "8.541694"
+      }
+    },
+    "date": "2011",
+    "language": "\"GER / LAT\"",
+    "URL": "http://www.irg.uzh.ch/static/zwingli-briefe/",
+    "epoch": "Modern",
+    "branch": "Philosophy of Religion",
+    "Content": {
+      "Writing support": "Letters, Works",
+      "facsimiles": "no"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "yes",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  },
+  {
+    "ID": 59,
+    "title": "Codex Suprasliensis",
+    "author": "/",
+    "curator": "David J. Birnbaum",
+    "cover": null,
+    "institution": {
+      "name": "not provided",
+      "website": "not provided",
+      "latitude": "not provided",
+      "longitude": "not provided",
+      "located_at": {
+        "place": "not provided",
+        "geonames_id": "not provided",
+        "latitude": "not provided",
+        "longitude": "not provided"
+      }
+    },
+    "date": "2011",
+    "language": "\"Church Slavonic\"",
+    "URL": "http://suprasliensis.obdurodon.org/",
+    "epoch": "Medieval",
+    "branch": "Philosophy of Religion, History of Philosophy",
+    "Content": {
+      "Writing support": "Manuscript, Codex",
+      "facsimiles": "yes"
+    },
+    "Features": {
+      "advanced_search": "no",
+      "index": "no",
+      "glossary": "no"
+    },
+    "dataReuse": {
+      "encoding": "HTML/XML",
+      "download": "no",
+      "license": null
+    }
+  }
+]
