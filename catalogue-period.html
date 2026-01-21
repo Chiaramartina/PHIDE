@@ -9,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
   <!-- React -->
@@ -21,183 +22,207 @@
 
   <div id="navbar-root"></div>
   <div id="main-root"></div>
-
   <footer class="bg-[#111827] text-white py-10 mt-20">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+  <div class="max-w-7xl mx-auto px-6">
 
-        <div>
-          <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
-          <p class="text-gray-300">
-            Digital catalogue of scholarly editions of philosophical texts.
-            Explore projects, maps, and schedules in a single platform.
-          </p>
-        </div>
+    <!-- Contenuto -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-        <div>
-          <h3 class="text-xl font-semibold mb-3">Contact</h3>
-          <p class="text-gray-300 mb-1">
-            Email:
-            <a href="mailto:info@phide.com" class="hover:text-white underline">
-              info@phide.com
-            </a>
-          </p>
-          <p class="text-gray-300 mb-1">
-            Phone:
-            <a href="tel:+390000000000" class="hover:text-white underline">
-              +39 000 000 0000
-            </a>
-          </p>
-          <p class="text-gray-300">
-            Address: Via Filosofia 1, 00100 Roma, Italy
-          </p>
-        </div>
-
-        <div>
-          <!-- Opzionale -->
-        </div>
-
+      <!-- Logo e descrizione -->
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
+        <p class="text-gray-300">
+          Digital catalogue of scholarly editions of philosophical texts.
+          Explore projects, maps, and schedules in a single platform.
+        </p>
       </div>
 
-      <hr class="border-gray-700 my-8">
-
-      <div class="text-center text-gray-400 text-sm">
-        &copy; 2025 PHIDE. All rights reserved.
+      <!-- Contatti -->
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Contact</h3>
+        <p class="text-gray-300 mb-1">
+          Email:
+          <a href="mailto:info@phide.com" class="hover:text-white underline">
+            info@phide.com
+          </a>
+        </p>
+        <p class="text-gray-300 mb-1">
+          Phone:
+          <a href="tel:+390000000000" class="hover:text-white underline">
+            +39 000 000 0000
+          </a>
+        </p>
+        <p class="text-gray-300">
+          Address: Via Filosofia 1, 00100 Roma, Italy
+        </p>
       </div>
+
+      <!-- Spazio futuro (opzionale) -->
+      <div>
+        <!-- Qui puoi aggiungere link, social, ecc. -->
+      </div>
+
     </div>
-  </footer>
 
-  <script type="text/babel">
+    <!-- Separatore -->
+    <hr class="border-gray-700 my-8">
 
-    /* ================= NAVBAR ================= */
-    function Navbar() {
-      const [mobileOpen, setMobileOpen] = React.useState(false);
-      const [dropdownOpen, setDropdownOpen] = React.useState(false);
+    <!-- Copyright -->
+    <div class="text-center text-gray-400 text-sm">
+      &copy; 2025 PHIDE. All rights reserved.
+    </div>
 
-      return (
-        <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex justify-between h-16 items-center">
+  </div>
+</footer>
 
-              <a href="index.html" className="text-xl font-semibold text-[#010435]">
-                PHIDE
-              </a>
 
-              <div className="hidden md:flex space-x-6 items-center">
+<script type="text/babel">
 
-                <div className="relative">
-                  <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
-                  >
-                    Browse
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
 
-                  {dropdownOpen && (
-                    <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                      <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
-                        Catalogue
-                      </a>
-                      <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
-                        Schedule
-                      </a>
-                    </div>
-                  )}
-                </div>
+/* ================= NAVBAR ================= */
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-                <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
-                <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
-              </div>
+  return (
+    <nav className="w-full bg-[##EFF4F] border-b border-black fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
+          <a href="index.html" className="text-xl font-semibold text-[#010435] font-['Playfair Display']">PHIDE</a>
 
-              <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  {mobileOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
+          <div className="hidden md:flex space-x-6 items-center font-['Playfair Display']">
+            <div className="relative">
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5b0909]">
+                Catalogue
               </button>
-
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow">
+                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                </div>
+              )}
             </div>
+
+            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
           </div>
 
-          {mobileOpen && (
-            <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-              <a href="" className="block">Browse</a>
-              <a href="/catalogue-period.html" className="block">Catalogue</a>
-              <a href="/scheda.html" className="block">Scheda</a>
-              <a href="/map.html" className="block">Map</a>
-              <a href="/documentation.html" className="block">Documentation</a>
-            </div>
-          )}
-        </nav>
-      );
-    }
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
 
-    /* ================= MAIN ================= */
-    function MainContent() {
-      const cards = [
-        { title: "All", href: "catalogue.html", size: "h-72 md:h-80", image: "./allimg.png" },
-        { title: "Ancient Philosophy", href: "catalogue.html?epoch=ancient", image: "./ancient.png" },
-        { title: "Medieval Philosophy", href: "catalogue.html?epoch=medieval", image: "./medieval.png" },
-        { title: "Modern Philosophy", href: "catalogue.html?epoch=modern", image: "./modern.png" },
-        { title: "Contemporary Philosophy", href: "catalogue.html?epoch=contemporary", image: "./cont.png" }
-      ];
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2 font-['Playfair Display']">
+          <a href="/catalogue.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/map.html" className="block">Map</a>
+          <a href="/documentation.html" className="block">Documentation</a>
+        </div>
+      )}
+    </nav>
+  );
+}
 
-      return (
-        <main className="pt-28 pb-12">
 
-          <div className="max-w-4xl mx-auto px-6 mb-12">
-            <a
-              href={cards[0].href}
-              className={`group relative ${cards[0].size} rounded-3xl p-12 flex items-center justify-center text-center
-              border-2 hover:scale-105 transition transform shadow-lg overflow-hidden`}
-            >
-              <img
-                src={cards[0].image}
-                className="absolute inset-0 w-full h-full object-cover
-                opacity-90 group-hover:opacity-90
-                transition-opacity duration-300 z-0"
-              />
-              <h2 className="z-10 text-4xl md:text-5xl font-semibold font-['Playfair Display']">
-                {cards[0].title}
-              </h2>
-            </a>
-          </div>
+/* ================= MAIN ================= */
+function MainContent() {
 
-          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {cards.slice(1).map((card, index) => (
-              <a
-                key={index}
-                href={card.href}
-                className="group relative h-56 md:h-64 rounded-2xl p-6 flex items-center justify-center text-center
-                border-2 hover:scale-105 transition transform shadow-md overflow-hidden"
-                style={{ borderColor: "#010435" }}
-              >
-                <img
-                  src={card.image}
-                  className="absolute inset-0 w-full h-full object-cover
-                  opacity-90 group-hover:opacity-90
-                  transition-opacity duration-300 z-0"
-                />
-                <h2 className="z-10 text-2xl md:text-3xl font-semibold">
-                  {card.title}
-                </h2>
-              </a>
-            ))}
-          </div>
-        </main>
-      );
-    }
+  const cards = [
+  {
+    title: "All",
+    href: "catalogue.html",
+    size: "h-72 md:h-80",
+    image: "allimg.png"
+  },
+  {
+    title: "Ancient Philosophy",
+    href: "catalogue.html?epoch=ancient",
+     image: "ancient.png"
+  },
+  {
+    title: "Medieval Philosophy",
+    href: "catalogue.html?epoch=medieval",
+    image: "medieval.png"
+  },
+  {
+    title: "Modern Philosophy",
+    href: "catalogue.html?epoch=modern",
+    image: "modern.png"
+  },
+  {
+    title: "Contemporary Philosophy",
+    href: "catalogue.html?epoch=contemporary",
+    image: "cont.png"
+  }
+];
 
-    /* ================= RENDER ================= */
-    ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
-    ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
+  return (
+    <main className="pt-28 pb-12">
 
-  </script>
+      {/* ALL CARD */}
+<div className="max-w-4xl mx-auto px-6 mb-12">
+  <a
+    href={cards[0].href}
+    className={`group relative ${cards[0].size} rounded-3xl flex items-center justify-center text-center
+    border-2 hover:scale-105 transition transform shadow-lg overflow-hidden`}
+  >
+    {/* Immagine */}
+    <img
+      src={cards[0].image}
+      className="absolute inset-0 w-full h-full object-cover z-0"
+    />
+
+    {/* Overlay: scuro -> chiaro al hover */}
+    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
+
+    {/* Titolo */}
+    <h2 className="relative z-10 text-4xl md:text-5xl font-semibold text-white font-['Playfair Display']">
+      {cards[0].title}
+    </h2>
+  </a>
+</div>
+
+{/* OTHER CARDS */}
+<div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+  {cards.slice(1).map((card, index) => (
+    <a
+      key={index}
+      href={card.href}
+      className="group relative h-56 md:h-64 rounded-2xl flex items-center justify-center text-center
+      border-2 hover:scale-105 transition transform shadow-md overflow-hidden"
+    >
+      <img
+        src={card.image}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      />
+
+      {/* Overlay: scuro -> chiaro al hover */}
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
+
+      <h2 className="relative z-10 text-2xl md:text-3xl font-semibold text-white font-['Playfair Display']">
+        {card.title}
+      </h2>
+    </a>
+  ))}
+</div>
+
+    </main>
+  );
+}
+
+
+/* ================= RENDER ================= */
+ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
+
+</script>
+
 </body>
 </html>
