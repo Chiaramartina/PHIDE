@@ -304,15 +304,21 @@ function BookBrowserUI() {
   const paginatedBooks = filteredBooks.slice(indexOfFirst, indexOfLast);
 
   return (
-    <div className="pt-20 pb-32">
-      <Navbar />
-      <section className="w-full mt-6">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
-          <div className="w-full h-1 bg-[#010435] rounded-full"></div>
-          <p className="text-6xl font-medium font-['Playfair Display'] text-[black] tracking-wide">CATALOGUE</p>
-          <div className="w-full h-1 bg-[#010435] rounded-full"></div>
-        </div>
-      </section>
+  <div className="pt-20 pb-32">
+    <Navbar />
+    <section className="w-full mt-6">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+        <div className="w-full h-1 bg-[#010435] rounded-full"></div>
+        <p
+          className="text-6xl font-medium text-[black] tracking-wide"
+          style={{ fontFamily: "'Playfair Display', serif" }}
+        >
+          CATALOGUE
+        </p>
+        <div className="w-full h-1 bg-[#010435] rounded-full"></div>
+      </div>
+    </section>
+
 
       <main className="max-w-7xl mx-auto px-4 mt-8">
 
@@ -468,32 +474,81 @@ function BookBrowserUI() {
                   </div>
                 )}
 
-                {showSchedule && (
-                  <div className="border-t pt-4 space-y-4">
-                    <Accordion title="Content" open={openAccordion==="content"} onClick={()=>setOpenAccordion(openAccordion==="content"?null:"content")}>
-                      <ul className="list-disc ml-5">
-                        <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
-                        <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
-                      </ul>
-                    </Accordion>
+               {showSchedule && (
+              <div className="border-t pt-4 space-y-4">
+                <Accordion
+                  title={
+                    <div className="flex items-center justify-between">
+                      Content
+                      <svg
+                        className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="content" ? "rotate-90" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  }
+                  open={openAccordion==="content"}
+                  onClick={() => setOpenAccordion(openAccordion==="content" ? null : "content")}
+                >
+                  <ul className="list-disc ml-5">
+                    <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
+                    <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
+                  </ul>
+                </Accordion>
 
-                    <Accordion title="Features" open={openAccordion==="features"} onClick={()=>setOpenAccordion(openAccordion==="features"?null:"features")}>
-                      <ul className="list-disc ml-5">
-                        <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
-                        <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
-                        <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
-                      </ul>
-                    </Accordion>
+                <Accordion
+                  title={
+                    <div className="flex items-center justify-between">
+                      Features
+                      <svg
+                        className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="features" ? "rotate-90" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  }
+                  open={openAccordion==="features"}
+                  onClick={() => setOpenAccordion(openAccordion==="features" ? null : "features")}
+                >
+                  <ul className="list-disc ml-5">
+                    <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
+                    <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
+                    <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
+                  </ul>
+                </Accordion>
 
-                    <Accordion title="Data & Reuse" open={openAccordion==="data"} onClick={()=>setOpenAccordion(openAccordion==="data"?null:"data")}>
-                      <ul className="list-disc ml-5">
-                        <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
-                        <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
-                        <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
-                      </ul>
-                    </Accordion>
-                  </div>
-                )}
+                <Accordion
+                  title={
+                    <div className="flex items-center justify-between">
+                      Data & Reuse
+                      <svg
+                        className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="data" ? "rotate-90" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  }
+                  open={openAccordion==="data"}
+                  onClick={() => setOpenAccordion(openAccordion==="data" ? null : "data")}
+                >
+                  <ul className="list-disc ml-5">
+                    <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
+                    <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
+                    <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
+                  </ul>
+                </Accordion>
+              </div>
+            )}
+
 
               </div>
             </div>
