@@ -75,41 +75,35 @@
 <!-- LINEA DIVISORIA -->
 <hr class="h-px bg-black border-0 m-0">
 <script>
-  let counter = 0;
-  const maxCount = 59;
   const counterElement = document.getElementById("counter");
+  const maxCount = 59;
+  let counter = 0;
+  let countingStarted = false; // evita di ripartire più volte
 
-  const interval = setInterval(() => {
-    counter++;
-    counterElement.textContent = counter;
+  const counterSection = document.querySelector(".stats-section");
 
-    if (counter >= maxCount) {
-      clearInterval(interval); // ferma il contatore a 59
-    }
-  }, 50); // 50ms per scorrere velocemente
-</script>
-
-
-
-<script>
-  const circles = document.querySelectorAll('.action-circle');
-
-  const observer = new IntersectionObserver(entries => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+      if (entry.isIntersecting && !countingStarted) {
+        countingStarted = true;
+
+        const interval = setInterval(() => {
+          counter++;
+          counterElement.textContent = counter;
+
+          if (counter >= maxCount) {
+            clearInterval(interval);
+          }
+        }, 50); // velocità contatore
       }
     });
-  }, {
-    threshold: 0.4
-  });
+  }, { threshold: 0.5 }); // il contatore parte quando almeno il 50% della sezione è visibile
 
-  circles.forEach(circle => observer.observe(circle));
+  observer.observe(counterSection);
 </script>
 
 
-  <!-- React Navbar Script -->
+<!-- React Navbar Script -->
 <script type="text/babel">
 function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);

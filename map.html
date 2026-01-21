@@ -28,7 +28,7 @@
   </style>
 </head>
 
-<body class="bg-white text-[#010435]" style="font-family: 'Playfair Display', serif;">
+<body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
 
   <!-- REACT NAVBAR -->
   <div id="navbar-root"></div>
@@ -97,72 +97,88 @@
   </script>
 
   <!-- React Navbar -->
-  <script type="text/babel">
-    function Navbar() {
-      const [mobileOpen, setMobileOpen] = React.useState(false);
-      const [dropdownOpen, setDropdownOpen] = React.useState(false);
+   <!-- React Navbar Script -->
+<script type="text/babel">
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-      return (
-        <nav className="w-full bg-white border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex justify-between h-16 items-center">
+  return (
+    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
 
-              {/* Logo */}
-              <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
+          {/* Logo */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">
+            PHIDE
+          </a>
 
-              {/* Desktop menu */}
-              <div className="hidden md:flex space-x-6 items-center">
-                <div className="relative">
-                  <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
-                  >
-                    Catalogue
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-6 items-center">
 
-                  {dropdownOpen && (
-                    <div className="absolute mt-2 w-48 bg-white border rounded shadow">
-                      <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
-                    </div>
-                  )}
-                </div>
+            {/* Dropdown */}
+            <div className="relative">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+            >
+              Browse
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-                <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
-                <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+            {dropdownOpen && (
+              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Catalogue
+                </a>
+                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Schedule
+                </a>
               </div>
-
-              {/* Mobile button */}
-              <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  {mobileOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
-              </button>
-            </div>
+            )}
           </div>
 
-          {/* Mobile menu */}
-          {mobileOpen && (
-            <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-              <a href="/catalogue.html" className="block">Catalogue</a>
-              <a href="/scheda.html" className="block">Scheda</a>
-              <a href="/map.html" className="block">Map</a>
-              <a href="/documentation.html" className="block">Documentation</a>
-            </div>
-          )}
-        </nav>
-      );
-    }
+
+            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+          </div>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="" className="block">Browse</a>
+           <a href="/catalogue-period.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/map.html" className="block">Map</a>
+          <a href="/documentation.html" className="block">Documentation</a>
+        </div>
+      )}
+    </nav>
+  );
+}
+
 
     ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
   </script>
-  
+
   <footer class="bg-[#111827] text-white py-10 mt-20">
   <div class="max-w-7xl mx-auto px-6">
 
