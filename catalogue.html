@@ -422,9 +422,31 @@ function BookBrowserUI() {
               <div className="hidden md:flex flex-col items-start">
                 <img src={selected.cover} alt={selected.title} className="w-[250px] h-[150px] object-cover border" />
                 <div className="flex gap-3 mt-4">
-                  {selected.URL && <a href={selected.URL} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']">URL</a>}
-                  <button onClick={()=>setShowSchedule(prev=>!prev)} className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']">Schedule</button>
-                </div>
+  {selected.URL && (
+    <a href={selected.URL} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']">
+      URL
+    </a>
+  )}
+
+  <button onClick={()=>setShowSchedule(prev=>!prev)} className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']">
+    Schedule
+  </button>
+
+  {/* NUOVO PULSANTE MAPPA */}
+{selected.institution?.lat && selected.institution?.lng && (
+  <a 
+    href={`/map.html?lat=${selected.institution.lat}&lng=${selected.institution.lng}`} 
+    className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span className="text-sm font-medium">Map</span>
+  </a>
+
+
+  )}
+</div>
+
               </div>
 
               <div className="flex flex-col flex-grow min-w-0">
