@@ -42,13 +42,13 @@
     <!-- HERO -->
     <section class="text-center mb-10">
       <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
-      <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">Mappa delle Digital Scholarly Editions Filosofiche</h1>
+      <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">Map of Philosophical Digital Scholarly Editions</h1>
       <div class="w-full h-1 bg-[#010435] rounded-full mt-4"></div>
     </section>
 
     <!-- MAPPA -->
     <section class="min-h-[400px] border border-[#010435] p-6 rounded-xl shadow-lg">
-      <h2 class="text-2xl font-semibold mb-4">Mappa delle Digital Scholarly Editions Filosofiche</h2>
+      <h2 class="text-2xl font-semibold mb-4">Map of Philosophical Digital Scholarly Editions</h2>
       <div id="map" class="w-full h-[60vh] rounded-xl"></div>
     </section>
 
@@ -60,29 +60,33 @@
   <!-- SCRIPT MAPPA -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const map = L.map('map').setView([48.85, 2.35], 5); // centro Europa
+      // Inizializza la mappa centrata sull'Europa
+      const map = L.map('map').setView([48.85, 2.35], 5);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
       }).addTo(map);
 
-      // Carica tutte le edizioni dal JSON
-      fetch('/list_digital_edition.json')
+      // Carica il JSON
+      fetch('/data/list_json.json')
         .then(response => response.json())
         .then(data => {
           data.forEach(item => {
-            if(item.institution && item.institution.located_at){
-              const lat = item.institution.located_at.latitude;
-              const lng = item.institution.located_at.longitude;
+            // Prendi lat/lng dai campi esistenti
+            const lat = item.institution_lat || item.location_lat;
+            const lng = item.institution_lng || item.location_lng;
+            const institutionName = item.institution_name || "Unknown Institution";
+            const country = item.part_of || "Unknown";
 
-              // Marker
+            if(lat && lng){
               const marker = L.marker([lat, lng]).addTo(map);
+
               marker.bindPopup(`
                 <strong>${item.title}</strong><br>
-                Autore: ${item.author}<br>
-                Curatore: ${item.curator}<br>
-                Istituzione: ${item.institution.name}<br>
-                Paese: ${item.institution.located_at.country}<br><br>
+                Autore: ${item.author_name} ${item.author_surname}<br>
+                Curatore: ${item.curator_name} ${item.curator_surname}<br>
+                Istituzione: ${institutionName}<br>
+                Paese: ${country}<br><br>
                 <a href="${item.URL}" target="_blank">Visita il progetto</a>
               `);
             }
@@ -158,6 +162,60 @@
 
     ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
   </script>
+  
+  <footer class="bg-[#111827] text-white py-10 mt-20">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Contenuto -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Logo e descrizione -->
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
+        <p class="text-gray-300">
+          Digital catalogue of scholarly editions of philosophical texts.
+          Explore projects, maps, and schedules in a single platform.
+        </p>
+      </div>
+
+      <!-- Contatti -->
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Contact</h3>
+        <p class="text-gray-300 mb-1">
+          Email:
+          <a href="mailto:info@phide.com" class="hover:text-white underline">
+            info@phide.com
+          </a>
+        </p>
+        <p class="text-gray-300 mb-1">
+          Phone:
+          <a href="tel:+390000000000" class="hover:text-white underline">
+            +39 000 000 0000
+          </a>
+        </p>
+        <p class="text-gray-300">
+          Address: Via Filosofia 1, 00100 Roma, Italy
+        </p>
+      </div>
+
+      <!-- Spazio futuro (opzionale) -->
+      <div>
+        <!-- Qui puoi aggiungere link, social, ecc. -->
+      </div>
+
+    </div>
+
+    <!-- Separatore -->
+    <hr class="border-gray-700 my-8">
+
+    <!-- Copyright -->
+    <div class="text-center text-gray-400 text-sm">
+      &copy; 2025 PHIDE. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

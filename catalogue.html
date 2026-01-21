@@ -13,9 +13,61 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-[#E7E5E4] text-[#010435] font-['Playfair Display']">
-
+<body class="bg-[#EFF4FA] text-[#010435] font-['Playfair Display']">
 <div id="root"></div>
+<footer class="bg-[#111827] text-white py-10 mt-20">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Contenuto -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Logo e descrizione -->
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
+        <p class="text-gray-300">
+          Digital catalogue of scholarly editions of philosophical texts.
+          Explore projects, maps, and schedules in a single platform.
+        </p>
+      </div>
+
+      <!-- Contatti -->
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Contact</h3>
+        <p class="text-gray-300 mb-1">
+          Email:
+          <a href="mailto:info@phide.com" class="hover:text-white underline">
+            info@phide.com
+          </a>
+        </p>
+        <p class="text-gray-300 mb-1">
+          Phone:
+          <a href="tel:+390000000000" class="hover:text-white underline">
+            +39 000 000 0000
+          </a>
+        </p>
+        <p class="text-gray-300">
+          Address: Via Filosofia 1, 00100 Roma, Italy
+        </p>
+      </div>
+
+      <!-- Spazio futuro (opzionale) -->
+      <div>
+        <!-- Qui puoi aggiungere link, social, ecc. -->
+      </div>
+
+    </div>
+
+    <!-- Separatore -->
+    <hr class="border-gray-700 my-8">
+
+    <!-- Copyright -->
+    <div class="text-center text-gray-400 text-sm">
+      &copy; 2025 PHIDE. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
 
 <script type="text/babel">
 
@@ -25,7 +77,7 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   return (
-    <nav className="w-full bg-[#E7E5E4] border-b border-black fixed top-0 left-0 z-50">
+    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
           <a href="index.html" className="text-xl font-semibold text-[#010435] font-['Playfair Display']">PHIDE</a>
@@ -84,8 +136,6 @@ function Accordion({ title, open, onClick, children }) {
 
 /* ================= BOOK BROWSER ================= */
 function BookBrowserUI() {
-
-  /* ===== FILTRI ===== */
   const [filterText, setFilterText] = React.useState("");
   const [filterLanguage, setFilterLanguage] = React.useState("");
   const [filterEpoch, setFilterEpoch] = React.useState("");
@@ -93,8 +143,9 @@ function BookBrowserUI() {
   const [filterInstitution, setFilterInstitution] = React.useState("");
   const [filterIndex, setFilterIndex] = React.useState(""); 
   const [showAdvanced, setShowAdvanced] = React.useState(false);
+  const [sortField, setSortField] = React.useState(null);
+  const [sortOrder, setSortOrder] = React.useState("asc");
 
-  /* ===== STATE ===== */
   const [selected, setSelected] = React.useState(null);
   const [showSchedule, setShowSchedule] = React.useState(false);
   const [openAccordion, setOpenAccordion] = React.useState(null);
@@ -103,41 +154,16 @@ function BookBrowserUI() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const booksPerPage = 15;
   const [languageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
-  // Mappa dei codici linguistici ai nomi completi
-const languageNames = {
-  SPA: "Spanish",
-  GER: "German",
-  DAN: "Danish",
-  FRE: "French",
-  FRA: "French",
-  LAT: "Latin",
-  ENM: "Middle English",
-  ENG: "English",
-  ITA: "Italian",
-  SYR: "Syriac, Arabic",
-  CHI: "Chinese",
-  AR: "Arabic",
-  "GER, ENG": "German, English",
-  "LAT; GER": "Latin, German",
-  "GER / LAT": "German / Latin",
-  "CHI/ENG": "Chinese / English",
-  "Church Slavonic": "Church Slavonic",
-  GRC: "Greek",
-  FR: "French"
-};
 
-/* ===== URL PARAMS all'avvio ===== */
-React.useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  setFilterBranch(params.get("branch") || "");
-  setFilterLanguage(params.get("language") || "");
-  setFilterText(params.get("text") || "");
-  setFilterEpoch(params.get("epoch") || "");
-}, []);
+  const languageNames = {
+    SPA: "Spanish", GER: "German", DAN: "Danish", FRE: "French", FRA: "French",
+    LAT: "Latin", ENM: "Middle English", ENG: "English", ITA: "Italian", SYR: "Syriac",
+    CHI: "Chinese", ARA: "Arabic", "GER, ENG": "German, English", "LAT; GER": "Latin, German",
+    "GER / LAT": "German / Latin", "CHI/ENG": "Chinese / English", "Church Slavonic": "Church Slavonic",
+    GRC: "Greek", FR: "French"
+  };
 
-/* ===== POPSTATE BACK/FORWARD ===== */
-React.useEffect(() => {
-  const onPopState = () => {
+  React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setFilterBranch(params.get("branch") || "");
     setFilterLanguage(params.get("language") || "");
@@ -145,81 +171,109 @@ React.useEffect(() => {
     setFilterEpoch(params.get("epoch") || "");
     setFilterInstitution(params.get("institution") || "");
     setFilterIndex(params.get("index") || "");
-  };
-
-  window.addEventListener("popstate", onPopState);
-  return () => window.removeEventListener("popstate", onPopState);
-}, []);
-
-
-  /* ===== URL PARAMS ===== */
-  React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setFilterBranch(params.get("branch") || "");
-    setFilterLanguage(params.get("language") || "");
-    setFilterText(params.get("text") || "");
-    setFilterEpoch(params.get("epoch") || "");
   }, []);
 
-/* ===== LOAD BOOKS ===== */
-React.useEffect(() => {
-  fetch("/list_digital_edition.json")
-    .then(res => res.json())
-    .then(data => {
-      setBooks(data);
-
-      // Estrai tutte le lingue dai libri
-      let langs = [];
-
-      data.forEach(b => {
-        const bookLangs = b.language
-          ?.replace(/"/g, "")
-          ?.split(/,|;/)
-          ?.map(l => l.trim()) || [];
-
-        bookLangs.forEach(code => {
-          // Se il codice è multiplo (es. CHI/ENG o GER, ENG) lo split
-          const expanded = code.split(/[,;/]/).map(c => c.trim());
-          langs.push(...expanded);
-        });
-      });
-
-      // Rimuove duplicati e ordina
-      setLanguages([...new Set(langs)].sort());
-    })
-    .catch(err => console.error("Errore nel caricamento libri:", err));
-}, []);
-
-
-  /* ===== UPDATE URL ===== */
   React.useEffect(() => {
-    const params = new URLSearchParams();
-    if (filterBranch) params.set("branch", filterBranch);
-    if (filterLanguage) params.set("language", filterLanguage);
-    if (filterText) params.set("text", filterText);
-    if (filterEpoch) params.set("epoch", filterEpoch);
-    window.history.pushState({}, "", `${window.location.pathname}?${params.toString()}`);
-  }, [filterBranch, filterLanguage, filterText, filterEpoch]);
+    const onPopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      setFilterBranch(params.get("branch") || "");
+      setFilterLanguage(params.get("language") || "");
+      setFilterText(params.get("text") || "");
+      setFilterEpoch(params.get("epoch") || "");
+      setFilterInstitution(params.get("institution") || "");
+      setFilterIndex(params.get("index") || "");
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
-  /* ===== FILTRO ===== */
-  const filteredBooks = books.filter(b => {
-    const epoch = b.epoch ? b.epoch.toLowerCase().trim() : "";
+  React.useEffect(() => {
+    fetch("/data/list_json.json")
+      .then(res => res.json())
+      .then(data => {
+        const map = new Map();
+        data.forEach(b => {
+          const key = [b.title?.trim(), b.author_surname, b.author_name, b.institution_name, b.URL].join("|");
+          const curatorFullName = `${b.curator_surname} ${b.curator_name}`.trim();
+          if (!map.has(key)) {
+            map.set(key, {
+              id: b.ID,
+              title: b.title?.trim(),
+              author: `${b.author_surname}${b.author_name}`,
+              curators: curatorFullName ? [curatorFullName] : [],
+              date: b.date,
+              language: b.language?.replace(/"/g, ""),
+              branch: b.branch,
+              epoch: b.epoch,
+              URL: b.URL,
+              institution: {
+                name: b.institution_name,
+                lat: b.institution_lat,
+                lng: b.institution_lng,
+                website: b.institution_website
+              },
+              Content: {
+                "Writing support": b.writing_support,
+                facsimiles: b.facsimiles
+              },
+              Features: {
+                advanced_search: b.advanced_search,
+                index: b.index,
+                glossary: b.glossary
+              },
+              dataReuse: {
+                encoding: b.encoding,
+                download: b.download,
+                license: b.creative_commons_license
+              },
+              cover: b.cover || "/covers/default.jpg" // <-- qui usiamo cover dal JSON
+            });
+          } else {
+            const entry = map.get(key);
+            if (curatorFullName && !entry.curators.includes(curatorFullName)) entry.curators.push(curatorFullName);
+          }
+        });
+
+        const books = Array.from(map.values()).map(b => ({ ...b, curator: b.curators.join("; ") }));
+        setBooks(books);
+
+        const langs = books.flatMap(b => b.language?.split(/,|;/).map(l => l.trim()) || []);
+        setLanguages([...new Set(langs)].sort());
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  let filteredBooks = books.filter(b => {
+    const bookEpoch = b.epoch ? b.epoch.toLowerCase().trim() : "";
     const filterE = filterEpoch ? filterEpoch.toLowerCase().trim() : "";
-    const indices = b.Features?.indices ?? null;
-
+    const indices = b.Features?.index === "yes";
     const bookLanguages = b.language?.replace(/"/g, "").split(/,|;/).map(l => l.trim()) || [];
+    const q = filterText.toLowerCase();
+
+    const matchSearch = !filterText || (
+      b.title?.toLowerCase().includes(q) ||
+      b.author?.toLowerCase().includes(q) ||
+      b.curators.some(c => c.toLowerCase().includes(q))
+    );
 
     return (
-      b.title?.toLowerCase().includes(filterText.toLowerCase()) &&
+      matchSearch &&
       (filterLanguage ? bookLanguages.includes(filterLanguage) : true) &&
-      (filterE ? epoch === filterE : true) &&
+      (filterE ? bookEpoch === filterE : true) &&
       (filterBranch ? b.branch?.toLowerCase().includes(filterBranch.toLowerCase()) : true) &&
       (filterInstitution ? b.institution?.name?.toLowerCase().includes(filterInstitution.toLowerCase()) : true) &&
       (filterIndex === "" ? true : filterIndex === "yes" ? indices === true : indices === false)
     );
   });
 
-  /* ===== PAGINAZIONE ===== */
+  if (sortField) {
+    filteredBooks.sort((a,b) => {
+      const va = (a[sortField] || "").toLowerCase();
+      const vb = (b[sortField] || "").toLowerCase();
+      return sortOrder === "asc" ? va.localeCompare(vb) : vb.localeCompare(va);
+    });
+  }
+
   const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
   const indexOfLast = currentPage * booksPerPage;
   const indexOfFirst = indexOfLast - booksPerPage;
@@ -228,8 +282,6 @@ React.useEffect(() => {
   return (
     <div className="pt-20 pb-32">
       <Navbar />
-
-      {/* HERO */}
       <section className="w-full mt-6">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
           <div className="w-full h-1 bg-[#010435] rounded-full"></div>
@@ -240,65 +292,58 @@ React.useEffect(() => {
 
       <main className="max-w-7xl mx-auto px-4 mt-8">
 
-        {/* FILTRI */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        {/* FILTRI E ORDINA */}
+        <div className="flex flex-wrap gap-2 mb-6 items-center">
 
-          <button
-            onClick={()=>{
-              setFilterText(""); setFilterLanguage(""); setFilterEpoch(""); setFilterBranch(""); setFilterInstitution(""); setFilterIndex("");
-            }}
-            className="p-1 w-16 border border-black text-black text-xs rounded-lg bg-white"
-          >
-            All
-          </button>
+          {/* ORDINE ALFABETICO */}
+          <div>
+            <label className="text-xs font-semibold mr-2">Filtered by:</label>
+            <select value={sortField || ""} onChange={e=>{
+              const val = e.target.value;
+              if(val==="none") { setSortField(null); setSortOrder("asc"); }
+              else { setSortField(val); setSortOrder("asc"); }
+            }} className="p-1 border border-black text-xs rounded-lg bg-white">
+              <option value="title">Title (A-Z)</option>
+              <option value="author">Author (A-Z)</option>
+              <option value="curator">Curator (A-Z)</option>
+            </select>
+          </div>
 
-          {/* DROPDOWN LINGUE */}
-<div className="relative">
-  <button 
-    onClick={() => setLanguageDropdownOpen(prev => !prev)} 
-    className="px-3 py-1 border border-black rounded-lg text-xs bg-white"
-  >
-    Language {filterLanguage ? `: ${languageNames[filterLanguage] || filterLanguage}` : ""}
-  </button>
-
-  {languageDropdownOpen && (
-    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
-      <button
-        onClick={() => { setFilterLanguage(""); setLanguageDropdownOpen(false); }}
-        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
-      >
-        All
-      </button>
-      {languages.map((lang, i) => (
-        <button
-          key={i}
-          onClick={() => { setFilterLanguage(lang); setLanguageDropdownOpen(false); }}
-          className={`text-left px-2 py-1 border rounded text-xs ${
-            filterLanguage === lang
-              ? "bg-black text-white"
-              : "bg-white text-black hover:bg-black hover:text-white"
-          }`}
-        >
-          {languageNames[lang] || lang}
-        </button>
-      ))}
-    </div>
-  )}
-</div>
+          {/* LINGUE */}
+          <div className="relative">
+            <button 
+              onClick={() => setLanguageDropdownOpen(prev => !prev)} 
+              className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+            >
+              <span>Language {filterLanguage ? `: ${languageNames[filterLanguage] || filterLanguage}` : ""}</span>
+              <svg className={`w-3 h-3 ml-2 transition-transform ${languageDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {languageDropdownOpen && (
+              <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
+                <button onClick={() => { setFilterLanguage(""); setLanguageDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white">All</button>
+                {languages.map((lang,i)=>(
+                  <button key={i} onClick={()=>{setFilterLanguage(lang); setLanguageDropdownOpen(false)}} className={`text-left px-2 py-1 border rounded text-xs ${filterLanguage===lang?"bg-black text-white":"bg-white text-black hover:bg-black hover:text-white"}`}>{languageNames[lang] || lang}</button>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* EPOCH */}
-          <select value={filterEpoch} onChange={e=>setFilterEpoch(e.target.value)} className="p-1 w-40 border text-xs rounded-lg">
+          <select value={filterEpoch} onChange={e=>setFilterEpoch(e.target.value)} className="p-1 w-26 border border-black text-black text-xs rounded-lg bg-white">
             <option value="">Epoch</option>
-            <option value="ancient philosophy">Ancient Philosophy</option>
-            <option value="medieval philosophy">Medieval Philosophy</option>
-            <option value="modern philosophy">Modern Philosophy</option>
-            <option value="contemporary philosophy">Contemporary Philosophy</option>
+            <option value="ancient">Ancient</option>
+            <option value="medieval">Medieval</option>
+            <option value="modern">Modern</option>
+            <option value="contemporary">Contemporary</option>
           </select>
 
-          {/* SEARCH */}
-          <input type="text" placeholder="Cerca..." value={filterText} onChange={(e)=>setFilterText(e.target.value)} className="p-1 w-40 border text-xs rounded-lg" />
+          {/* GENERAL SEARCH */}
+          <input type="text" placeholder="Search..." value={filterText} onChange={e=>setFilterText(e.target.value)} className="p-1 w-40 border text-xs rounded-lg" />
 
-          <button onClick={()=>setShowAdvanced(!showAdvanced)} className="px-3 py-1 border text-xs rounded-lg">Advanced Search</button>
+          {/* ADVANCED */}
+          
         </div>
 
         {/* ADVANCED PANEL */}
@@ -307,16 +352,6 @@ React.useEffect(() => {
             <div>
               <label className="text-sm font-semibold">Institution</label>
               <input value={filterInstitution} onChange={e=>setFilterInstitution(e.target.value)} placeholder="Search institution..." className="w-full p-2 border rounded" />
-            </div>
-            <div>
-              <label className="text-sm font-semibold">Epoch</label>
-              <select value={filterEpoch} onChange={e=>setFilterEpoch(e.target.value)} className="w-full p-2 border rounded">
-                <option value="">All</option>
-                <option value="ancient philosophy">Ancient</option>
-                <option value="medieval philosophy">Medieval</option>
-                <option value="modern philosophy">Modern</option>
-                <option value="contemporary philosophy">Contemporary</option>
-              </select>
             </div>
             <div>
               <label className="text-sm font-semibold">Index</label>
@@ -331,10 +366,10 @@ React.useEffect(() => {
 
         {/* CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {paginatedBooks.map((b, i) => (
-            <div key={i} onClick={() => { setSelected(b); setShowSchedule(false); setOpenAccordion(null); }} className="cursor-pointer bg-white border p-4 hover:shadow-lg hover:scale-105 transition duration-300">
+          {paginatedBooks.map((b,i)=>(
+            <div key={i} onClick={()=>{setSelected(b); setShowSchedule(false); setOpenAccordion(null)}} className="cursor-pointer bg-white border p-4 hover:shadow-lg hover:scale-105 transition duration-300">
               <div className="w-full h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
-                <img src={b.cover} alt={b.title} className="w-full h-full object-cover" onError={(e)=>e.target.src='https://via.placeholder.com/120x180?text=Buch'} />
+                <img src={b.cover} alt={b.title} className="w-full h-full object-cover" onError={e=>e.target.src='https://via.placeholder.com/120x180?text=Buch'} />
               </div>
               <div className="mt-3 px-1 font-['Playfair Display']">
                 <p className="font-semibold text-base truncate">{b.title}</p>
@@ -346,99 +381,80 @@ React.useEffect(() => {
 
         {/* PAGINAZIONE */}
         <div className="flex justify-center gap-2 mt-6">
-          {Array.from({length: totalPages}, (_, i) => i+1).map(n => (
-            <button key={n} onClick={() => setCurrentPage(n)} className={`px-3 py-1 rounded-xl shadow ${n===currentPage ? "bg-[black] text-white" : "bg-white text-[#010435] hover:bg-[#5b0909] hover:text-white"}`}>
+          {Array.from({length: totalPages}, (_, i)=>i+1).map(n=>(
+            <button key={n} onClick={()=>setCurrentPage(n)} className={`px-3 py-1 rounded-xl shadow ${n===currentPage?"bg-[black] text-white":"bg-white text-[#010435] hover:bg-[#5b0909] hover:text-white"}`}>
               {n}
             </button>
           ))}
         </div>
 
-      </main>
+        {/* MODALE */}
+        {selected && (
+          <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-10 bg-white border-t border-black max-h-[80vh] overflow-auto font-['Playfair Display']">
 
-      {/* MODALE */}
-      {selected && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-10 bg-white border-t border-black max-h-[80vh] overflow-auto font-['Playfair Display']">
+            <button className="absolute right-4 top-4 md:right-6 md:top-6 text-3xl" onClick={()=>setSelected(null)}>×</button>
 
-          <button className="absolute right-4 top-4 md:right-6 md:top-6 text-3xl" onClick={() => setSelected(null)}>×</button>
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="hidden md:flex flex-col items-start">
+                <img src={selected.cover} alt={selected.title} className="w-[250px] h-[150px] object-cover border" />
+                <div className="flex gap-3 mt-4">
+                  {selected.URL && <a href={selected.URL} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']">URL</a>}
+                  <button onClick={()=>setShowSchedule(prev=>!prev)} className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']">Schedule</button>
+                </div>
+              </div>
 
-          <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex flex-col flex-grow min-w-0">
+                <h2 className="text-3xl mb-2 font-['Playfair_Display']">„{selected.title}“</h2>
 
-            {/* IMMAGINE + BOTTONI */}
-            <div className="hidden md:flex flex-col items-start">
-              <img src={selected.cover} alt={selected.title} className="w-[250px] h-[150px] object-cover border" />
-              <div className="flex gap-3 mt-4">
-                {selected.URL && (
-                  <a href={selected.URL} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']">URL</a>
+                <div className="grid grid-cols-2 gap-x-12 gap-y-2 mb-4 text-sm md:text-base">
+                  <p><strong>Author</strong><br />{selected.author}</p>
+                  <p><strong>Published</strong><br />{selected.date}</p>
+                  <p><strong>Curator</strong><br />{selected.curator}</p>
+                  <p><strong>Institution</strong><br />{selected.institution?.name}</p>
+                </div>
+
+                {selected.branch && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {selected.branch.split(",").map(b=>b.trim()).map((branch,i)=>(
+                      <button key={i} onClick={()=>{setFilterBranch(branch); setSelected(null); setCurrentPage(1);}}
+                        className="px-3 py-1 border border-black rounded-xl text-sm hover:bg-black hover:text-white transition">{branch}</button>
+                    ))}
+                  </div>
                 )}
-                <button onClick={() => setShowSchedule(prev => !prev)} className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']">Schedule</button>
+
+                {showSchedule && (
+                  <div className="border-t pt-4 space-y-4">
+                    <Accordion title="Content" open={openAccordion==="content"} onClick={()=>setOpenAccordion(openAccordion==="content"?null:"content")}>
+                      <ul className="list-disc ml-5">
+                        <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
+                        <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
+                      </ul>
+                    </Accordion>
+
+                    <Accordion title="Features" open={openAccordion==="features"} onClick={()=>setOpenAccordion(openAccordion==="features"?null:"features")}>
+                      <ul className="list-disc ml-5">
+                        <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
+                        <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
+                        <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
+                      </ul>
+                    </Accordion>
+
+                    <Accordion title="Data & Reuse" open={openAccordion==="data"} onClick={()=>setOpenAccordion(openAccordion==="data"?null:"data")}>
+                      <ul className="list-disc ml-5">
+                        <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
+                        <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
+                        <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
+                      </ul>
+                    </Accordion>
+                  </div>
+                )}
+
               </div>
             </div>
-
-            {/* DETTAGLI */}
-            <div className="flex flex-col flex-grow min-w-0">
-
-              {/* ===== TITOLO DELL'EDIZIONE ===== */}
-              <h2 className="text-3xl mb-2 font-['Playfair_Display']">„{selected.title}“</h2>
-
-              {/* SUBTITLE */}
-              {selected.subtitle && (
-                <h3 className="text-gray-500 mb-6">{selected.subtitle}</h3>
-              )}
-
-              {/* AUTORE, CURATOR, INSTITUTION */}
-              <div className="grid grid-cols-2 gap-x-12 gap-y-2 mb-4 text-sm md:text-base">
-                <p><strong>Author</strong><br />{selected.author}</p>
-                <p><strong>Published</strong><br />{selected.date}</p>
-                <p><strong>Curator</strong><br />{selected.curator}</p>
-                <p><strong>Institution</strong><br />{selected.institution?.name}</p>
-              </div>
-
-              {/* ===== BRANCH BUTTONS ===== */}
-              {selected.branch && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selected.branch.split(",").map(b => b.trim()).map((branch, i) => (
-                    <button key={i} onClick={() => { setFilterBranch(branch); setSelected(null); setCurrentPage(1); }}
-                      className="px-3 py-1 border border-black rounded-xl text-sm hover:bg-black hover:text-white transition">
-                      {branch}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* ACCORDION */}
-              {showSchedule && (
-                <div className="border-t pt-4 space-y-4">
-                  <Accordion title="Content" open={openAccordion==="content"} onClick={()=>setOpenAccordion(openAccordion==="content"?null:"content")}>
-                    <ul className="list-disc ml-5">
-                      <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
-                      <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
-                    </ul>
-                  </Accordion>
-
-                  <Accordion title="Features" open={openAccordion==="features"} onClick={()=>setOpenAccordion(openAccordion==="features"?null:"features")}>
-                    <ul className="list-disc ml-5">
-                      <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
-                      <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
-                      <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
-                    </ul>
-                  </Accordion>
-
-                  <Accordion title="Data & Reuse" open={openAccordion==="data"} onClick={()=>setOpenAccordion(openAccordion==="data"?null:"data")}>
-                    <ul className="list-disc ml-5">
-                      <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
-                      <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
-                      <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
-                    </ul>
-                  </Accordion>
-                </div>
-              )}
-
-            </div>
-
           </div>
-        </div>
-      )}
+        )}
 
+      </main>
     </div>
   );
 }

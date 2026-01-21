@@ -270,7 +270,7 @@
     "title": "Lament of St. Anselm",
     "author": "Anselm of Canterbury",
     "curator": "Andrew Kraebel",
-    "cover": "/photo/anselm.png",
+     "cover": "/photo/pico.png",
     "institution": {
       "name": "University of Pennsylvania, Trinity University",
       "website": "https://www.upenn.edu",
@@ -1044,7 +1044,7 @@
       }
     },
     "date": "2023",
-    "language": "\"AR\"",
+    "language": "\"ARA\"",
     "URL": "https://erquran.org",
     "epoch": "Medieval",
     "branch": "Philosophy of Religion, Moral Philosophy",
@@ -1538,7 +1538,7 @@
       }
     },
     "date": "2016",
-    "language": "\"AR\"",
+    "language": "\"ARA\"",
     "URL": "https://tarsian.vital-it.ch/#folio_103r",
     "epoch": "/",
     "branch": "Philosophy of Religion, Philosophy of History",

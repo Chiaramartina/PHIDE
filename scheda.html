@@ -7,24 +7,36 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- DataTables CSS -->
+  <!-- jQuery & DataTables -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+
+  <!-- JSZip per Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- PapaParse per CSV -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <!-- React -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <style>
     body {
       font-family: Arial, sans-serif;
       padding-top: 80px;
-      background-color: #E7E5E4;
+      background-color: #EFF4FA;
       margin: 0;
     }
 
     .container {
       max-width: 1400px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 40px;
-      padding-right: 40px;
+      margin: auto;
+      padding: 0 40px;
     }
 
     h1 {
@@ -39,8 +51,7 @@
 
     table.dataTable {
       width: auto !important;
-      margin-left: auto;
-      margin-right: auto;
+      margin: auto;
       border: 1px solid #ccc;
       border-radius: 8px;
       overflow: hidden;
@@ -59,15 +70,11 @@
       border-right: none;
     }
 
-table.dataTable thead {
-  background-color: #e2e8f0; /* header azzurro chiaro */
-}
-
-
-
-    .dt-buttons {
-      margin-bottom: 15px;
+    table.dataTable thead {
+      background-color: #e2e8f0;
     }
+
+    /* ===== BOTTONI EXPORT (CSV / EXCEL / JSON) ===== */
 
     table.dataTable thead input {
       width: 100%;
@@ -76,22 +83,77 @@ table.dataTable thead {
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+    /* ===== BOTTONI EXPORT ===== */
+    .dt-button {
+      background-color: #1F426A !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 6px !important;
+      padding: 6px 14px !important;
+      font-weight: 600;
+    }
+
+    .dt-button:hover,
+    .dt-button:focus,
+    .dt-button:active {
+      background-color: #1F426A !important;
+      color: #ffffff !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
+    /* ===== PAGINAZIONE BASE ===== */
+    .dataTables_paginate .paginate_button {
+      background: #1F426A !important;
+      color: #ffffff !important;
+      border: 2px solid #1F426A !important;
+      border-radius: 6px !important;
+      margin: 0 3px !important;
+      padding: 4px 10px !important;
+      box-shadow: none !important;
+    }
+
+    /* ===== HOVER NUMERI (1,2,3...) ===== */
+    .dataTables_paginate .paginate_button:not(.current):not(.disabled):hover {
+      background: #ffffff !important;
+      color: #1F426A !important;
+      border: 2px solid #1F426A !important;
+    }
+
+    /* ===== PAGINA CORRENTE ===== */
+    .dataTables_paginate .paginate_button.current {
+      background: #ffffff !important;
+      color: #1F426A !important;
+      border: 2px solid #1F426A !important;
+      font-weight: 700;
+    }
+
+    /* ===== DISABILITATI ===== */
+    .dataTables_paginate .paginate_button.disabled {
+      background: #cccccc !important;
+      color: #666666 !important;
+      border: 2px solid #cccccc !important;
+      cursor: not-allowed !important;
+    }
+
   </style>
 </head>
 <body>
 
+<!-- React Navbar -->
 <div id="navbar-root"></div>
 
 <div class="container">
-  <h1></h1>
   <div class="table-wrapper">
     <table id="catalog" class="display">
       <thead>
         <tr>
           <th>ID</th>
           <th>Title</th>
-          <th>Author</th>
-          <th>Curator</th>
+          <th>Author Surname</th>
+          <th>Author Name</th>
+          <th>Curator Surname</th>
+          <th>Curator Name</th>
           <th>Institution</th>
           <th>Place</th>
           <th>Country</th>
@@ -114,78 +176,102 @@ table.dataTable thead {
           <th><input></th><th><input></th><th><input></th><th><input></th>
           <th><input></th><th><input></th><th><input></th><th><input></th>
           <th><input></th><th><input></th><th><input></th><th><input></th>
-          <th><input></th><th><input></th><th><input></th>
+          <th><input></th><th><input></th><th><input></th><th><input></th><th><input></th>
         </tr>
       </thead>
     </table>
   </div>
 </div>
 
-<!-- JS Libraries -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <!-- FOOTER -->
+<footer class="bg-[#111827] text-white py-10 mt-20">
+  <div class="max-w-7xl mx-auto px-6">
 
-<!-- React -->
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Contenuto -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-<!-- React Navbar -->
+      <!-- Logo e descrizione -->
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
+        <p class="text-gray-300">
+          Digital catalogue of scholarly editions of philosophical texts.
+          Explore projects, maps, and schedules in a single platform.
+        </p>
+      </div>
+
+      <!-- Contatti -->
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Contact</h3>
+        <p class="text-gray-300 mb-1">
+          Email:
+          <a href="mailto:info@phide.com" class="hover:text-white underline">
+            info@phide.com
+          </a>
+        </p>
+        <p class="text-gray-300 mb-1">
+          Phone:
+          <a href="tel:+390000000000" class="hover:text-white underline">
+            +39 000 000 0000
+          </a>
+        </p>
+        <p class="text-gray-300">
+          Address: Via Filosofia 1, 00100 Roma, Italy
+        </p>
+      </div>
+
+      <!-- Spazio futuro (opzionale) -->
+      <div>
+        <!-- Qui puoi aggiungere link, social, ecc. -->
+      </div>
+
+    </div>
+
+    <!-- Separatore -->
+    <hr class="border-gray-700 my-8">
+
+    <!-- Copyright -->
+    <div class="text-center text-gray-400 text-sm">
+      &copy; 2025 PHIDE. All rights reserved.
+    </div>
+
+  </div>
+</footer>
+
+
+
+<!-- React Navbar Script -->
 <script type="text/babel">
 function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   return (
-    <nav className="w-full bg-[#E7E5E4] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-
-          {/* Logo */}
-          <a href="index.html" className="text-xl font-semibold text-[#010435]">
-            PHIDE
-          </a>
-
-          {/* Desktop menu */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
           <div className="hidden md:flex space-x-6 items-center">
-
-            {/* Dropdown */}
             <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
-            >
-              Browse
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Catalogue
-                </a>
-                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Schedule
-                </a>
-              </div>
-            )}
-          </div>
-
-
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+              >
+                Browse
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                  <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
+                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                </div>
+              )}
+            </div>
             <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
             <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
           </div>
-
-          {/* Mobile button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden"
-          >
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -197,44 +283,88 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="" className="block">Browse</a>
-           <a href="/catalogue-period.html" className="block">Catalogue</a>
-          <a href="/scheda.html" className="block">Scheda</a>
+          <a href="/catalogue-period.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Schedule</a>
           <a href="/map.html" className="block">Map</a>
           <a href="/documentation.html" className="block">Documentation</a>
         </div>
       )}
     </nav>
   );
-  }
-
-  ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+}
+ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
 </script>
 
-<!-- DataTables JS con CSV esterno -->
+<!-- DataTables Script -->
 <script>
-  fetch('data/list_digital_edition.csv')
+$(document).ready(function(){
+  fetch('/data/list.csv')
     .then(response => response.text())
     .then(csv => {
-      const parsed = Papa.parse(csv, {
-        header: true,
-        skipEmptyLines: true
-      });
-
+      const parsed = Papa.parse(csv, { header:true, skipEmptyLines:true });
       const data = parsed.data;
 
       const table = $('#catalog').DataTable({
         data: data,
+        searching: false, // disattiva ricerca globale
         dom: 'Bfrtip',
-        buttons: ['csvHtml5','excelHtml5','json'],
+        buttons: [
+          // Scarica CSV originale
+          {
+            text: 'CSV',
+            action: function ( e, dt, node, config ) {
+              fetch('/data/list.csv')
+                .then(resp => resp.blob())
+                .then(blob => {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'list.csv';
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                });
+            }
+          },
+          // Excel
+          {
+            text: 'EXCEL',
+            action: function ( e, dt, node, config ) {
+              fetch('/data/list_excel.xlsx')
+                .then(resp => resp.blob())
+                .then(blob => {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = 'list_excel.xlsx';
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                });
+            }
+          },
+          // JSON
+          {
+            text: 'JSON',
+            action: function ( e, dt, node, config ) {
+              const jsonData = dt.data().toArray();
+              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'list_json.json';
+              a.click();
+              URL.revokeObjectURL(url);
+            }
+          }
+        ],
         columns: [
           { data: 'ID' },
           { data: 'title' },
-          { data: 'author' },
-          { data: 'curator' },
+          { data: 'author_surname' },
+          { data: 'author_name' },
+          { data: 'curator_surname' },
+          { data: 'curator_name' },
           { data: 'institution_name' },
           { data: 'located_at' },
           { data: 'part_of' },
@@ -255,16 +385,12 @@ function Navbar() {
         fixedHeader: true
       });
 
-      // Filtri per colonna
-      $('#catalog thead tr:eq(1) th').each(function(i){
-        $('input', this).on('keyup change', function(){
-          if(table.column(i).search() !== this.value){
-            table.column(i).search(this.value, true, false, true).draw();
-          }
-        });
-      });
+      // Rimosso il codice dei filtri per colonna
     });
+});
+
 </script>
+
 
 </body>
 </html>

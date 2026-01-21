@@ -20,6 +20,7 @@
 
   <!-- HERO -->
   <section class="hero" style="min-height: 100vh; padding-top: 80px;">
+    
     <div class="hero-content">
       <p class="hero-small top">
         PHIDE is a digital catalogue of scholarly editions of philosophical texts from different historical periods.
@@ -38,6 +39,7 @@
       <div class="line"></div>
     </div>
   </section>
+  
 
   <hr class="h-px bg-black border-0 m-0">
 
@@ -72,36 +74,22 @@
 
 <!-- LINEA DIVISORIA -->
 <hr class="h-px bg-black border-0 m-0">
-
-
 <script>
-  function goTo(section) {
-    alert("Vai alla sezione: " + section);
-    // oppure window.location.href = 'link_alla_sezione';
-  }
+  let counter = 0;
+  const maxCount = 59;
+  const counterElement = document.getElementById("counter");
+
+  const interval = setInterval(() => {
+    counter++;
+    counterElement.textContent = counter;
+
+    if (counter >= maxCount) {
+      clearInterval(interval); // ferma il contatore a 59
+    }
+  }, 50); // 50ms per scorrere velocemente
 </script>
 
 
-
-  <script>
-    function goTo(section) {
-      alert("Hai cliccato: " + section);
-      // window.location.href = section + ".html";
-    }
-
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform = 'scale(1.07)';
-        card.style.boxShadow = '0 25px 50px rgba(0,0,0,0.2)';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'scale(1)';
-        card.style.boxShadow = 'none';
-      });
-    });
-  </script>
-</section>
 
 <script>
   const circles = document.querySelectorAll('.action-circle');
@@ -128,7 +116,7 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   return (
-    <nav className="w-full bg-[#E7E5E4] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
+    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
 
@@ -206,36 +194,61 @@ function Navbar() {
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- FOOTER -->
-<footer class="bg-[#020435] text-white py-10">
-  <div class="container mx-auto px-4">
-    <div class="row">
+  <footer class="bg-[#111827] text-white py-10 mt-20">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Contenuto -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 
       <!-- Logo e descrizione -->
-      <div class="col-12 col-md-4 mb-6 md:mb-0">
+      <div>
         <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
-        <p class="text-gray-200">
-          Digital catalogue of scholarly editions of philosophical texts. Explore projects, maps, and schedules in a single platform.
+        <p class="text-gray-300">
+          Digital catalogue of scholarly editions of philosophical texts.
+          Explore projects, maps, and schedules in a single platform.
         </p>
       </div>
 
       <!-- Contatti -->
-      <div class="col-12 col-md-4">
+      <div>
         <h3 class="text-xl font-semibold mb-3">Contact</h3>
-        <p class="text-gray-200 mb-1">Email: <a href="mailto:info@phide.com" class="hover:text-[#F2A65A]">info@phide.com</a></p>
-        <p class="text-gray-200 mb-1">Phone: <a href="tel:+390000000000" class="hover:text-[#F2A65A]">+39 000 000 0000</a></p>
-        <p class="text-gray-200">Address: Via Filosofia 1, 00100 Roma, Italy</p>
+        <p class="text-gray-300 mb-1">
+          Email:
+          <a href="mailto:info@phide.com" class="hover:text-white underline">
+            info@phide.com
+          </a>
+        </p>
+        <p class="text-gray-300 mb-1">
+          Phone:
+          <a href="tel:+390000000000" class="hover:text-white underline">
+            +39 000 000 0000
+          </a>
+        </p>
+        <p class="text-gray-300">
+          Address: Via Filosofia 1, 00100 Roma, Italy
+        </p>
+      </div>
+
+      <!-- Spazio futuro (opzionale) -->
+      <div>
+        <!-- Qui puoi aggiungere link, social, ecc. -->
       </div>
 
     </div>
 
-    <hr class="border-gray-500 my-6">
+    <!-- Separatore -->
+    <hr class="border-gray-700 my-8">
 
-    <div class="text-center text-gray-300">
+    <!-- Copyright -->
+    <div class="text-center text-gray-400 text-sm">
       &copy; 2025 PHIDE. All rights reserved.
     </div>
+
   </div>
 </footer>
+
+
+
 
 </body>
 </html>
