@@ -164,10 +164,9 @@ function BookBrowserUI() {
   const [filterText, setFilterText] = React.useState("");
   const [filterLanguage, setFilterLanguage] = React.useState("");
   const [filterEpoch, setFilterEpoch] = React.useState("");
+  const [epochDropdownOpen, setEpochDropdownOpen] = React.useState(false);
   const [filterBranch, setFilterBranch] = React.useState("");
   const [filterInstitution, setFilterInstitution] = React.useState("");
-  const [filterIndex, setFilterIndex] = React.useState(""); 
-  const [showAdvanced, setShowAdvanced] = React.useState(false);
   const [sortField, setSortField] = React.useState(null);
   const [sortOrder, setSortOrder] = React.useState("asc");
 
@@ -179,6 +178,16 @@ function BookBrowserUI() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const booksPerPage = 15;
   const [languageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
+  /* ================= FOR ADVANCED SEARCH ================= */
+  const [filterAdvancedSearch, setFilterAdvancedSearch] = React.useState("");
+  const [filterIndex, setFilterIndex] = React.useState("");
+  const [filterGlossary, setFilterGlossary] = React.useState("");
+  const [filterFacsimiles, setFilterFacsimiles] = React.useState("");
+  const [filterEncoding, setFilterEncoding] = React.useState("");
+  const [filterDownload, setFilterDownload] = React.useState("");
+  const [showAdvanced, setShowAdvanced] = React.useState(false);
+
+
 
   const languageNames = {
     SPA: "Spanish", GER: "German", DAN: "Danish", FRE: "French", FRA: "French",
@@ -222,37 +231,36 @@ function BookBrowserUI() {
           const curatorFullName = `${b.curator_surname} ${b.curator_name}`.trim();
           if (!map.has(key)) {
             map.set(key, {
-              id: b.ID,
-              title: b.title?.trim(),
-              author: `${b.author_surname}${b.author_name}`,
-              curators: curatorFullName ? [curatorFullName] : [],
-              date: b.date,
-              language: b.language?.replace(/"/g, ""),
-              branch: b.branch,
-              epoch: b.epoch,
-              URL: b.URL,
-              institution: {
-                name: b.institution_name,
-                lat: b.institution_lat,
-                lng: b.institution_lng,
-                website: b.institution_website
-              },
-              Content: {
-                "Writing support": b.writing_support,
-                facsimiles: b.facsimiles
-              },
-              Features: {
-                advanced_search: b.advanced_search,
-                index: b.index,
-                glossary: b.glossary
-              },
-              dataReuse: {
-                encoding: b.encoding,
-                download: b.download,
-                license: b.creative_commons_license
-              },
-              cover: b.cover || "/covers/default.jpg" // <-- qui usiamo cover dal JSON
-            });
+            id: b.ID,
+            title: b.title?.trim(),
+            author: `${b.author_surname || ""} ${b.author_name || ""}`.trim(),
+            curators: curatorFullName ? [curatorFullName] : [],
+            date: b.date,
+            language: b.language?.replace(/"/g, ""),
+            branch: b.branch,
+            epoch: b.epoch,
+            URL: b.URL,
+
+            institution: {
+              name: b.institution_name,
+              lat: b.institution_lat,
+              lng: b.institution_lng,
+              website: b.institution_website
+            },
+
+            // ✅ FLAT FIELDS (come nel JSON)
+            writing_support: b.writing_support,
+            facsimiles: b.facsimiles,
+            advanced_search: b.advanced_search,
+            index: b.index,
+            glossary: b.glossary,
+            encoding: b.encoding,
+            download: b.download,
+            creative_commons_license: b.creative_commons_license,
+
+            cover: b.cover || "/covers/default.jpg"
+          });
+
           } else {
             const entry = map.get(key);
             if (curatorFullName && !entry.curators.includes(curatorFullName)) entry.curators.push(curatorFullName);
@@ -275,6 +283,7 @@ function BookBrowserUI() {
     const bookLanguages = b.language?.replace(/"/g, "").split(/,|;/).map(l => l.trim()) || [];
     const q = filterText.toLowerCase();
 
+
     const matchSearch = !filterText || (
       b.title?.toLowerCase().includes(q) ||
       b.author?.toLowerCase().includes(q) ||
@@ -287,8 +296,14 @@ function BookBrowserUI() {
       (filterE ? bookEpoch === filterE : true) &&
       (filterBranch ? b.branch?.toLowerCase().includes(filterBranch.toLowerCase()) : true) &&
       (filterInstitution ? b.institution?.name?.toLowerCase().includes(filterInstitution.toLowerCase()) : true) &&
-      (filterIndex === "" ? true : filterIndex === "yes" ? indices === true : indices === false)
+
+      // ADVANCED FILTERS
+      (filterAdvancedSearch ? b.advanced_search === filterAdvancedSearch : true) &&
+      (filterIndex ? b.index === filterIndex : true) &&
+      (filterGlossary ? b.glossary === filterGlossary : true) &&
+      (filterFacsimiles ? b.facsimiles === filterFacsimiles : true) 
     );
+
   });
 
   if (sortField) {
@@ -303,6 +318,15 @@ function BookBrowserUI() {
   const indexOfLast = currentPage * booksPerPage;
   const indexOfFirst = indexOfLast - booksPerPage;
   const paginatedBooks = filteredBooks.slice(indexOfFirst, indexOfLast);
+
+  const epochs = ["ancient", "medieval", "modern", "contemporary"];
+  const epochNames = {
+  ancient: "Ancient",
+  medieval: "Medieval",
+  modern: "Modern",
+  contemporary: "Contemporary"
+};
+
 
   return (
   <div className="pt-20 pb-32">
@@ -362,13 +386,51 @@ function BookBrowserUI() {
           </div>
 
           {/* EPOCH */}
-          <select value={filterEpoch} onChange={e=>setFilterEpoch(e.target.value)} className="p-1 w-26 border border-black text-black text-xs rounded-lg bg-white">
-            <option value="">Epoch</option>
-            <option value="ancient">Ancient</option>
-            <option value="medieval">Medieval</option>
-            <option value="modern">Modern</option>
-            <option value="contemporary">Contemporary</option>
-          </select>
+          <div className="relative">
+            <button 
+              onClick={() => setEpochDropdownOpen(prev => !prev)} 
+              className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+            >
+              <span>Epoch {filterEpoch ? `: ${epochNames[filterEpoch] || filterEpoch}` : ""}</span>
+
+              <svg className={`w-3 h-3 ml-2 transition-transform ${epochDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {epochDropdownOpen && (
+              <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
+                
+                {/* ALL */}
+                <button 
+                  onClick={() => { setFilterEpoch(""); setEpochDropdownOpen(false); }} 
+                  className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
+                >
+                  All
+                </button>
+
+                {/* EPOCH OPTIONS */}
+                {epochs.map((ep,i)=>(
+                  <button 
+                    key={i}
+                    onClick={()=>{ setFilterEpoch(ep); setEpochDropdownOpen(false); }}
+                    className={`text-left px-2 py-1 border rounded text-xs ${
+                      filterEpoch === ep 
+                        ? "bg-black text-white" 
+                        : "bg-white text-black hover:bg-black hover:text-white"
+                    }`}
+                  >
+                    {epochNames[ep]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+
+           {/* ADVANCED SEARCH */}
+       <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
+
 
           {/* GENERAL SEARCH */}
           <input type="text" placeholder="Search..." value={filterText} onChange={e=>setFilterText(e.target.value)} className="p-1 w-40 border text-xs rounded-lg" />
@@ -379,21 +441,51 @@ function BookBrowserUI() {
 
         {/* ADVANCED PANEL */}
         {showAdvanced && (
-          <div className="mt-4 p-4 border bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="text-sm font-semibold">Institution</label>
-              <input value={filterInstitution} onChange={e=>setFilterInstitution(e.target.value)} placeholder="Search institution..." className="w-full p-2 border rounded" />
-            </div>
-            <div>
-              <label className="text-sm font-semibold">Index</label>
-              <select value={filterIndex} onChange={e=>setFilterIndex(e.target.value)} className="w-full p-2 border rounded">
-                <option value="">All</option>
-                <option value="yes">Only records with index</option>
-                <option value="no">Without index</option>
-              </select>
-            </div>
+        <div className="mt-4 p-4 border bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+
+          {/* ADVANCED SEARCH */}
+          <div>
+            <label className="font-semibold">Advanced search</label>
+            <select value={filterAdvancedSearch} onChange={e=>setFilterAdvancedSearch(e.target.value)} className="w-full p-2 border rounded">
+              <option value="">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
-        )}
+
+          {/* INDEX */}
+          <div>
+            <label className="font-semibold">Index</label>
+            <select value={filterIndex} onChange={e=>setFilterIndex(e.target.value)} className="w-full p-2 border rounded">
+              <option value="">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          {/* GLOSSARY */}
+          <div>
+            <label className="font-semibold">Glossary</label>
+            <select value={filterGlossary} onChange={e=>setFilterGlossary(e.target.value)} className="w-full p-2 border rounded">
+              <option value="">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          {/* FACSIMILES */}
+          <div>
+            <label className="font-semibold">Facsimiles</label>
+            <select value={filterFacsimiles} onChange={e=>setFilterFacsimiles(e.target.value)} className="w-full p-2 border rounded">
+              <option value="">All</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+        </div>
+      )}
+
 
         {/* CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">

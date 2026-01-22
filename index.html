@@ -14,7 +14,8 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
-<body>
+<body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
+
   <!-- REACT NAVBAR -->
   <div id="navbar-root"></div>
 
@@ -55,7 +56,7 @@
         </div>
       </div>
 
-      <div class="row mt-5 align-items-start">
+      <div class="row mt-5 align-items-start" style="font-family: 'Playfair Display', serif;">
         <div class="col-12 col-md-6">
           <div class="counter-wrapper">
             <span id="counter">0</span><span class="counter-label">editions</span>
@@ -180,8 +181,6 @@ function Navbar() {
     </nav>
   );
 }
-
-
     ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
   </script>
 
