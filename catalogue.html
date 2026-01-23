@@ -63,7 +63,7 @@ function Navbar() {
 
             {dropdownOpen && (
               <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
                   Catalogue
                 </a>
                 <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
@@ -73,8 +73,8 @@ function Navbar() {
             )}
           </div>
 
-            <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
 
           {/* Mobile button */}
@@ -577,7 +577,7 @@ function BookBrowserUI() {
 
           {selected.institution?.lat && selected.institution?.lng && (
             <a 
-              href={`/map.html?lat=${selected.institution.lat}&lng=${selected.institution.lng}`} 
+              href={`map.html?lat=${selected.institution.lat}&lng=${selected.institution.lng}`} 
               className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
               target="_blank"
               rel="noopener noreferrer"
