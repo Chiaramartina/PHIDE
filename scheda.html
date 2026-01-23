@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Schedule</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -17,8 +16,9 @@
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+</head>
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
+
   <div id="navbar-root"></div>
   <main class="max-w-7xl mx-auto px-4 py-10">
 
@@ -138,8 +138,6 @@
 </head>
 <body>
 
-<!-- React Navbar -->
-<div id="navbar-root"></div>
 
 <div class="container">
   <div class="table-wrapper">
@@ -334,7 +332,7 @@ $(document).ready(function(){
             text: 'JSON',
             action: function ( e, dt, node, config ) {
               const jsonData = dt.data().toArray();
-              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'data/list_json.json' });
+              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: '.data/list_json.json' });
               const url = URL.createObjectURL(blob);
               const a = document.createElement('a');
               a.href = url;
