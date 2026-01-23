@@ -28,7 +28,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "yes",
-  "creative_commons_license": "no"
+  "creative_commons_license": "no",
+  "tool": "TEICHI"
  },
  {
   "ID": 2,
@@ -59,7 +60,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "ediarum.DB, Oxygen XML Author"
  },
  {
   "ID": 3,
@@ -237,7 +239,7 @@
   "URL": "https:\/\/lumieres.unil.ch\/projets\/barbeyrac\/",
   "cover": "/photo/barberyrac.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Law, Ethics, Political Philosophy",
+  "branch": "Ethics, Political Philosophy",
   "writing_support": "Letter",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -276,7 +278,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "EVT (Edition Visualization Technology)"
  },
  {
   "ID": 9,
@@ -330,7 +333,7 @@
   "URL": "https:\/\/www.mpiwg-berlin.mpg.de\/Galileo_Prototype\/MAIN.HTM",
    "cover": "/photo/galileo.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Science, Philosophy of Physics, Philosophy of Nature, Philosophy History",
+  "branch": "Philosophy of Science, Philosophy of Physics, History of Philosophy",
   "writing_support": "Manuscript",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -361,7 +364,7 @@
   "URL": "https:\/\/www.mpiwg-berlin.mpg.de\/Galileo_Prototype\/MAIN.HTM",
    "cover": "/photo/galileo.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Science, Philosophy of Physics, Philosophy of Nature, Philosophy History",
+  "branch": "Philosophy of Science, Philosophy of Physics, History of Philosophy",
   "writing_support": "Manuscript",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -392,7 +395,7 @@
   "URL": "https:\/\/www.mpiwg-berlin.mpg.de\/Galileo_Prototype\/MAIN.HTM",
    "cover": "/photo/galileo.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Science, Philosophy of Physics, Philosophy of Nature, Philosophy History",
+  "branch": "Philosophy of Science, Philosophy of Physics, History of Philosophy",
   "writing_support": "Manuscript",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -423,7 +426,7 @@
   "URL": "https:\/\/www.newtonproject.ox.ac.uk",
   "cover": "/photo/newton.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Science, Philosophy of Physics, Metaphysics, Philosophy History",
+  "branch": "Philosophy of Science, Philosophy of Physics, Metaphysics, History of Philosophy",
   "writing_support": "Manuscript",
   "facsimiles": "no",
   "advanced_search": "yes",
@@ -454,7 +457,7 @@
   "URL": "https:\/\/www.google.com\/search?client=safari&rls=en&q=Max+Planck+Institute+for+the+History+of+Science&ie=UTF-8&oe=UTF-8",
   "cover": "/photo/opera.png",
   "epoch": "Modern",
-  "branch": "Aesthetics, Philosophy of Art, Practical Philosophy",
+  "branch": "Aesthetics, Practical Philosophy",
   "writing_support": "Print",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -485,7 +488,7 @@
   "URL": "http:\/\/darwin-online.org.uk\/Variorum\/",
   "cover": "/photo/darwin.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Biology, Philosophy of Science, Philosophy of Nature",
+  "branch": "Philosophy of Biology, Philosophy of Science",
   "writing_support": "Printed book",
   "facsimiles": "partly",
   "advanced_search": "yes",
@@ -516,7 +519,7 @@
   "URL": "http:\/\/www.darwinproject.ac.uk\/",
    "cover": "/photo/darwin_correspondence.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Biology, Philosophy of Science, Philosophy of Nature",
+  "branch": "Philosophy of Biology, Philosophy of Science",
   "writing_support": "Manuscript, Letter",
   "facsimiles": "no",
   "advanced_search": "yes",
@@ -609,7 +612,7 @@
   "URL": "http:\/\/www.nietzschesource.org\/",
   "cover": "/photo/nietzsche.png",
   "epoch": "Modern",
-  "branch": "Practical Philosophy, Aesthetics, Metaphysics Moral Philosophy",
+  "branch": "Practical Philosophy, Aesthetics, Metaphysics, Moral Philosophy",
   "writing_support": "Manuscript, Book, letter",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -799,7 +802,8 @@
   "glossary": "no",
   "encoding": "TEI\/XML",
   "download": "yes ",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "TextGrid, CollateX"
  },
  {
   "ID": 21,
@@ -820,7 +824,7 @@
   "URL": "https:\/\/ahiqar.uni-goettingen.de",
    "cover": "/photo/ahiqar.png",
   "epoch": "Ancient",
-  "branch": "Philosophy of Religion, Philosophy of Culture",
+  "branch": "Philosophy of Religion",
   "writing_support": "Manuscript, Inscription",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -848,7 +852,7 @@
   "language": "\"SYR, ARA\"",
   "URL": "https:\/\/ahiqar.uni-goettingen.de",
   "epoch": "Ancient",
-  "branch": "Philosophy of Religion, Philosophy of Culture",
+  "branch": "Philosophy of Religion",
   "writing_support": "Manuscript, Inscription",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -876,7 +880,7 @@
   "language": "\"SYR, ARA\"",
   "URL": "https:\/\/ahiqar.uni-goettingen.de",
   "epoch": "Ancient",
-  "branch": "Philosophy of Religion, Philosophy of Culture",
+  "branch": "Philosophy of Religion",
   "writing_support": "Manuscript, Inscription",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -906,7 +910,7 @@
   "language": "\"FRA\"",
   "URL": "https:\/\/lumieres.unil.ch\/projets\/barbeyrac\/",
   "epoch": "Modern",
-  "branch": "Philosophy of Law, Ethics, Political Philosophy",
+  "branch": "Ethics, Political Philosophy",
   "writing_support": "Letter",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -936,7 +940,7 @@
   "language": "\"FRA\"",
   "URL": "https:\/\/lumieres.unil.ch\/projets\/barbeyrac\/",
   "epoch": "Modern",
-  "branch": "Philosophy of Law, Ethics, Political Philosophy",
+  "branch": "Ethics, Political Philosophy",
   "writing_support": "Letter",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -967,7 +971,7 @@
   "URL": "https:\/\/www.brown.edu\/Departments\/Italian_Studies\/pico\/",
   "cover": "/photo/pico.png",
   "epoch": "Medieval",
-  "branch": "Moral Philosophy, Philosophical Anthropology, Philosophy of Religion",
+  "branch": "Moral Philosophy, Philosophy of Religion",
   "writing_support": "Manuscript",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -998,7 +1002,7 @@
   "URL": "https:\/\/lumieres.unil.ch\/projets\/barbeyrac\/",
   "cover": "/photo/barberyrac.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Law, Ethics, Political Philosophy",
+  "branch": "Ethics, Political Philosophy",
   "writing_support": "Letter",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -1029,7 +1033,7 @@
   "URL": "https:\/\/lumieres.unil.ch\/projets\/barbeyrac\/",
   "cover": "/photo/barbeyrac.png",
   "epoch": "Modern",
-  "branch": "Philosophy of Law, Ethics, Political Philosophy",
+  "branch": "Ethics, Political Philosophy",
   "writing_support": "Letter",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -1060,7 +1064,7 @@
   "URL": "https:\/\/valep.vc.univie.ac.at\/valepPlus\/project\/62",
   "cover": "/photo/carnap.png",
   "epoch": "Contemporary",
-  "branch": "Philosophy of Computing, Logic, Epistemology, Philosophy of Science",
+  "branch": "Logic, Epistemology, Philosophy of Science",
   "writing_support": "Manuscript, Book, letter, memo",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -1091,7 +1095,7 @@
   "URL": "https:\/\/valep.vc.univie.ac.at\/valepPlus\/project\/62",
   "cover": "/photo/carnap.png",
   "epoch": "Contemporary",
-  "branch": "Philosophy of Computing, Logic, Epistemology, Philosophy of Science",
+  "branch": "Logic, Epistemology, Philosophy of Science",
   "writing_support": "Manuscript, Book, letter, memo",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -1120,7 +1124,7 @@
   "URL": "https:\/\/zenodo.org\/record\/1133490",
   "cover": "/photo/four.png",
   "epoch": "Medieval",
-  "branch": "Philosophy of Religion, Ethics, Philosophical Anthropology",
+  "branch": "Philosophy of Religion, Ethics",
   "writing_support": "Manuscript",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -1128,7 +1132,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "yes",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "Oxygen XML Editor"
  },
  {
   "ID": 24,
@@ -1149,7 +1154,7 @@
   "URL": "https:\/\/zenodo.org\/record\/1133490",
   "cover": "/photo/four.png",
   "epoch": "Medieval",
-  "branch": "Philosophy of Religion, Ethics, Philosophical Anthropology",
+  "branch": "Philosophy of Religion, Ethics",
   "writing_support": "Manuscript",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -1157,7 +1162,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "yes",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "Oxygen XML Editor"
  },
  {
   "ID": 25,
@@ -1273,14 +1279,15 @@
   "URL": "https:\/\/eng-bup.unibas.it\/library\/DH",
   "cover": "/photo/vico.png",
   "epoch": "Modern",
-  "branch": "Philosophy of History, Philosophy of Culture, Political Philosophy",
+  "branch": "Philosophy of History, Political Philosophy",
   "writing_support": "Manuscript",
   "facsimiles": "vico",
   "advanced_search": "yes",
   "index": "yes",
   "encoding": "XML-TEI",
   "download": "yes",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "EVT (Edition Visualization Technology)"
  },
  {
   "ID": 28,
@@ -1402,7 +1409,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+   "tool": "Oxygen XML Editor, TextGrid, LERA, Voyant Tools"
  },
  {
   "ID": 31,
@@ -1433,7 +1441,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "Oxygen XML Editor, TextGrid, LERA, Voyant Tools"
  },
  {
   "ID": 32,
@@ -1724,7 +1733,7 @@
   "URL": "https:\/\/www.unicaen.fr\/services\/puc\/sources\/Montesquieu\/",
   "cover": "/photo/montedite.png",
   "epoch": "Modern",
-  "branch": "Political Philosophy, Ethics, Philosophy of Law",
+  "branch": "Political Philosophy, Ethics",
   "writing_support": "Manuscript, Notebooks",
   "facsimiles": "yes",
   "advanced_search": "no",
@@ -1821,7 +1830,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "yes",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+   "tool": "EVT (Edition Visualization Technology)"
  },
  {
   "ID": 41,
@@ -1850,7 +1860,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "yes",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+   "tool": "EVT (Edition Visualization Technology)"
  },
  {
   "ID": 42,
@@ -2175,7 +2186,7 @@
   "URL": "https:\/\/russell.humanities.mcmaster.ca",
   "cover": "/photo/russell.png",
   "epoch": "Contemporary",
-  "branch": "Logic, Philosophy of Language, Epistemology, Philosophy of Mathematics, Ethics",
+  "branch": "Logic, Philosophy of Language, Epistemology, Philosophy of Science, Ethics",
   "writing_support": "Letters",
   "facsimiles": "yes",
   "advanced_search": "yes",
@@ -2235,7 +2246,7 @@
   "URL": "https:\/\/bza.dila.edu.tw",
   "cover": "/photo/chinese.png",
   "epoch": "Ancient",
-  "branch": "Philosophy of Religion, Moral Philosophy, Philosophy of Culture",
+  "branch": "Philosophy of Religion, Moral Philosophy",
   "writing_support": "Collection of texts",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -2264,7 +2275,7 @@
   "URL": "https:\/\/bza.dila.edu.tw",
   "cover": "/photo/chinese.png",
   "epoch": "Ancient",
-  "branch": "Philosophy of Religion, Moral Philosophy, Philosophy of Culture",
+  "branch": "Philosophy of Religion, Moral Philosophy",
   "writing_support": "Collection of texts",
   "facsimiles": "no",
   "advanced_search": "no",
@@ -2424,7 +2435,8 @@
   "glossary": "no",
   "encoding": "TEI-XML-TEI",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "Oxygen XML Editor"
  },
  {
   "ID": 52,
@@ -2484,7 +2496,8 @@
   "glossary": "no",
   "encoding": "XML-TEI",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+   "tool": "Transkribus, Oxygen XML Editor"
  },
  {
   "ID": 54,
@@ -2635,7 +2648,8 @@
   "glossary": "no",
   "encoding": "HTML\/XML",
   "download": "no",
-  "creative_commons_license": "yes"
+  "creative_commons_license": "yes",
+  "tool": "Mirador, LombardPress Viewer"
  },
  {
   "ID": 58,

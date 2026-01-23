@@ -168,21 +168,18 @@ body::before {
 /* Stili per la Seconda Sezione */
 .stats-section {
   padding: 100px 0;
-  background-color:#5A7796; /* #304B77 oppure */
-  min-height: 100vh;
+  background: url("/second.png") no-repeat center center; /* immagine */
+  background-size: cover;        /* riempie tutto lo schermo */
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;              /* full screen */
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.display-main {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.1;
-  color: #EFF4FA;
-  font-weight: 400;
-  margin-bottom: 40px;
-}
+
 
 .counter-wrapper {
   /* Font molto grande e Bold come nell'immagine */
@@ -201,13 +198,6 @@ body::before {
   font-weight: 700;
   margin-left: 10px;
   vertical-align: middle;
-}
-
-.description-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  color: #EFF4FA;
-  line-height: 1.6;
 }
 
 .arrow-line {
@@ -244,3 +234,130 @@ body::before {
   font-weight: 700; /* Per rendere il "12" grassetto come nell'immagine */
 }
 
+.branch-carousel-wrapper {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.branch-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 420px;
+}
+
+.branch-card {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #111827;
+  color: #EFF4FA;
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  opacity: 0.4;
+  transform: scale(0.85);
+
+  display: flex;                /* CENTRA CONTENUTO */
+  flex-direction: column;
+  justify-content: center;      /* verticale */
+  align-items: center;          /* orizzontale */
+  text-align: center;
+}
+
+.branch-card.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 10;
+}
+
+.branch-card.left {
+  transform: translateX(-220px) scale(0.85);
+}
+
+.branch-card.right {
+  transform: translateX(220px) scale(0.85);
+}
+
+.branch-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.branch-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  font-size: 3rem;
+  border: none;
+  cursor: pointer;
+  color: #010435;
+  z-index: 20;
+}
+
+.carousel-btn.left { left: 20px; }
+.carousel-btn.right { right: 20px; }
+
+ .full-screen-section {
+    min-height: 95vh;       /* Altezza minima pari a quella della finestra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente il contenuto */
+  }
+
+  .branch-carousel {
+  display: flex;
+  gap: 40px;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); /* smooth Apple-like */
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    min-height: auto;
+    padding: 80px 20px;
+    justify-content: flex-start;
+  }
+
+  .counter-wrapper {
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .branch-carousel-wrapper {
+    overflow-x: auto;
+    padding: 0 20px;
+  }
+
+  .branch-carousel {
+    position: static;
+    height: auto;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .branch-card {
+    position: relative;
+    min-width: 260px;
+    height: 300px;
+    transform: none !important;
+    opacity: 1;
+  }
+
+  .carousel-btn {
+    display: none;
+  }
+}

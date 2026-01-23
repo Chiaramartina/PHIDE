@@ -187,6 +187,7 @@
           <th>Encoding</th>
           <th>Download</th>
           <th>License</th>
+          <th>Tool</th>
         </tr>
         <tr>
           <!-- Filtri -->
@@ -195,65 +196,29 @@
           <th><input></th><th><input></th><th><input></th><th><input></th>
           <th><input></th><th><input></th><th><input></th><th><input></th>
           <th><input></th><th><input></th><th><input></th><th><input></th><th><input></th>
+          <th><input></th>
         </tr>
       </thead>
     </table>
   </div>
 </div>
 
-  <!-- FOOTER -->
-<footer class="bg-[#111827] text-white py-10 mt-20">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <!-- Contenuto -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-      <!-- Logo e descrizione -->
-      <div>
-        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
-        <p class="text-gray-300">
-          Digital catalogue of scholarly editions of philosophical texts.
-          Explore projects, maps, and schedules in a single platform.
-        </p>
-      </div>
-
-      <!-- Contatti -->
-      <div>
-        <h3 class="text-xl font-semibold mb-3">Contact</h3>
-        <p class="text-gray-300 mb-1">
-          Email:
-          <a href="mailto:info@phide.com" class="hover:text-white underline">
-            info@phide.com
-          </a>
-        </p>
-        <p class="text-gray-300 mb-1">
-          Phone:
-          <a href="tel:+390000000000" class="hover:text-white underline">
-            +39 000 000 0000
-          </a>
-        </p>
-        <p class="text-gray-300">
-          Address: Via Filosofia 1, 00100 Roma, Italy
-        </p>
-      </div>
-
-      <!-- Spazio futuro (opzionale) -->
-      <div>
-        <!-- Qui puoi aggiungere link, social, ecc. -->
-      </div>
-
-    </div>
-
-    <!-- Separatore -->
-    <hr class="border-gray-700 my-8">
-
-    <!-- Copyright -->
-    <div class="text-center text-gray-400 text-sm">
-      &copy; 2025 PHIDE. All rights reserved.
-    </div>
-
+ <!-- FOOTER -->
+<footer class="bg-[#111827] text-gray-400 py-4 mt-20">
+  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+    <span class="text-white font-semibold">PHIDE</span>
+    <span class="mx-2">·</span>
+    <a
+      href="mailto:chiara.martina3@studio.unibo.it"
+      class="hover:text-white underline"
+    >
+      chiara.martina3@studio.unibo.it
+    </a>
+    <span class="mx-2">·</span>
+    <span>&copy; 2026 CC BY-SA 4.0</span>
   </div>
 </footer>
+
 
 
   <!-- React Navbar Script -->
@@ -279,7 +244,7 @@ function Navbar() {
             <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
             >
               Browse
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,8 +265,8 @@ function Navbar() {
           </div>
 
 
-            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+            <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
 
           {/* Mobile button */}
@@ -372,13 +337,13 @@ $(document).ready(function(){
           {
             text: 'EXCEL',
             action: function ( e, dt, node, config ) {
-              fetch('/data/list_excel.xlsx')
+              fetch('/data/list_ex.xlsx')
                 .then(resp => resp.blob())
                 .then(blob => {
                   const url = window.URL.createObjectURL(blob);
                   const a = document.createElement('a');
                   a.href = url;
-                  a.download = 'list_excel.xlsx';
+                  a.download = 'list_ex.xlsx';
                   a.click();
                   window.URL.revokeObjectURL(url);
                 });
@@ -389,7 +354,7 @@ $(document).ready(function(){
             text: 'JSON',
             action: function ( e, dt, node, config ) {
               const jsonData = dt.data().toArray();
-              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'data/list_json.json' });
               const url = URL.createObjectURL(blob);
               const a = document.createElement('a');
               a.href = url;
@@ -400,36 +365,118 @@ $(document).ready(function(){
           }
         ],
         columns: [
-          { data: 'ID' },
-          { data: 'title' },
-          { data: 'author_surname' },
-          { data: 'author_name' },
-          { data: 'curator_surname' },
-          { data: 'curator_name' },
-          { data: 'institution_name' },
-          { data: 'located_at' },
-          { data: 'part_of' },
-          { data: 'date' },
-          { data: 'language' },
-          { data: 'epoch' },
-          { data: 'branch' },
-          { data: 'writing_support' },
-          { data: 'facsimiles' },
-          { data: 'advanced_search' },
-          { data: 'index' },
-          { data: 'glossary' },
-          { data: 'encoding' },
-          { data: 'download' },
-          { data: 'creative_commons_license' }
-        ],
+  { data: 'ID' },
+  { 
+    data: 'title',
+    render: function(data, type, row) {
+      if(data && row.URL) {
+        return `<a href="${row.URL}" target="_blank" class="text-blue-600 hover:underline">${data}</a>`;
+      }
+      return data;
+    }
+  },
+  { data: 'author_surname' },
+  { data: 'author_name' },
+  { 
+    data: 'curator_surname'
+  },
+  { data: 'curator_name' },
+  { 
+    data: 'institution_name',
+    render: function(data, type, row) {
+      if(data && row.institution_website) {
+        return `<a href="${row.institution_website}" target="_blank" class="text-blue-600 hover:underline">${data}</a>`;
+      }
+      return data;
+    }
+  },
+  { data: 'located_at' },
+  { data: 'part_of' },
+  { data: 'date' },
+  { data: 'language' },
+  { data: 'epoch' },
+  { data: 'branch' },
+  { data: 'writing_support' },
+  { data: 'facsimiles' },
+  { data: 'advanced_search' },
+  { data: 'index' },
+  { data: 'glossary' },
+  { data: 'encoding' },
+  { data: 'download' },
+  { data: 'creative_commons_license' },
+  {
+  data: 'tool',
+  render: function (data) {
+    if (!data) return '';
+    return `
+      <span class="text-black-800">
+        ${data}
+      </span>
+    `;
+  }
+},
+
+
+
+
+  
+],
+
         orderCellsTop: true,
         fixedHeader: true
       });
-
-      // Rimosso il codice dei filtri per colonna
     });
 });
 
+</script>
+
+<style>
+.full-screen-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.branch-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+.branch-card {
+  flex: 0 0 auto;
+  width: 250px;
+  background: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 1rem;
+}
+.branch-card img.branch-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.carousel-btn {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+</style>
+
+<script>
+const carousel = document.getElementById('branch-carousel');
+
+function prevBranch() {
+  carousel.scrollBy({ left: -300, behavior: 'smooth' });
+}
+
+function nextBranch() {
+  carousel.scrollBy({ left: 300, behavior: 'smooth' });
+}
 </script>
 
 

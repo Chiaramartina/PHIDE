@@ -16,58 +16,22 @@
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
 
 <div id="root"></div>
-<footer class="bg-[#111827] text-white py-10 mt-20">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <!-- Contenuto -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-      <!-- Logo e descrizione -->
-      <div>
-        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
-        <p class="text-gray-300">
-          Digital catalogue of scholarly editions of philosophical texts.
-          Explore projects, maps, and schedules in a single platform.
-        </p>
-      </div>
-
-      <!-- Contatti -->
-      <div>
-        <h3 class="text-xl font-semibold mb-3">Contact</h3>
-        <p class="text-gray-300 mb-1">
-          Email:
-          <a href="mailto:info@phide.com" class="hover:text-white underline">
-            info@phide.com
-          </a>
-        </p>
-        <p class="text-gray-300 mb-1">
-          Phone:
-          <a href="tel:+390000000000" class="hover:text-white underline">
-            +39 000 000 0000
-          </a>
-        </p>
-        <p class="text-gray-300">
-          Address: Via Filosofia 1, 00100 Roma, Italy
-        </p>
-      </div>
-
-      <!-- Spazio futuro (opzionale) -->
-      <div>
-        <!-- Qui puoi aggiungere link, social, ecc. -->
-      </div>
-
-    </div>
-
-    <!-- Separatore -->
-    <hr class="border-gray-700 my-8">
-
-    <!-- Copyright -->
-    <div class="text-center text-gray-400 text-sm">
-      &copy; 2025 PHIDE. All rights reserved.
-    </div>
-
+<!-- FOOTER -->
+<footer class="bg-[#111827] text-gray-400 py-4 mt-20">
+  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+    <span class="text-white font-semibold">PHIDE</span>
+    <span class="mx-2">·</span>
+    <a
+      href="mailto:chiara.martina3@studio.unibo.it"
+      class="hover:text-white underline"
+    >
+      chiara.martina3@studio.unibo.it
+    </a>
+    <span class="mx-2">·</span>
+    <span>&copy; 2026 CC BY-SA 4.0</span>
   </div>
 </footer>
+
 
 
 <script type="text/babel">
@@ -92,7 +56,7 @@ function Navbar() {
             <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5b0909]"
+              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
             >
               Browse
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,8 +77,8 @@ function Navbar() {
           </div>
 
 
-            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+            <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
 
           {/* Mobile button */}
@@ -178,6 +142,8 @@ function BookBrowserUI() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const booksPerPage = 15;
   const [languageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
+  const [sortDropdownOpen, setSortDropdownOpen] = React.useState(false);
+
   /* ================= FOR ADVANCED SEARCH ================= */
   const [filterAdvancedSearch, setFilterAdvancedSearch] = React.useState("");
   const [filterIndex, setFilterIndex] = React.useState("");
@@ -186,6 +152,9 @@ function BookBrowserUI() {
   const [filterEncoding, setFilterEncoding] = React.useState("");
   const [filterDownload, setFilterDownload] = React.useState("");
   const [showAdvanced, setShowAdvanced] = React.useState(false);
+  const [filterTool, setFilterTool] = React.useState("");
+  const [tools, setTools] = React.useState([]);
+
 
 
 
@@ -199,6 +168,8 @@ function BookBrowserUI() {
 
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const selectedBranch = params.get("branch");
+
     setFilterBranch(params.get("branch") || "");
     setFilterLanguage(params.get("language") || "");
     setFilterText(params.get("text") || "");
@@ -257,7 +228,7 @@ function BookBrowserUI() {
             encoding: b.encoding,
             download: b.download,
             creative_commons_license: b.creative_commons_license,
-
+            tool: b.tool,
             cover: b.cover || "/covers/default.jpg"
           });
 
@@ -272,6 +243,15 @@ function BookBrowserUI() {
 
         const langs = books.flatMap(b => b.language?.split(/,|;/).map(l => l.trim()) || []);
         setLanguages([...new Set(langs)].sort());
+
+        const toolSet = new Set();
+        books.forEach(b => {
+          if (b.tool) {
+            b.tool.split(",").map(t => t.trim()).forEach(t => toolSet.add(t));
+          }
+        });
+        setTools([...toolSet].sort());
+
       })
       .catch(err => console.error(err));
   }, []);
@@ -291,18 +271,19 @@ function BookBrowserUI() {
     );
 
     return (
-      matchSearch &&
-      (filterLanguage ? bookLanguages.includes(filterLanguage) : true) &&
-      (filterE ? bookEpoch === filterE : true) &&
-      (filterBranch ? b.branch?.toLowerCase().includes(filterBranch.toLowerCase()) : true) &&
-      (filterInstitution ? b.institution?.name?.toLowerCase().includes(filterInstitution.toLowerCase()) : true) &&
+  matchSearch &&
+  (filterLanguage ? bookLanguages.includes(filterLanguage) : true) &&
+  (filterE ? bookEpoch === filterE : true) &&
+  (filterBranch ? b.branch?.toLowerCase().includes(filterBranch.toLowerCase()) : true) &&
+  (filterInstitution ? b.institution?.name?.toLowerCase().includes(filterInstitution.toLowerCase()) : true) &&
+  (filterAdvancedSearch ? b.advanced_search === filterAdvancedSearch : true) &&
+  (filterIndex ? b.index === filterIndex : true) &&
+  (filterGlossary ? b.glossary === filterGlossary : true) &&
+  (filterFacsimiles ? b.facsimiles === filterFacsimiles : true) &&
+  (filterTool ? b.tool?.split(",").map(t => t.trim()).includes(filterTool) : true)
 
-      // ADVANCED FILTERS
-      (filterAdvancedSearch ? b.advanced_search === filterAdvancedSearch : true) &&
-      (filterIndex ? b.index === filterIndex : true) &&
-      (filterGlossary ? b.glossary === filterGlossary : true) &&
-      (filterFacsimiles ? b.facsimiles === filterFacsimiles : true) 
-    );
+);
+
 
   });
 
@@ -344,101 +325,128 @@ function BookBrowserUI() {
       </div>
     </section>
 
+    {filterBranch && (
+  <div className="max-w-7xl mx-auto px-4 mt-4">
+    <a
+      href="catalogue.html"
+      className="text-sm underline hover:text-[#5b0909]"
+    >
+      ←  Return to the full catalog
+    </a>
+    <p className="text-sm italic mt-1">
+      Filtered by: <strong>{filterBranch}</strong>
+    </p>
+  </div>
+)}
+
+
 
       <main className="max-w-7xl mx-auto px-4 mt-8">
 
-        {/* FILTRI E ORDINA */}
-        <div className="flex flex-wrap gap-2 mb-6 items-center">
+       <div className="flex flex-wrap gap-2 mb-6 items-center w-full">
+    {/* FILTRI A SINISTRA */}
+    <div className="flex flex-wrap gap-2 items-center">
+    
+    {/* ORDINE ALFABETICO / TITLE */}
+<div className="relative">
+  <button 
+    onClick={() => setSortDropdownOpen(prev => !prev)}
+    className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+  >
+    Sort {sortField ? `: ${sortField.charAt(0).toUpperCase() + sortField.slice(1)}` : ""}
+    <svg className={`w-3 h-3 ml-2 transition-transform ${sortDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
 
-          {/* ORDINE ALFABETICO */}
-          <div>
-            <label className="text-xs font-semibold mr-2">Filtered by:</label>
-            <select value={sortField || ""} onChange={e=>{
-              const val = e.target.value;
-              if(val==="none") { setSortField(null); setSortOrder("asc"); }
-              else { setSortField(val); setSortOrder("asc"); }
-            }} className="p-1 border border-black text-xs rounded-lg bg-white">
-              <option value="title">Title (A-Z)</option>
-              <option value="author">Author (A-Z)</option>
-              <option value="curator">Curator (A-Z)</option>
-            </select>
-          </div>
-
-          {/* LINGUE */}
-          <div className="relative">
-            <button 
-              onClick={() => setLanguageDropdownOpen(prev => !prev)} 
-              className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
-            >
-              <span>Language {filterLanguage ? `: ${languageNames[filterLanguage] || filterLanguage}` : ""}</span>
-              <svg className={`w-3 h-3 ml-2 transition-transform ${languageDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {languageDropdownOpen && (
-              <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
-                <button onClick={() => { setFilterLanguage(""); setLanguageDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white">All</button>
-                {languages.map((lang,i)=>(
-                  <button key={i} onClick={()=>{setFilterLanguage(lang); setLanguageDropdownOpen(false)}} className={`text-left px-2 py-1 border rounded text-xs ${filterLanguage===lang?"bg-black text-white":"bg-white text-black hover:bg-black hover:text-white"}`}>{languageNames[lang] || lang}</button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* EPOCH */}
-          <div className="relative">
-            <button 
-              onClick={() => setEpochDropdownOpen(prev => !prev)} 
-              className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
-            >
-              <span>Epoch {filterEpoch ? `: ${epochNames[filterEpoch] || filterEpoch}` : ""}</span>
-
-              <svg className={`w-3 h-3 ml-2 transition-transform ${epochDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {epochDropdownOpen && (
-              <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
-                
-                {/* ALL */}
-                <button 
-                  onClick={() => { setFilterEpoch(""); setEpochDropdownOpen(false); }} 
-                  className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
-                >
-                  All
-                </button>
-
-                {/* EPOCH OPTIONS */}
-                {epochs.map((ep,i)=>(
-                  <button 
-                    key={i}
-                    onClick={()=>{ setFilterEpoch(ep); setEpochDropdownOpen(false); }}
-                    className={`text-left px-2 py-1 border rounded text-xs ${
-                      filterEpoch === ep 
-                        ? "bg-black text-white" 
-                        : "bg-white text-black hover:bg-black hover:text-white"
-                    }`}
-                  >
-                    {epochNames[ep]}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+  {sortDropdownOpen && (
+    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
+      <button 
+        onClick={() => { setSortField(null); setSortOrder("asc"); setSortDropdownOpen(false); }} 
+        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
+      >
+        None
+      </button>
+      <button 
+        onClick={() => { setSortField("title"); setSortOrder("asc"); setSortDropdownOpen(false); }} 
+        className={`text-left px-2 py-1 border rounded text-xs ${sortField==="title" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+      >
+        Title (A-Z)
+      </button>
+      <button 
+        onClick={() => { setSortField("author"); setSortOrder("asc"); setSortDropdownOpen(false); }} 
+        className={`text-left px-2 py-1 border rounded text-xs ${sortField==="author" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+      >
+        Author (A-Z)
+      </button>
+      <button 
+        onClick={() => { setSortField("curator"); setSortOrder("asc"); setSortDropdownOpen(false); }} 
+        className={`text-left px-2 py-1 border rounded text-xs ${sortField==="curator" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+      >
+        Curator (A-Z)
+      </button>
+    </div>
+  )}
+</div>
 
 
-           {/* ADVANCED SEARCH */}
-       <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
-
-
-          {/* GENERAL SEARCH */}
-          <input type="text" placeholder="Search..." value={filterText} onChange={e=>setFilterText(e.target.value)} className="p-1 w-40 border text-xs rounded-lg" />
-
-          {/* ADVANCED */}
-          
+    {/* LINGUE */}
+    <div className="relative">
+      <button 
+        onClick={() => setLanguageDropdownOpen(prev => !prev)} 
+        className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+      >
+        <span>Language {filterLanguage ? `: ${languageNames[filterLanguage] || filterLanguage}` : ""}</span>
+        <svg className={`w-3 h-3 ml-2 transition-transform ${languageDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {languageDropdownOpen && (
+        <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
+          <button onClick={() => { setFilterLanguage(""); setLanguageDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white">All</button>
+          {languages.map((lang,i)=>(
+            <button key={i} onClick={()=>{setFilterLanguage(lang); setLanguageDropdownOpen(false)}} className={`text-left px-2 py-1 border rounded text-xs ${filterLanguage===lang?"bg-black text-white":"bg-white text-black hover:bg-black hover:text-white"}`}>{languageNames[lang] || lang}</button>
+          ))}
         </div>
+      )}
+    </div>
 
+    {/* EPOCH */}
+    <div className="relative">
+      <button 
+        onClick={() => setEpochDropdownOpen(prev => !prev)} 
+        className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+      >
+        <span>Epoch {filterEpoch ? `: ${epochNames[filterEpoch] || filterEpoch}` : ""}</span>
+        <svg className={`w-3 h-3 ml-2 transition-transform ${epochDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {epochDropdownOpen && (
+        <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
+          <button onClick={() => { setFilterEpoch(""); setEpochDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white">All</button>
+          {epochs.map((ep,i)=>(
+            <button key={i} onClick={()=>{ setFilterEpoch(ep); setEpochDropdownOpen(false); }} className={`text-left px-2 py-1 border rounded text-xs ${filterEpoch===ep ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}>{epochNames[ep]}</button>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {/* ADVANCED SEARCH */}
+    <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
+  </div>
+
+  {/* INPUT DI RICERCA A DESTRA */}
+  <input
+    type="text"
+    placeholder="Search..."
+    value={filterText}
+    onChange={e => setFilterText(e.target.value)}
+    className="p-1 w-40 border text-xs rounded-lg ml-auto"
+  />
+</div>
+
+       
         {/* ADVANCED PANEL */}
         {showAdvanced && (
         <div className="mt-4 p-4 border bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
@@ -473,6 +481,7 @@ function BookBrowserUI() {
             </select>
           </div>
 
+
           {/* FACSIMILES */}
           <div>
             <label className="font-semibold">Facsimiles</label>
@@ -480,6 +489,21 @@ function BookBrowserUI() {
               <option value="">All</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
+            </select>
+          </div>
+
+           {/* TOOL FILTER */}
+          <div>
+            <label className="font-semibold">Tool</label>
+            <select 
+              value={filterTool} 
+              onChange={e => setFilterTool(e.target.value)} 
+              className="w-full p-2 border rounded"
+            >
+              <option value="">All</option>
+              {tools.map((t,i) => (
+                <option key={i} value={t}>{t}</option>
+              ))}
             </select>
           </div>
 
@@ -505,148 +529,204 @@ function BookBrowserUI() {
         {/* PAGINAZIONE */}
         <div className="flex justify-center gap-2 mt-6">
           {Array.from({length: totalPages}, (_, i)=>i+1).map(n=>(
-            <button key={n} onClick={()=>setCurrentPage(n)} className={`px-3 py-1 rounded-xl shadow ${n===currentPage?"bg-[black] text-white":"bg-white text-[#010435] hover:bg-[#5b0909] hover:text-white"}`}>
+            <button key={n} onClick={()=>setCurrentPage(n)} className={`px-3 py-1 rounded-xl shadow ${n===currentPage?"bg-[black] text-white":"bg-white text-[#010435] hover:bg-[#111827] hover:text-white"}`}>
               {n}
             </button>
           ))}
         </div>
+        
 
         {/* MODALE */}
-        {selected && (
-          <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-10 bg-white border-t border-black max-h-[80vh] overflow-auto font-['Playfair Display']">
+      {selected && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-10 bg-white border-t border-black max-h-[80vh] overflow-auto font-['Playfair Display']">
+      
+          
+          {/* CLOSE BUTTON */}
+          <button 
+            className="absolute right-4 top-4 md:right-6 md:top-6 text-3xl" 
+            onClick={()=>setSelected(null)}
+          >
+            ×
+          </button>
 
-            <button className="absolute right-4 top-4 md:right-6 md:top-6 text-3xl" onClick={()=>setSelected(null)}>×</button>
+          <div className="flex flex-col md:flex-row gap-8">
 
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="hidden md:flex flex-col items-start">
-                <img src={selected.cover} alt={selected.title} className="w-[250px] h-[150px] object-cover border" />
-                <div className="flex gap-3 mt-4">
-  {selected.URL && (
-    <a href={selected.URL} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']">
-      URL
-    </a>
-  )}
+      {/* IMMAGINE E BOTTONI */}
+      <div className="flex flex-col items-start gap-4">
 
-  <button onClick={()=>setShowSchedule(prev=>!prev)} className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']">
-    Schedule
-  </button>
+        {/* COVER */}
+        <img
+          src={selected.cover}
+          alt={selected.title}
+          className="w-full md:w-[250px] h-[150px] object-cover border"
+        />
 
-  {/* NUOVO PULSANTE MAPPA */}
-{selected.institution?.lat && selected.institution?.lng && (
-  <a 
-    href={`/map.html?lat=${selected.institution.lat}&lng=${selected.institution.lng}`} 
-    className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <span className="text-sm font-medium">Map</span>
-  </a>
+        {/* BOTTONI SEMPRE VISIBILI */}
+        <div className="flex flex-wrap gap-3">
+          {selected.URL && (
+            <a 
+              href={selected.URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']"
+            >
+              URL
+            </a>
+          )}
 
+          <button 
+            onClick={()=>setShowSchedule(prev=>!prev)} 
+            className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']"
+          >
+            Schedule
+          </button>
 
-  )}
-</div>
+          {selected.institution?.lat && selected.institution?.lng && (
+            <a 
+              href={`/map.html?lat=${selected.institution.lat}&lng=${selected.institution.lng}`} 
+              className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="text-sm font-medium">Map</span>
+            </a>
+          )}
+        </div>
+      </div>
 
-              </div>
+      {/* DETTAGLI */}
+      <div className="flex flex-col flex-grow min-w-0">
+        <h2 className="text-3xl mb-2 font-['Playfair_Display']">„{selected.title}“</h2>
 
-              <div className="flex flex-col flex-grow min-w-0">
-                <h2 className="text-3xl mb-2 font-['Playfair_Display']">„{selected.title}“</h2>
+        <div className="grid grid-cols-2 gap-x-12 gap-y-2 mb-4 text-sm md:text-base">
+          <p><strong>Author</strong><br />{selected.author}</p>
+          <p><strong>Published</strong><br />{selected.date}</p>
+          <p><strong>Curator</strong><br />{selected.curator}</p>
+          <p><strong>Institution</strong><br />{selected.institution?.name}</p>
+        </div>
 
-                <div className="grid grid-cols-2 gap-x-12 gap-y-2 mb-4 text-sm md:text-base">
-                  <p><strong>Author</strong><br />{selected.author}</p>
-                  <p><strong>Published</strong><br />{selected.date}</p>
-                  <p><strong>Curator</strong><br />{selected.curator}</p>
-                  <p><strong>Institution</strong><br />{selected.institution?.name}</p>
-                </div>
-
-                {selected.branch && (
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {selected.branch.split(",").map(b=>b.trim()).map((branch,i)=>(
-                      <button key={i} onClick={()=>{setFilterBranch(branch); setSelected(null); setCurrentPage(1);}}
-                        className="px-3 py-1 border border-black rounded-xl text-sm hover:bg-black hover:text-white transition">{branch}</button>
-                    ))}
-                  </div>
-                )}
-
-               {showSchedule && (
-              <div className="border-t pt-4 space-y-4">
-                <Accordion
-                  title={
-                    <div className="flex items-center justify-between">
-                      Content
-                      <svg
-                        className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="content" ? "rotate-90" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  }
-                  open={openAccordion==="content"}
-                  onClick={() => setOpenAccordion(openAccordion==="content" ? null : "content")}
-                >
-                  <ul className="list-disc ml-5">
-                    <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
-                    <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
-                  </ul>
-                </Accordion>
-
-                <Accordion
-                  title={
-                    <div className="flex items-center justify-between">
-                      Features
-                      <svg
-                        className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="features" ? "rotate-90" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  }
-                  open={openAccordion==="features"}
-                  onClick={() => setOpenAccordion(openAccordion==="features" ? null : "features")}
-                >
-                  <ul className="list-disc ml-5">
-                    <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
-                    <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
-                    <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
-                  </ul>
-                </Accordion>
-
-                <Accordion
-                  title={
-                    <div className="flex items-center justify-between">
-                      Data & Reuse
-                      <svg
-                        className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="data" ? "rotate-90" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  }
-                  open={openAccordion==="data"}
-                  onClick={() => setOpenAccordion(openAccordion==="data" ? null : "data")}
-                >
-                  <ul className="list-disc ml-5">
-                    <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
-                    <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
-                    <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
-                  </ul>
-                </Accordion>
-              </div>
-            )}
-
-
-              </div>
-            </div>
+        {selected.branch && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {selected.branch.split(",").map(b=>b.trim()).map((branch,i)=>(
+              <button key={i} onClick={()=>{setFilterBranch(branch); setSelected(null); setCurrentPage(1);}}
+                className="px-3 py-1 border border-black rounded-xl text-sm hover:bg-black hover:text-white transition">{branch}</button>
+            ))}
           </div>
         )}
+
+        {/* SCHEDULE / ACCORDION */}
+        {showSchedule && (
+          <div className="border-t pt-4 space-y-4">
+
+            <Accordion
+              title={
+                <div className="flex items-center justify-between">
+                  Content
+                  <svg
+                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="content" ? "rotate-90" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              }
+              open={openAccordion==="content"}
+              onClick={() => setOpenAccordion(openAccordion==="content" ? null : "content")}
+            >
+              <ul className="list-disc ml-5">
+                <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
+                <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
+              </ul>
+            </Accordion>
+
+            <Accordion
+              title={
+                <div className="flex items-center justify-between">
+                  Features
+                  <svg
+                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="features" ? "rotate-90" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              }
+              open={openAccordion==="features"}
+              onClick={() => setOpenAccordion(openAccordion==="features" ? null : "features")}
+            >
+              <ul className="list-disc ml-5">
+                <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
+                <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
+                <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
+              </ul>
+            </Accordion>
+
+            <Accordion
+              title={
+                <div className="flex items-center justify-between">
+                  Data & Reuse
+                  <svg
+                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="data" ? "rotate-90" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              }
+              open={openAccordion==="data"}
+              onClick={() => setOpenAccordion(openAccordion==="data" ? null : "data")}
+            >
+              <ul className="list-disc ml-5">
+                <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
+                <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
+                <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
+              </ul>
+            </Accordion>
+
+           <Accordion
+              title={
+                <div className="flex items-center justify-between">
+                  Tool
+                  <svg
+                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="tool" ? "rotate-90" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              }
+              open={openAccordion==="tool"}
+              onClick={() => setOpenAccordion(openAccordion==="tool" ? null : "tool")}
+            >
+              <ul className="list-disc ml-5">
+                {selected.tool 
+                  ? selected.tool.split(",").map((t,i) => (
+                      <li key={i}>{t.trim()}</li>
+                    ))
+                  : <li>N/A</li>
+                }
+              </ul>
+            </Accordion>
+
+
+
+
+          </div>
+        )}
+
+      </div>
+
+    </div>
+  </div>
+)}
 
       </main>
     </div>
@@ -658,4 +738,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(<BookBrowserUI />);
 
 </script>
 </body>
-</html>
+</html>  

@@ -22,91 +22,79 @@
 
   <div id="navbar-root"></div>
   <div id="main-root"></div>
-  <footer class="bg-[#111827] text-white py-10 mt-20">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <!-- Contenuto -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-      <!-- Logo e descrizione -->
-      <div>
-        <h2 class="text-2xl font-semibold mb-3">PHIDE</h2>
-        <p class="text-gray-300">
-          Digital catalogue of scholarly editions of philosophical texts.
-          Explore projects, maps, and schedules in a single platform.
-        </p>
-      </div>
-
-      <!-- Contatti -->
-      <div>
-        <h3 class="text-xl font-semibold mb-3">Contact</h3>
-        <p class="text-gray-300 mb-1">
-          Email:
-          <a href="mailto:info@phide.com" class="hover:text-white underline">
-            info@phide.com
-          </a>
-        </p>
-        <p class="text-gray-300 mb-1">
-          Phone:
-          <a href="tel:+390000000000" class="hover:text-white underline">
-            +39 000 000 0000
-          </a>
-        </p>
-        <p class="text-gray-300">
-          Address: Via Filosofia 1, 00100 Roma, Italy
-        </p>
-      </div>
-
-      <!-- Spazio futuro (opzionale) -->
-      <div>
-        <!-- Qui puoi aggiungere link, social, ecc. -->
-      </div>
-
-    </div>
-
-    <!-- Separatore -->
-    <hr class="border-gray-700 my-8">
-
-    <!-- Copyright -->
-    <div class="text-center text-gray-400 text-sm">
-      &copy; 2025 PHIDE. All rights reserved.
-    </div>
-
+ <!-- FOOTER -->
+<footer class="bg-[#111827] text-gray-400 py-4 mt-20">
+  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+    <span class="text-white font-semibold">PHIDE</span>
+    <span class="mx-2">·</span>
+    <a
+      href="mailto:chiara.martina3@studio.unibo.it"
+      class="hover:text-white underline"
+    >
+      chiara.martina3@studio.unibo.it
+    </a>
+    <span class="mx-2">·</span>
+    <span>&copy; 2026 CC BY-SA 4.0</span>
   </div>
 </footer>
 
 
+
+
+
+<!-- React Navbar Script -->
 <script type="text/babel">
-
-
-/* ================= NAVBAR ================= */
 function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   return (
-    <nav class="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-[2000] font-['Inter']">
+    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-          <a href="index.html" className="text-xl font-semibold text-[#010435] font-['Playfair Display']">PHIDE</a>
 
-          <div className="hidden md:flex space-x-6 items-center font-['Playfair Display']">
+          {/* Logo */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">
+            PHIDE
+          </a>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-6 items-center">
+
+            {/* Dropdown */}
             <div className="relative">
-              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5b0909]">
-                Catalogue
-              </button>
-              {dropdownOpen && (
-                <div className="absolute mt-2 w-48 bg-white border rounded shadow">
-                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
-                </div>
-              )}
-            </div>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
+            >
+              Browse
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-            <a href="/map.html" className="font-medium hover:text-[#5b0909]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#5b0909]">Documentation</a>
+            {dropdownOpen && (
+              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Catalogue
+                </a>
+                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                  Schedule
+                </a>
+              </div>
+            )}
           </div>
 
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
+
+            <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+          </div>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden"
+          >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -118,9 +106,11 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2 font-['Playfair Display']">
-          <a href="/catalogue.html" className="block">Catalogue</a>
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="" className="block">Browse</a>
+           <a href="/catalogue-period.html" className="block">Catalogue</a>
           <a href="/scheda.html" className="block">Scheda</a>
           <a href="/map.html" className="block">Map</a>
           <a href="/documentation.html" className="block">Documentation</a>
@@ -128,8 +118,7 @@ function Navbar() {
       )}
     </nav>
   );
-}
-
+  }
 
 /* ================= MAIN ================= */
 function MainContent() {

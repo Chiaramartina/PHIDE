@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Playfair Display', serif;
+      background-color: #EFF4FA;
+      color: #010435;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; }
+    a:hover { color: #1F426A; }
+
+    main {
+      flex: 1;
+      margin-top: 64px;
+    }
+
+    section {
+      padding: 2rem;
+      margin-bottom: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      scroll-margin-top: 96px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #e2e8f0;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar-root"></div>
+
+<!-- LAYOUT -->
+<main class="grid grid-cols-1 md:grid-cols-[260px_1fr] max-w-7xl mx-auto w-full px-4 gap-8">
+
+  <!-- SIDEBAR -->
+  <aside class="hidden md:block sticky top-24 self-start bg-[#EFF4FA] border-r pr-6">
+    <h2 class="text-xl font-semibold mb-6">Documentation</h2>
+    <ul class="space-y-4">
+      <li><a href="#about">About the Project</a></li>
+      <li><a href="#navigation">Navigation Structure</a></li>
+      <li><a href="#database">Database Structure</a></li>
+      <li><a href="#criteria">Selection Criteria</a></li>
+      <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="text-2xl font-semibold mb-4">About the Project</h2>
+      <p class="mb-4">
+        This documentation provides the methodological framework underlying
+        <strong>PHIDE (Philosophical Digital Edition Catalogue)</strong>.
+        PHIDE aims to offer a comprehensive overview of the current landscape of
+        digital scholarly editions in philosophy, highlighting their features and
+        contributions to the field.
+      </p>
+      <p class="mb-4">
+        The primary goal of PHIDE is to give scholars and researchers a structured
+        entry point to discover digital editions, facilitating their integration
+        into various stages of the scholarly workflow.
+      </p>
+      <p class="mb-4">
+        PHIDE was originally conceived as part of my thesis project. The current
+        version of PHIDE benefits from a data model aligned with
+        <a href="https://doi.org/10.1038/sdata.2016.18" target="_blank" rel="noopener noreferrer" class="underline">
+          FAIR principles
+        </a>
+        for digital editions.
+      </p>
+      <p>
+        Through this catalogue, researchers can explore the ecosystem of
+        philosophical digital editions, compare editorial practices, and identify
+        tools and methodologies relevant to their own scholarly projects.
+      </p>
+    </section>
+
+    <!-- NAVIGATION -->
+    <section id="navigation">
+      <h2 class="text-2xl font-semibold mb-4">Navigation Structure</h2>
+      <p class="mb-4">
+        The main navigation bar includes the <strong>Browse</strong> menu, which
+        provides access to two sections: <strong>Schedule</strong> and
+        <strong>Catalogue</strong>.
+      </p>
+
+      <h3 class="text-xl font-semibold mt-6 mb-2">Schedule</h3>
+      <p class="mb-4">
+        The Schedule section provides a tabular overview of the digital scholarly
+        editions included in PHIDE. It is structured as a dataset that can be
+        browsed, filtered, and exported in CSV, JSON, and Excel formats.
+      </p>
+
+      <h3 class="text-xl font-semibold mt-6 mb-2">Catalogue</h3>
+      <p class="mb-4">
+        The catalogue is organized as a searchable database accessible through
+        filters and descriptive records. Each record represents a digital scholarly
+        resource.
+      </p>
+      <p class="mb-2">Main filters include:</p>
+      <ul class="list-disc list-inside mb-4">
+        <li>Sort: ordering of results (by title, author, curator)</li>
+        <li>Language: language of the resource</li>
+        <li>Epoch: historical period</li>
+        <li>
+          Advanced Search: combined search criteria such as index, glossary,
+          facsimiles, and tools.
+        </li>
+      </ul>
+      <p>
+        Each record may include direct links to external resources (the
+        website of the digital edition), the Schedule entry, and the geographical
+        localization of the project via the interactive map.
+      </p>
+    </section>
+
+    <!-- DATABASE -->
+<section id="database">
+  <h2 class="text-2xl font-semibold mb-4">Database Structure</h2>
+  <p class="mb-4">
+    Each record represents a digital scholarly edition. The structure of the
+    main fields is outlined below.
+  </p>
+
+  <!-- Contenitore scrollabile -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ID</td><td>Integer</td><td>Unique identifier of the edition.</td></tr>
+        <tr><td>title</td><td>String</td><td>Title of the edition.</td></tr>
+        <tr><td>author_surname</td><td>String</td><td>Author’s surname.</td></tr>
+        <tr><td>author_name</td><td>String</td><td>Author’s first name.</td></tr>
+        <tr><td>curator_surname</td><td>String</td><td>Curator’s surname.</td></tr>
+        <tr><td>curator_name</td><td>String</td><td>Curator’s first name.</td></tr>
+        <tr><td>institution_name</td><td>String</td><td>Name of the hosting institution.</td></tr>
+        <tr><td>institution_lat</td><td>Float</td><td>Latitude of the institution.</td></tr>
+        <tr><td>institution_lng</td><td>Float</td><td>Longitude of the institution.</td></tr>
+        <tr><td>located_at</td><td>String</td><td>City.</td></tr>
+        <tr><td>location_geonames_id</td><td>Integer</td><td>GeoNames ID.</td></tr>
+        <tr><td>location_lat</td><td>Float</td><td>Latitude of the location.</td></tr>
+        <tr><td>location_lng</td><td>Float</td><td>Longitude of the location.</td></tr>
+        <tr><td>part_of</td><td>String</td><td>Country of affiliation.</td></tr>
+        <tr><td>institution_website</td><td>URL</td><td>Institution’s website.</td></tr>
+        <tr><td>date</td><td>Integer</td><td>Year of publication.</td></tr>
+        <tr><td>language</td><td>String</td><td>Main language.</td></tr>
+        <tr><td>URL</td><td>URL</td><td>Direct link to the digital edition.</td></tr>
+        <tr><td>epoch</td><td>String</td><td>Historical period.</td></tr>
+        <tr><td>branch</td><td>String</td><td>Philosophical branch.</td></tr>
+        <tr><td>writing_support</td><td>String</td><td>Writing medium.</td></tr>
+        <tr><td>facsimiles</td><td>Boolean</td><td>Includes digital facsimiles.</td></tr>
+        <tr><td>advanced_search</td><td>Boolean</td><td>Supports advanced search.</td></tr>
+        <tr><td>index</td><td>Boolean</td><td>Digital index present.</td></tr>
+        <tr><td>glossary</td><td>Boolean</td><td>Digital glossary present.</td></tr>
+        <tr><td>encoding</td><td>String</td><td>Encoding format.</td></tr>
+        <tr><td>download</td><td>Boolean</td><td>Downloadable material.</td></tr>
+        <tr><td>creative_commons_license</td><td>String</td><td>Creative Commons license.</td></tr>
+        <tr><td>tool</td><td>String</td><td>DSE digital tool</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+    <!-- CRITERIA -->
+    <section id="criteria">
+      <h2 class="text-2xl font-semibold mb-4">Selection Criteria</h2>
+      <p class="mb-4">
+        The selection process was initially guided by reliable and up-to-date sources, including 
+        <a href="https://www.digitale-edition.de/exist/apps/editions-browser/index.html" target="_blank" rel="noopener noreferrer" class="underline">Patrick Sahle’s Digital Editions Browser</a> (last updated 2026), 
+        the <a href="https://dig-ed-cat.acdh.oeaw.ac.at/index.html" target="_blank" rel="noopener noreferrer" class="underline">Catalogue of Digital Editions</a> by Greta Franzini (last updated 2022), 
+        and <a href="https://ride.i-d-e.de/" target="_blank" rel="noopener noreferrer" class="underline">RIDE: A Review Journal for Scholarly Digital Editions and Resources</a>.
+      </p>
+      <p class="mb-4">
+        PHIDE follows the approach proposed by Patrick Sahle for cataloguing digital
+        scholarly editions, focusing on the editions themselves and excluding
+        digital libraries, pedagogical resources, and projects that do not aim to
+        produce scholarly editions.
+      </p>
+      <p>
+        Accessibility represents a fundamental criterion: all editions included
+        in PHIDE must be available online, preferably with persistent links and
+        structured metadata.
+      </p>
+    </section>
+
+    <!-- ACKNOWLEDGEMENTS -->
+    <section id="acknowledgements">
+      <h2 class="text-2xl font-semibold mb-4">Acknowledgements</h2>
+      <p>
+        I would like to thank Paola Italia for her guidance and valuable directions
+        throughout this work.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-[#111827] text-gray-400 py-4 mt-20">
+  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+    <span class="text-white font-semibold">PHIDE</span>
+    <span class="mx-2">·</span>
+    <a
+      href="mailto:chiara.martina3@studio.unibo.it"
+      class="hover:text-white underline"
+    >
+      chiara.martina3@studio.unibo.it
+    </a>
+    <span class="mx-2">·</span>
+    <span>&copy; 2026 CC BY-SA 4.0</span>
+  </div>
+</footer>
+
+
+
+<!-- React Navbar Script -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#EFF4FA] border-b border-black font-['Inter'] shadow">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16 items-center">
+
+          <a href="/index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
+
+          <div className="hidden md:flex space-x-6 items-center">
+            <div className="relative">
+              <button onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-1 font-medium hover:text-[#1F426A]">
+                Browse
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                  <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
+                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                </div>
+              )}
+            </div>
+            <a href="/map.html" className="font-medium hover:text-[#1F426A]">Map</a>
+            <a href="/documentation.html" className="font-medium hover:text-[#1F426A]">Documentation</a>
+          </div>
+
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
+          <a href="/documentation.html" className="block">Documentation</a>
+          <a href="/catalogue-period.html" className="block">Catalogue</a>
+          <a href="/scheda.html" className="block">Schedule</a>
+          <a href="/map.html" className="block">Map</a>
+        </div>
+      )}
+    </nav>
+  );
+}
+ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+</script>
+
+
+</body>
+</html>
