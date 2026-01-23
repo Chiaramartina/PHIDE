@@ -270,7 +270,7 @@ function BookBrowserUI() {
   matchSearch &&
   (filterLanguage ? bookLanguages.includes(filterLanguage) : true) &&
   (filterE ? bookEpoch === filterE : true) &&
-  (filterBranch ? b.branch?.toLowerCase().includes(filterBranch.toLowerCase()) : true) &&
+  (filterBranch ? b.branch?.split(",").map(s => s.trim().toLowerCase()).includes(filterBranch.toLowerCase()) : true) &&
   (filterInstitution ? b.institution?.name?.toLowerCase().includes(filterInstitution.toLowerCase()) : true) &&
   (filterAdvancedSearch ? b.advanced_search === filterAdvancedSearch : true) &&
   (filterIndex ? b.index === filterIndex : true) &&
