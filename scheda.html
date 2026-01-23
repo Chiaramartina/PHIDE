@@ -3,39 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Schedule</title>
-  
-    <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- jQuery & DataTables -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-
-  <!-- JSZip per Excel -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <!-- PapaParse per CSV -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
-  <!-- React -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
-
-  <!-- REACT NAVBAR -->
   <div id="navbar-root"></div>
-
-  <!-- CONTENUTO -->
   <main class="max-w-7xl mx-auto px-4 py-10">
 
-    <!-- HERO -->
     <section class="text-center mb-10">
       <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
       <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">SCHEDULE</h1>
@@ -92,8 +78,6 @@
       background-color: #e2e8f0;
     }
 
-    /* ===== BOTTONI EXPORT (CSV / EXCEL / JSON) ===== */
-
     table.dataTable thead input {
       width: 100%;
       box-sizing: border-box;
@@ -101,7 +85,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    /* ===== BOTTONI EXPORT ===== */
+
     .dt-button {
       background-color: #1F426A !important;
       color: #ffffff !important;
@@ -120,7 +104,6 @@
       outline: none !important;
     }
 
-    /* ===== PAGINAZIONE BASE ===== */
     .dataTables_paginate .paginate_button {
       background: #1F426A !important;
       color: #ffffff !important;
@@ -131,14 +114,12 @@
       box-shadow: none !important;
     }
 
-    /* ===== HOVER NUMERI (1,2,3...) ===== */
     .dataTables_paginate .paginate_button:not(.current):not(.disabled):hover {
       background: #ffffff !important;
       color: #1F426A !important;
       border: 2px solid #1F426A !important;
     }
 
-    /* ===== PAGINA CORRENTE ===== */
     .dataTables_paginate .paginate_button.current {
       background: #ffffff !important;
       color: #1F426A !important;
@@ -146,7 +127,6 @@
       font-weight: 700;
     }
 
-    /* ===== DISABILITATI ===== */
     .dataTables_paginate .paginate_button.disabled {
       background: #cccccc !important;
       color: #666666 !important;
@@ -415,13 +395,7 @@ $(document).ready(function(){
     `;
   }
 },
-
-
-
-
-  
 ],
-
         orderCellsTop: true,
         fixedHeader: true
       });

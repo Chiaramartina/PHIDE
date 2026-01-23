@@ -15,13 +15,9 @@
 </head>
 
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
-
-  <!-- REACT NAVBAR -->
   <div id="navbar-root"></div>
-
   <!-- HERO -->
   <section class="hero" style="min-height: 100vh; padding-top: 80px;">
-    
     <div class="hero-content">
       <h1>
         PHIDE: Philosophical<br>
@@ -44,33 +40,28 @@
     <div class="container-fluid px-md-5">
       <div class="row">
         <div class="col-12 col-lg-10">
-<h4 class="display-main">
-  Development of PHIDE began in 2026, with the goal of mapping the landscape of digital scholarly editions in philosophy and delivering an interactive, user-friendly platform. Students and researchers can browse, search, filter, and organize digital editions by language, historical period, tools and other research interests.
-</h4>          </h4>
+        <h4 class="display-main">
+          Development of PHIDE began in 2026, with the goal of mapping the landscape of digital scholarly editions in philosophy and delivering an interactive, user-friendly platform. Students and researchers can browse, search, filter, and organize digital editions by language, historical period, tools and other research interests.
+        </h4>        
         </div>
       </div>
-
       <div class="row mt-5 align-items-start" style="font-family: 'Playfair Display', serif;">
         <div class="col-12 col-md-6">
           <div class="counter-wrapper">
             <span id="counter">0</span><span class="counter-label">editions</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- THIRD SECTION – EXPLORE BY MACRO THEME -->
+  <!-- THIRD SECTION -->
 <section class="py-24 bg-[#EFF4FA] text-center full-screen-section">
   <h2 class="text-4xl mb-12">Explore by macro theme</h2>
-
   <div class="branch-carousel-wrapper">
     <button class="carousel-btn left" onclick="prevBranch()">‹</button>
-
     <div class="branch-carousel" id="branch-carousel">
     </div>
-
     <button class="carousel-btn right" onclick="nextBranch()">›</button>
   </div>
 </section>
@@ -80,10 +71,7 @@
   <div class="max-w-7xl mx-auto px-6 text-center text-sm">
     <span class="text-white font-semibold">PHIDE</span>
     <span class="mx-2">·</span>
-    <a
-      href="mailto:chiara.martina3@studio.unibo.it"
-      class="hover:text-white underline"
-    >
+    <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline">
       chiara.martina3@studio.unibo.it
     </a>
     <span class="mx-2">·</span>
@@ -91,33 +79,27 @@
   </div>
 </footer>
 
-
-
 <!-- Counter -->
 <script>
   const counterElement = document.getElementById("counter");
   const maxCount = 59;
   let counter = 0;
   let countingStarted = false; // evita di ripartire più volte
-
   const counterSection = document.querySelector(".stats-section");
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !countingStarted) {
         countingStarted = true;
-
         const interval = setInterval(() => {
           counter++;
           counterElement.textContent = counter;
-
           if (counter >= maxCount) {
             clearInterval(interval);
           }
-        }, 50); // velocità contatore
+        }, 50); 
       }
     });
-  }, { threshold: 0.5 }); // il contatore parte quando almeno il 50% della sezione è visibile
+  }, { threshold: 0.5 }); 
 
   observer.observe(counterSection);
 </script>
@@ -128,32 +110,26 @@
 function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
-
   return (
     <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-
           {/* Logo */}
           <a href="index.html" className="text-xl font-semibold text-[#010435]">
             PHIDE
           </a>
-
           {/* Desktop menu */}
           <div className="hidden md:flex space-x-6 items-center">
-
             {/* Dropdown */}
             <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
-            >
+              className="flex items-center gap-1 font-medium hover:text-[#5A7796]">
               Browse
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-
             {dropdownOpen && (
               <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
                 <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
@@ -165,12 +141,9 @@ function Navbar() {
               </div>
             )}
           </div>
-
-
             <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
             <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
-
           {/* Mobile button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}

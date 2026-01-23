@@ -4,18 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Catalogue</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
 
 <div id="root"></div>
+
 <!-- FOOTER -->
 <footer class="bg-[#111827] text-gray-400 py-4 mt-20">
   <div class="max-w-7xl mx-auto px-6 text-center text-sm">
@@ -31,8 +30,6 @@
     <span>&copy; 2026 CC BY-SA 4.0</span>
   </div>
 </footer>
-
-
 
 <script type="text/babel">
 function Navbar() {
@@ -75,7 +72,6 @@ function Navbar() {
               </div>
             )}
           </div>
-
 
             <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
             <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
@@ -339,8 +335,6 @@ function BookBrowserUI() {
   </div>
 )}
 
-
-
       <main className="max-w-7xl mx-auto px-4 mt-8">
 
        <div className="flex flex-wrap gap-2 mb-6 items-center w-full">
@@ -432,19 +426,19 @@ function BookBrowserUI() {
       )}
     </div>
 
-    {/* ADVANCED SEARCH */}
-    <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
-  </div>
+        {/* ADVANCED SEARCH */}
+        <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
+      </div>
 
-  {/* INPUT DI RICERCA A DESTRA */}
-  <input
-    type="text"
-    placeholder="Search..."
-    value={filterText}
-    onChange={e => setFilterText(e.target.value)}
-    className="p-1 w-40 border text-xs rounded-lg ml-auto"
-  />
-</div>
+      {/* INPUT DI RICERCA A DESTRA */}
+      <input
+        type="text"
+        placeholder="Search..."
+        value={filterText}
+        onChange={e => setFilterText(e.target.value)}
+        className="p-1 w-40 border text-xs rounded-lg ml-auto"
+      />
+    </div>
 
        
         {/* ADVANCED PANEL */}

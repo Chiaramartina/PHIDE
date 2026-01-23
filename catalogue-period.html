@@ -4,24 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Catalogue</title>
-
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-
-  <!-- React -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
-
-
   <div id="navbar-root"></div>
   <div id="main-root"></div>
+
  <!-- FOOTER -->
 <footer class="bg-[#111827] text-gray-400 py-4 mt-20">
   <div class="max-w-7xl mx-auto px-6 text-center text-sm">
@@ -37,10 +30,6 @@
     <span>&copy; 2026 CC BY-SA 4.0</span>
   </div>
 </footer>
-
-
-
-
 
 <!-- React Navbar Script -->
 <script type="text/babel">
@@ -206,8 +195,6 @@ function MainContent() {
   );
 }
 
-
-/* ================= RENDER ================= */
 ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
 ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
 
