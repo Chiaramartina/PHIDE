@@ -168,7 +168,7 @@ body::before {
 /* Stili per la Seconda Sezione */
 .stats-section {
   padding: 100px 0;
-  background: url("/second.png") no-repeat center center; /* immagine */
+  background: url("second.png") no-repeat center center; /* immagine */
   background-size: cover;        /* riempie tutto lo schermo */
   background-position: center;
   background-repeat: no-repeat;

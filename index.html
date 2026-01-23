@@ -132,17 +132,17 @@ function Navbar() {
             </button>
             {dropdownOpen && (
               <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
                   Catalogue
                 </a>
-                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">
                   Schedule
                 </a>
               </div>
             )}
           </div>
-            <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
           {/* Mobile button */}
           <button
@@ -164,10 +164,10 @@ function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
           <a href="" className="block">Browse</a>
-           <a href="/catalogue-period.html" className="block">Catalogue</a>
-          <a href="/scheda.html" className="block">Scheda</a>
-          <a href="/map.html" className="block">Map</a>
-          <a href="/documentation.html" className="block">Documentation</a>
+           <a href="catalogue-period.html" className="block">Catalogue</a>
+          <a href="scheda.html" className="block">Scheda</a>
+          <a href="map.html" className="block">Map</a>
+          <a href="documentation.html" className="block">Documentation</a>
         </div>
       )}
     </nav>
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let branches = [];
   let currentIndex = 0;
 
-  fetch("data/list_json.json")
+  fetch(".data/list_json.json")
     .then(res => {
       if (!res.ok) throw new Error("JSON non trovato");
       return res.json();

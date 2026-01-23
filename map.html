@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let targetMarker = null;
   const tol = 0.0001;
 
-  fetch('/data/list_json.json')
+  fetch('./data/list_json.json')
     .then(response => response.json())
     .then(data => {
       data.forEach(item => {
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     maxZoom: 18,
   }).addTo(map);
 
-  fetch('/data/list_json.json')
+  fetch('./data/list_json.json')
     .then(response => response.json())
     .then(data => {
       let targetMarker = null;
@@ -197,13 +197,13 @@ document.addEventListener("DOMContentLoaded", () => {
                   </button>
                   {dropdownOpen && (
                     <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                      <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
-                      <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                      <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
+                      <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
                     </div>
                   )}
                 </div>
-                <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-                <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+                <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+                <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
               </div>
 
               <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
@@ -220,10 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
           {mobileOpen && (
             <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
               <a href="" className="block">Browse</a>
-              <a href="/catalogue-period.html" className="block">Catalogue</a>
-              <a href="/scheda.html" className="block">Scheda</a>
-              <a href="/map.html" className="block">Map</a>
-              <a href="/documentation.html" className="block">Documentation</a>
+              <a href="catalogue-period.html" className="block">Catalogue</a>
+              <a href="scheda.html" className="block">Scheda</a>
+              <a href="map.html" className="block">Map</a>
+              <a href="documentation.html" className="block">Documentation</a>
             </div>
           )}
         </nav>

@@ -189,7 +189,7 @@ function BookBrowserUI() {
   }, []);
 
   React.useEffect(() => {
-    fetch("/data/list_json.json")
+    fetch("./data/list_json.json")
       .then(res => res.json())
       .then(data => {
         const map = new Map();
@@ -225,7 +225,7 @@ function BookBrowserUI() {
             download: b.download,
             creative_commons_license: b.creative_commons_license,
             tool: b.tool,
-            cover: b.cover || "/covers/default.jpg"
+            cover: b.cover || "covers/default.jpg"
           });
 
           } else {

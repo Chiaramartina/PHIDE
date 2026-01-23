@@ -267,7 +267,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
 
-          <a href="/index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
 
           <div className="hidden md:flex space-x-6 items-center">
             <div className="relative">
@@ -280,13 +280,13 @@ function Navbar() {
               </button>
               {dropdownOpen && (
                 <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                  <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
-                  <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                  <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
+                  <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
                 </div>
               )}
             </div>
-            <a href="/map.html" className="font-medium hover:text-[#1F426A]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#1F426A]">Documentation</a>
+            <a href="map.html" className="font-medium hover:text-[#1F426A]">Map</a>
+            <a href="documentation.html" className="font-medium hover:text-[#1F426A]">Documentation</a>
           </div>
 
           <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
@@ -302,10 +302,10 @@ function Navbar() {
       </div>
       {mobileOpen && (
         <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="/documentation.html" className="block">Documentation</a>
-          <a href="/catalogue-period.html" className="block">Catalogue</a>
-          <a href="/scheda.html" className="block">Schedule</a>
-          <a href="/map.html" className="block">Map</a>
+          <a href="documentation.html" className="block">Documentation</a>
+          <a href="catalogue-period.html" className="block">Catalogue</a>
+          <a href="scheda.html" className="block">Schedule</a>
+          <a href="map.html" className="block">Map</a>
         </div>
       )}
     </nav>

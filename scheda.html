@@ -234,7 +234,7 @@ function Navbar() {
 
             {dropdownOpen && (
               <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="/catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
                   Catalogue
                 </a>
                 <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
@@ -245,8 +245,8 @@ function Navbar() {
           </div>
 
 
-            <a href="/map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="/documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
+            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
 
           {/* Mobile button */}
@@ -269,10 +269,10 @@ function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
           <a href="" className="block">Browse</a>
-           <a href="/catalogue-period.html" className="block">Catalogue</a>
-          <a href="/scheda.html" className="block">Scheda</a>
-          <a href="/map.html" className="block">Map</a>
-          <a href="/documentation.html" className="block">Documentation</a>
+           <a href="catalogue-period.html" className="block">Catalogue</a>
+          <a href="scheda.html" className="block">Scheda</a>
+          <a href="map.html" className="block">Map</a>
+          <a href="documentation.html" className="block">Documentation</a>
         </div>
       )}
     </nav>
@@ -286,7 +286,7 @@ function Navbar() {
 <!-- DataTables Script -->
 <script>
 $(document).ready(function(){
-  fetch('/data/list.csv')
+  fetch('./data/list.csv')
     .then(response => response.text())
     .then(csv => {
       const parsed = Papa.parse(csv, { header:true, skipEmptyLines:true });
@@ -301,7 +301,7 @@ $(document).ready(function(){
           {
             text: 'CSV',
             action: function ( e, dt, node, config ) {
-              fetch('/data/list.csv')
+              fetch('./data/list.csv')
                 .then(resp => resp.blob())
                 .then(blob => {
                   const url = window.URL.createObjectURL(blob);
@@ -317,7 +317,7 @@ $(document).ready(function(){
           {
             text: 'EXCEL',
             action: function ( e, dt, node, config ) {
-              fetch('/data/list_ex.xlsx')
+              fetch('./data/list_ex.xlsx')
                 .then(resp => resp.blob())
                 .then(blob => {
                   const url = window.URL.createObjectURL(blob);
