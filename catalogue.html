@@ -140,6 +140,11 @@ function BookBrowserUI() {
   const [languageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
   const [sortDropdownOpen, setSortDropdownOpen] = React.useState(false);
 
+  const [filterAuthor, setFilterAuthor] = React.useState("");
+  const [authors, setAuthors] = React.useState([]);
+  const [authorDropdownOpen, setAuthorDropdownOpen] = React.useState(false);
+
+
   /* ================= FOR ADVANCED SEARCH ================= */
   const [filterAdvancedSearch, setFilterAdvancedSearch] = React.useState("");
   const [filterIndex, setFilterIndex] = React.useState("");
@@ -152,6 +157,28 @@ function BookBrowserUI() {
   const [tools, setTools] = React.useState([]);
 
 
+  const [highlightAuthor, setHighlightAuthor] = React.useState(false);
+
+  const [highlightEpoch, setHighlightEpoch] = React.useState(false);
+
+React.useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("highlight") === "epoch") {
+    setHighlightEpoch(true); // evidenzia blu
+    params.delete("highlight");
+    window.history.replaceState({}, "", window.location.pathname); // rimuove ?highlight dall'URL
+  }
+}, []);
+
+
+React.useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("highlight") === "author") {
+    setHighlightAuthor(true); // evidenzia blu
+    params.delete("highlight");
+    window.history.replaceState({}, "", window.location.pathname); // rimuove il ?highlight dall'URL
+  }
+}, []);
 
 
   const languageNames = {
@@ -200,7 +227,10 @@ function BookBrowserUI() {
             map.set(key, {
             id: b.ID,
             title: b.title?.trim(),
-            author: `${b.author_surname || ""} ${b.author_name || ""}`.trim(),
+            author: [b.author_surname?.replace(",", "").trim(), b.author_name?.trim()]
+            .filter(Boolean)
+            .join(", "),
+
             curators: curatorFullName ? [curatorFullName] : [],
             date: b.date,
             language: b.language?.replace(/"/g, ""),
@@ -240,6 +270,15 @@ function BookBrowserUI() {
         const langs = books.flatMap(b => b.language?.split(/,|;/).map(l => l.trim()) || []);
         setLanguages([...new Set(langs)].sort());
 
+        const authorSet = new Set();
+        books.forEach(b => {
+          if (b.author) authorSet.add(b.author);
+        });
+        setAuthors([...authorSet].sort());
+        
+      
+
+
         const toolSet = new Set();
         books.forEach(b => {
           if (b.tool) {
@@ -276,7 +315,9 @@ function BookBrowserUI() {
   (filterIndex ? b.index === filterIndex : true) &&
   (filterGlossary ? b.glossary === filterGlossary : true) &&
   (filterFacsimiles ? b.facsimiles === filterFacsimiles : true) &&
+  (filterAuthor ? b.author === filterAuthor : true) &&
   (filterTool ? b.tool?.split(",").map(t => t.trim()).includes(filterTool) : true)
+  
 
 );
 
@@ -407,24 +448,83 @@ function BookBrowserUI() {
 
     {/* EPOCH */}
     <div className="relative">
+  <button 
+    onClick={() => {
+      setEpochDropdownOpen(prev => !prev); // apre/chiude la dropdown
+      setHighlightEpoch(false);           // rimuove il blu appena cliccato
+    }} 
+    className={`px-3 py-1 border border-black rounded-lg text-xs flex items-center justify-between w-40
+      ${highlightEpoch ? "bg-[#111827] text-white" : "bg-white text-black"}`
+    }
+  >
+    <span>Epoch {filterEpoch ? `: ${epochNames[filterEpoch] || filterEpoch}` : ""}</span>
+    <svg className={`w-3 h-3 ml-2 transition-transform ${epochDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  {epochDropdownOpen && (
+    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
       <button 
-        onClick={() => setEpochDropdownOpen(prev => !prev)} 
-        className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+        onClick={() => { setFilterEpoch(""); setEpochDropdownOpen(false); }} 
+        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
       >
-        <span>Epoch {filterEpoch ? `: ${epochNames[filterEpoch] || filterEpoch}` : ""}</span>
-        <svg className={`w-3 h-3 ml-2 transition-transform ${epochDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        All
       </button>
-      {epochDropdownOpen && (
-        <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
-          <button onClick={() => { setFilterEpoch(""); setEpochDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white">All</button>
-          {epochs.map((ep,i)=>(
-            <button key={i} onClick={()=>{ setFilterEpoch(ep); setEpochDropdownOpen(false); }} className={`text-left px-2 py-1 border rounded text-xs ${filterEpoch===ep ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}>{epochNames[ep]}</button>
+      {epochs.map((ep,i)=>(
+        <button key={i} 
+          onClick={()=>{ setFilterEpoch(ep); setEpochDropdownOpen(false); }}
+          className={`text-left px-2 py-1 border rounded text-xs ${filterEpoch===ep ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+        >
+          {epochNames[ep]}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+
+    {/* AUTHOR */}
+    <div className="relative">
+    <button  onClick={() => {
+      setAuthorDropdownOpen(prev => !prev); // apre/chiude la dropdown
+      setHighlightAuthor(false);           // rimuove il blu appena cliccato
+    }} 
+    className={`px-3 py-1 border border-black rounded-lg text-xs flex items-center justify-between w-40
+      ${highlightAuthor ? "bg-[#111827] text-white" : "bg-white text-black"}`
+    }
+  >
+    <span>{filterAuthor || "Author"} </span>
+      <svg className={`w-3 h-3 ml-2 transition-transform ${authorDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+
+
+      {authorDropdownOpen && (
+        <div className="absolute mt-1 w-48 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
+          <button 
+            onClick={() => { setFilterAuthor(""); setAuthorDropdownOpen(false); }} 
+            className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
+          >
+            All
+          </button>
+
+          {authors.map((a,i)=>(
+            <button 
+              key={i} 
+              onClick={()=>{ setFilterAuthor(a); setAuthorDropdownOpen(false); }}
+              className={`text-left px-2 py-1 border rounded text-xs ${filterAuthor===a ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+            >
+              {a}
+            </button>
           ))}
         </div>
+
+        
       )}
     </div>
+
 
         {/* ADVANCED SEARCH */}
         <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
@@ -576,15 +676,16 @@ function BookBrowserUI() {
           </button>
 
           {selected.institution?.lat && selected.institution?.lng && (
-            <a 
-              href={`map.html?lat=${selected.institution.lat}&lng=${selected.institution.lng}`} 
-              className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-sm font-medium">Map</span>
-            </a>
-          )}
+        <a 
+          href={`map.html?id=${selected.id}`} 
+          className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="text-sm font-medium">Map</span>
+        </a>
+      )}
+
         </div>
       </div>
 

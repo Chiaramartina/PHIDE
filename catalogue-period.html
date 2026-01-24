@@ -11,19 +11,16 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
-<body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
+<body class="bg-[#EFF4FA] text-[#010435] min-h-screen flex flex-col font-['Playfair Display', serif]">
   <div id="navbar-root"></div>
-  <div id="main-root"></div>
+  <div id="main-root" class="flex-grow"></div>
 
  <!-- FOOTER -->
-<footer class="bg-[#111827] text-gray-400 py-4 mt-20">
+<footer class="bg-[#111827] text-gray-400 py-4 mt-auto">
   <div class="max-w-7xl mx-auto px-6 text-center text-sm">
     <span class="text-white font-semibold">PHIDE</span>
     <span class="mx-2">·</span>
-    <a
-      href="mailto:chiara.martina3@studio.unibo.it"
-      class="hover:text-white underline"
-    >
+    <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline">
       chiara.martina3@studio.unibo.it
     </a>
     <span class="mx-2">·</span>
@@ -31,9 +28,9 @@
   </div>
 </footer>
 
-<!-- React Navbar Script -->
 <script type="text/babel">
-function Navbar() {
+/* ================= NAVBAR ================= */
+function Navbar({highlightAuthor}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
@@ -41,49 +38,26 @@ function Navbar() {
     <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-50 font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-
-          {/* Logo */}
-          <a href="index.html" className="text-xl font-semibold text-[#010435]">
-            PHIDE
-          </a>
-
-          {/* Desktop menu */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
           <div className="hidden md:flex space-x-6 items-center">
-
-            {/* Dropdown */}
             <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
-            >
-              Browse
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Catalogue
-                </a>
-                <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Schedule
-                </a>
-              </div>
-            )}
-          </div>
-
-
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5A7796]">
+                Browse
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
+                  <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
+                  <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
+                </div>
+              )}
+            </div>
             <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
             <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
-
-          {/* Mobile button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden"
-          >
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -95,11 +69,10 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
           <a href="" className="block">Browse</a>
-           <a href="catalogue-period.html" className="block">Catalogue</a>
+          <a href="catalogue-period.html" className="block">Catalogue</a>
           <a href="scheda.html" className="block">Scheda</a>
           <a href="map.html" className="block">Map</a>
           <a href="documentation.html" className="block">Documentation</a>
@@ -107,98 +80,45 @@ function Navbar() {
       )}
     </nav>
   );
-  }
+}
 
-/* ================= MAIN ================= */
+/* ================= MAIN CONTENT ================= */
 function MainContent() {
-
   const cards = [
-  {
-    title: "All",
-    href: "catalogue.html",
-    size: "h-72 md:h-80",
-    image: "allimg.png"
-  },
-  {
-    title: "Ancient Philosophy",
-    href: "catalogue.html?epoch=ancient",
-     image: "ancient.png"
-  },
-  {
-    title: "Medieval Philosophy",
-    href: "catalogue.html?epoch=medieval",
-    image: "medieval.png"
-  },
-  {
-    title: "Modern Philosophy",
-    href: "catalogue.html?epoch=modern",
-    image: "modern.png"
-  },
-  {
-    title: "Contemporary Philosophy",
-    href: "catalogue.html?epoch=contemporary",
-    image: "cont.png"
-  }
-];
+    { title: "All", href: "catalogue.html", size: "h-64 md:h-72", image: "allimg.png" },
+    { title: "Period", href: "catalogue.html?highlight=epoch", size: "h-64 md:h-72", image: "epoch.png" },
+    { title: "Author", href: "catalogue.html?highlight=author", size: "h-64 md:h-72", image: "author.png" }
+  ];
 
   return (
     <main className="pt-28 pb-12">
+      <div className="max-w-4xl mx-auto px-6 mb-12">
+        <a href={cards[0].href} className={`group relative ${cards[0].size} rounded-3xl flex items-center justify-center text-center border-2 hover:scale-105 transition transform shadow-lg overflow-hidden`}>
+          <img src={cards[0].image} className="absolute inset-0 w-full h-full object-cover z-0"/>
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
+          <h2 className="relative z-10 text-4xl md:text-5xl font-semibold text-white">{cards[0].title}</h2>
+        </a>
+      </div>
 
-      {/* ALL CARD */}
-<div className="max-w-4xl mx-auto px-6 mb-12">
-  <a
-    href={cards[0].href}
-    className={`group relative ${cards[0].size} rounded-3xl flex items-center justify-center text-center
-    border-2 hover:scale-105 transition transform shadow-lg overflow-hidden`}
-  >
-    {/* Immagine */}
-    <img
-      src={cards[0].image}
-      className="absolute inset-0 w-full h-full object-cover z-0"
-    />
-
-    {/* Overlay: scuro -> chiaro al hover */}
-    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
-
-    {/* Titolo */}
-    <h2 className="relative z-10 text-4xl md:text-5xl font-semibold text-white font-['Playfair Display']">
-      {cards[0].title}
-    </h2>
-  </a>
-</div>
-
-{/* OTHER CARDS */}
-<div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-  {cards.slice(1).map((card, index) => (
-    <a
-      key={index}
-      href={card.href}
-      className="group relative h-56 md:h-64 rounded-2xl flex items-center justify-center text-center
-      border-2 hover:scale-105 transition transform shadow-md overflow-hidden"
-    >
-      <img
-        src={card.image}
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
-
-      {/* Overlay: scuro -> chiaro al hover */}
-      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
-
-      <h2 className="relative z-10 text-2xl md:text-3xl font-semibold text-white font-['Playfair Display']">
-        {card.title}
-      </h2>
-    </a>
-  ))}
-</div>
-
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {cards.slice(1).map((card,index) => (
+          <a key={index} href={card.href} className={`group relative ${card.size} rounded-2xl flex items-center justify-center text-center border-2 hover:scale-105 transition transform shadow-md overflow-hidden`}>
+            <img src={card.image} className="absolute inset-0 w-full h-full object-cover z-0"/>
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
+            <h2 className="relative z-10 text-2xl md:text-3xl font-semibold text-white">{card.title}</h2>
+          </a>
+        ))}
+      </div>
     </main>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+/* ================= RENDER ================= */
+const urlParams = new URLSearchParams(window.location.search);
+const highlightAuthor = urlParams.get("highlight") === "author";
+
+ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar highlightAuthor={highlightAuthor} />);
 ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
-
 </script>
-
 </body>
 </html>
