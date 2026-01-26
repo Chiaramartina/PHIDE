@@ -15,19 +15,12 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
-    body { font-family: 'Inter', sans-serif; margin: 0; }
+    html, body { height: 100%; margin: 0; font-family: 'Inter', sans-serif; }
     h1, h2, .font-serif { font-family: 'Playfair Display', serif; }
 
-    #sidebar-list::-webkit-scrollbar { width: 6px; }
-    #sidebar-list::-webkit-scrollbar-track { background: #f1f1f1; }
-    #sidebar-list::-webkit-scrollbar-thumb { background: #010435; border-radius: 10px; }
+    main { display: flex; height: calc(100vh - 4rem); overflow: hidden; }
 
-    main {
-      display: flex;
-      height: calc(100vh - 4rem);
-      overflow: hidden;
-    }
-
+    /* Sidebar desktop */
     aside {
       width: 25%;
       min-width: 300px;
@@ -36,6 +29,7 @@
       flex-direction: column;
       border-right: 1px solid #ccc;
       z-index: 20;
+      transition: transform 0.3s ease;
     }
 
     #sidebar-list { flex: 1; overflow-y: auto; }
@@ -46,17 +40,44 @@
       transition: all 0.2s ease;
       border-left: 4px solid transparent;
     }
-    .edition-card:hover {
-      background-color: #f8fafc;
-      border-left: 4px solid #010435;
-    }
-    .edition-card.active {
-      background-color: #e5edff;
-      border-left: 4px solid #1e40af;
-    }
+    .edition-card:hover { background-color: #f8fafc; border-left: 4px solid #010435; }
+    .edition-card.active { background-color: #e5edff; border-left: 4px solid #1e40af; }
 
     nav { z-index: 5000 !important; }
     .leaflet-container { z-index: 0 !important; }
+
+    /* Mobile drawer */
+    @media (max-width: 768px) {
+      aside {
+        width: 80%;
+        max-width: 300px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: white;
+        z-index: 50;
+        transform: translateX(-100%);
+        box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+      }
+      aside.open { transform: translateX(0); }
+
+      #overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 40;
+      }
+      #overlay.active { display: block; }
+
+      #map { flex: 1; height: 100%; }
+    }
+
+    /* Scrollbar sidebar */
+    #sidebar-list::-webkit-scrollbar { width: 6px; }
+    #sidebar-list::-webkit-scrollbar-track { background: #f1f1f1; }
+    #sidebar-list::-webkit-scrollbar-thumb { background: #010435; border-radius: 10px; }
   </style>
 </head>
 
@@ -64,10 +85,14 @@
 
 <!-- NAVBAR -->
 <div id="navbar-root"></div>
+
+<!-- Bottone sidebar mobile -->
+<button id="sidebarToggle" class="md:hidden fixed top-4 left-4 z-[5001] px-4 py-2 bg-[#010435] text-white rounded shadow">SEARCH</button>
+<div id="overlay"></div>
+
 <div class="h-16"></div>
 
 <main>
-
   <!-- SIDEBAR -->
   <aside>
     <div class="p-5 bg-[#010435] text-white">
@@ -92,14 +117,12 @@
   <!-- MAP -->
   <div class="relative flex-1">
     <div id="map"></div>
-
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000]">
       <button id="viewAll" class="bg-white px-4 py-2 rounded-full shadow font-semibold text-sm border">
         Reset View
       </button>
     </div>
   </div>
-
 </main>
 
 <!-- LIBRARIES -->
@@ -111,7 +134,6 @@
 <!-- MAP SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-
   const sidebarList = document.getElementById("sidebar-list");
   const searchInput = document.getElementById("searchInput");
   const resultsCount = document.getElementById("results-count");
@@ -119,20 +141,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const initialView = [41.8902, 12.4922];
   const initialZoom = 4;
   const map = L.map("map").setView(initialView, initialZoom);
-
   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png").addTo(map);
 
   let allData = [];
   let markers = [];
 
-  // URL PARAMS (CATALOGUE → MAP)
   const params = new URLSearchParams(window.location.search);
   const highlightID = params.get("id");
   const urlLat = params.get("lat");
   const urlLng = params.get("lng");
   const urlTitle = params.get("title");
 
-  // LOAD DATA
+  // Load JSON
   fetch("./data/list_json.json")
     .then(r => r.json())
     .then(data => {
@@ -141,157 +161,119 @@ document.addEventListener("DOMContentLoaded", () => {
       handleURLFocus();
     });
 
-    // CLEAN & FORMAT NAMES
-function cleanText(str) {
-  return (str || "")
-    .replace(/,+/g, ",")
-    .replace(/\s+/g, " ")
-    .replace(/,\s*$/, "")
-    .trim();
-}
+  function cleanText(str) {
+    return (str||"").replace(/,+/g,",").replace(/\s+/g," ").replace(/,\s*$/,"").trim();
+  }
+  function formatName(surname,name){
+    surname=cleanText(surname); name=cleanText(name);
+    if(!surname&&!name)return""; if(!surname)return name; if(!name)return surname;
+    return `${surname}, ${name}`;
+  }
 
-function formatName(surname, name) {
-  surname = cleanText(surname);
-  name = cleanText(name);
+  function renderUI(data){
+    markers.forEach(m=>map.removeLayer(m));
+    markers=[]; sidebarList.innerHTML="";
+    const editions=new Map();
+    data.forEach(item=>{
+      const curator=formatName(item.curator_surname,item.curator_name);
+      if(!editions.has(item.ID)) editions.set(item.ID,{...item,curators:[]});
+      if(curator&&!editions.get(item.ID).curators.includes(curator))
+        editions.get(item.ID).curators.push(curator);
+    });
+    const deduped=[...editions.values()];
+    resultsCount.innerText=`${deduped.length} Editions found`;
 
-  if (!surname && !name) return "";
-  if (!surname) return name;
-  if (!name) return surname;
-  return `${surname}, ${name}`;
-}
+    deduped.forEach(item=>{
+      const lat=parseFloat(item.institution_lat||item.location_lat);
+      const lng=parseFloat(item.institution_lng||item.location_lng);
+      if(isNaN(lat)||isNaN(lng))return;
+      const author=formatName(item.author_surname,item.author_name);
+      const curatorsText=item.curators.length?item.curators.join(";"):"";
 
-function renderUI(data) {
-  markers.forEach(m => map.removeLayer(m));
-  markers = [];
-  sidebarList.innerHTML = "";
+      const marker=L.marker([lat,lng]).addTo(map);
+      marker.bindPopup(`
+        <div class="p-2">
+          <div class="font-bold text-sm">${item.title}</div>
+          <div class="text-xs text-gray-600">
+            <strong>Author:</strong> ${author}<br>
+            ${curatorsText?`<strong>Curators:</strong> ${curatorsText}`:""}
+          </div>
+          <a href="${item.URL}" target="_blank" class="text-xs text-blue-600 font-bold">Open project →</a>
+        </div>
+      `);
+      markers.push(marker);
 
-  // Dedup per ID + curatori
-  const editions = new Map();
+      const card=document.createElement("div");
+      card.className="edition-card p-4 border-b cursor-pointer";
+      card.dataset.id=item.ID;
+      card.innerHTML=`
+        <div class="flex justify-between text-[10px] mb-1">
+          <span class="font-bold bg-gray-100 px-2 rounded">#${item.ID}</span>
+          <span class="text-blue-600 font-semibold">${item.epoch||""}</span>
+        </div>
+        <div class="text-sm font-bold">${item.title}</div>
+        <div class="text-xs text-gray-500">
+          <strong>Author:</strong> ${author}<br>
+          ${curatorsText?`<strong>Curators:</strong> ${curatorsText}`:""}
+        </div>
+      `;
+      card.onclick=()=>{ map.setView([lat,lng],13); marker.openPopup();
+        document.querySelectorAll(".edition-card").forEach(c=>c.classList.remove("active"));
+        card.classList.add("active");
+      };
+      sidebarList.appendChild(card);
+    });
+  }
 
-  data.forEach(item => {
-    const curator = formatName(item.curator_surname, item.curator_name);
-
-    if (!editions.has(item.ID)) {
-      editions.set(item.ID, { ...item, curators: [] });
-    }
-
-    if (curator && !editions.get(item.ID).curators.includes(curator)) {
-      editions.get(item.ID).curators.push(curator);
-    }
+  searchInput.addEventListener("input",e=>{
+    const q=e.target.value.toLowerCase();
+    const filtered=allData.filter(item=>{
+      const title=(item.title||"").toLowerCase();
+      const author=`${item.author_surname||""} ${item.author_name||""}`.toLowerCase();
+      const curator=`${item.curator_surname||""} ${item.curator_name||""}`.toLowerCase();
+      const place=(item.located_at||"").toLowerCase();
+      return title.includes(q)||author.includes(q)||curator.includes(q)||place.includes(q);
+    });
+    renderUI(filtered);
   });
 
-  const deduped = [...editions.values()];
-  resultsCount.innerText = `${deduped.length} Editions found`;
+  document.getElementById("viewAll").onclick=()=>{ map.setView(initialView,initialZoom); map.closePopup(); };
 
-  deduped.forEach(item => {
-  const lat = parseFloat(item.institution_lat || item.location_lat);
-  const lng = parseFloat(item.institution_lng || item.location_lng);
-  if (isNaN(lat) || isNaN(lng)) return;
-
-  // Formatta Author e Curators
-  const author = formatName(item.author_surname, item.author_name);
-  const curatorsText = item.curators.length ? item.curators.join("; ") : "";
-
-  // MARKER
-  const marker = L.marker([lat, lng]).addTo(map);
-  marker.bindPopup(`
-    <div class="p-2">
-      <div class="font-bold text-sm">${item.title}</div>
-      <div class="text-xs text-gray-600">
-        <strong>Author:</strong> ${author}<br>
-        ${curatorsText ? `<strong>Curators:</strong> ${curatorsText}` : ""}
-      </div>
-      <a href="${item.URL}" target="_blank" class="text-xs text-blue-600 font-bold">Open project →</a>
-    </div>
-  `);
-  markers.push(marker);
-
-  // SIDEBAR CARD
-  const card = document.createElement("div");
-  card.className = "edition-card p-4 border-b cursor-pointer";
-  card.dataset.id = item.ID;
-
-  card.innerHTML = `
-    <div class="flex justify-between text-[10px] mb-1">
-      <span class="font-bold bg-gray-100 px-2 rounded">#${item.ID}</span>
-      <span class="text-blue-600 font-semibold">${item.epoch || ""}</span>
-    </div>
-    <div class="text-sm font-bold">${item.title}</div>
-    <div class="text-xs text-gray-500">
-      <strong>Author:</strong> ${author}<br>
-      ${curatorsText ? `<strong>Curators:</strong> ${curatorsText}` : ""}
-    </div>
-  `;
-
-  card.onclick = () => {
-    map.setView([lat, lng], 13);
-    marker.openPopup();
-    document.querySelectorAll(".edition-card").forEach(c => c.classList.remove("active"));
-    card.classList.add("active");
-  };
-
-  sidebarList.appendChild(card);
-});
-
-}
-
-
-  // SEARCH
-  searchInput.addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-
-  const filtered = allData.filter(item => {
-    const title = (item.title || "").toLowerCase();
-    const author = `${item.author_surname || ""} ${item.author_name || ""}`.toLowerCase();
-    const curator = `${item.curator_surname || ""} ${item.curator_name || ""}`.toLowerCase();
-    const place = (item.located_at || "").toLowerCase();
-
-    return title.includes(q) || author.includes(q) || curator.includes(q) || place.includes(q);
-  });
-
-  renderUI(filtered);
-});
-
-
-  // RESET VIEW
-  document.getElementById("viewAll").onclick = () => {
-    map.setView(initialView, initialZoom);
-    map.closePopup();
-  };
-
-  // DEEP LINK FROM CATALOGUE
-  function handleURLFocus() {
-
-    // lat/lng direct link
-    if (urlLat && urlLng) {
-      const lat = parseFloat(urlLat);
-      const lng = parseFloat(urlLng);
-      map.setView([lat, lng], 12);
-      L.marker([lat, lng]).addTo(map).bindPopup(urlTitle || "").openPopup();
+  function handleURLFocus(){
+    if(urlLat&&urlLng){
+      const lat=parseFloat(urlLat),lng=parseFloat(urlLng);
+      map.setView([lat,lng],12);
+      L.marker([lat,lng]).addTo(map).bindPopup(urlTitle||"").openPopup();
       return;
     }
-
-    // ID link
-    if (!highlightID) return;
-    const item = allData.find(b => String(b.ID) === highlightID);
-    if (!item) return;
-
-    const lat = parseFloat(item.institution_lat);
-    const lng = parseFloat(item.institution_lng);
-    if (!lat || !lng) return;
-
-    map.setView([lat, lng], 12);
-
-    markers.forEach(m => {
-      if (m.getLatLng().lat === lat && m.getLatLng().lng === lng) m.openPopup();
-    });
-
-    const card = document.querySelector(`[data-id="${highlightID}"]`);
-    if (card) {
-      card.classList.add("active");
-      card.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    if(!highlightID)return;
+    const item=allData.find(b=>String(b.ID)===highlightID);
+    if(!item)return;
+    const lat=parseFloat(item.institution_lat),lng=parseFloat(item.institution_lng);
+    if(!lat||!lng)return;
+    map.setView([lat,lng],12);
+    markers.forEach(m=>{ if(m.getLatLng().lat===lat && m.getLatLng().lng===lng) m.openPopup(); });
+    const card=document.querySelector(`[data-id="${highlightID}"]`);
+    if(card){ card.classList.add("active"); card.scrollIntoView({behavior:"smooth",block:"center"}); }
   }
+
+  // Mobile sidebar toggle
+  const sidebar=document.querySelector("aside");
+  const toggleBtn=document.getElementById("sidebarToggle");
+  const overlay=document.getElementById("overlay");
+
+  toggleBtn.addEventListener("click",()=>{
+    sidebar.classList.toggle("open");
+    overlay.classList.toggle("active");
+  });
+
+  overlay.addEventListener("click",()=>{
+    sidebar.classList.remove("open");
+    overlay.classList.remove("active");
+  });
+
+  // Resize map on window change
+  window.addEventListener("resize",()=>{ map.invalidateSize(); });
 
 });
 </script>
@@ -306,11 +288,9 @@ function Navbar() {
     <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-[5000] font-['Inter']">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-
           <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
 
           <div className="hidden md:flex space-x-6 items-center">
-
             <div className="relative">
               <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5A7796]">
                 Browse
@@ -318,7 +298,6 @@ function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
                 </svg>
               </button>
-
               {dropdownOpen && (
                 <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
                   <a href="catalogue-period.html" className="px-4 py-2 hover:bg-gray-100">Catalogue</a>
@@ -326,7 +305,6 @@ function Navbar() {
                 </div>
               )}
             </div>
-
             <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
             <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
           </div>
