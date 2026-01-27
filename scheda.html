@@ -20,7 +20,8 @@
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
 
   <div id="navbar-root"></div>
-  <main class="max-w-7xl mx-auto px-4 py-10">
+  <main class="max-w-7xl mx-auto px-4 py-2">
+
 
     <section class="text-center mb-10">
       <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
@@ -134,8 +135,9 @@
       cursor: not-allowed !important;
     }
     .dataTables_wrapper .dt-buttons {
-  margin-bottom: 20px; /* aumenta se li vuoi ancora più su */
+  margin-bottom: 4px; /* oppure 0 */
 }
+
 
 
   </style>
@@ -297,7 +299,7 @@ $(document).ready(function(){
       const table = $('#catalog').DataTable({
         data: data,
         searching: false, // disattiva ricerca globale
-        dom: 'Bfrtip',
+        dom: 'Btip',
         buttons: [
           // Scarica CSV originale
           {
