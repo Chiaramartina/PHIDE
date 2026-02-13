@@ -3,61 +3,413 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catalogue</title>
+  <title>PHIDE - Catalogue</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      background: #EFF4FA;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .animate-fade-scale {
+      animation: fadeInScale 0.6s ease forwards;
+    }
+
+    .animate-slide-left {
+      animation: slideInLeft 0.8s ease forwards;
+    }
+
+    .animate-slide-right {
+      animation: slideInRight 0.8s ease forwards;
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .animate-slideDown {
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .loading-skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    /* Card Styles */
+    .catalogue-card {
+      position: relative;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 2px solid rgba(1, 4, 53, 0.1);
+      transform-origin: center;
+      height: 100%;
+    }
+
+    .catalogue-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(1,4,53,0.4) 0%, rgba(90,119,150,0.4) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+
+    .catalogue-card:hover {
+      transform: scale(1.02) translateY(-3px);
+      border-color: #010435;
+      box-shadow: 0 20px 40px rgba(1, 4, 53, 0.2);
+    }
+
+    .catalogue-card:hover::before {
+      opacity: 1;
+    }
+
+    .catalogue-card img {
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 0;
+    }
+
+    .catalogue-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(1,4,53,0.3) 0%, rgba(90,119,150,0.3) 100%);
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    .catalogue-card:hover .card-overlay {
+      background: linear-gradient(135deg, rgba(1,4,53,0.5) 0%, rgba(90,119,150,0.5) 100%);
+    }
+
+    .card-title {
+      position: relative;
+      z-index: 2;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .catalogue-card:hover .card-title {
+      transform: translateY(-3px);
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-subtitle {
+      position: relative;
+      z-index: 2;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .catalogue-card:hover .card-subtitle {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stats Badge */
+    .stats-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #010435;
+      border: 1px solid rgba(1, 4, 53, 0.1);
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .catalogue-card:hover .stats-badge {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+
+    .breadcrumb a {
+      color: #010435;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .breadcrumb a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #010435;
+      transition: width 0.3s ease;
+    }
+
+    .breadcrumb a:hover::after {
+      width: 100%;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: #010435;
+      line-height: 1.2;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Layout */
+    #navbar-root {
+      flex-shrink: 0;
+    }
+
+    #main-root {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 70px; /* Altezza navbar */
+      padding-bottom: 20px;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      .catalogue-card {
+        border-radius: 1rem;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-[#EFF4FA] text-[#010435] min-h-screen flex flex-col font-['Playfair Display', serif]">
+<body>
   <div id="navbar-root"></div>
-  <div id="main-root" class="flex-grow"></div>
-
- <!-- FOOTER -->
-<footer class="bg-[#111827] text-gray-400 py-4 mt-auto">
-  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
-    <span class="text-white font-semibold">PHIDE</span>
-    <span class="mx-2">·</span>
-    <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline">
-      chiara.martina3@studio.unibo.it
-    </a>
-    <span class="mx-2">·</span>
-    <span>&copy; 2026 CC BY-SA 4.0</span>
+  
+  <!-- Main Content Container -->
+  <div id="main-root">
+    <div class="main-container">
+      <div class="max-w-6xl mx-auto px-4 w-full">
+        {/* Il contenuto verrà renderizzato qui da React */}
+      </div>
+    </div>
   </div>
-</footer>
 
+  <!-- FOOTER -->
+  <footer class="bg-[#111827] text-gray-400 py-2 flex-shrink-0">
+    <div class="max-w-7xl mx-auto px-6 text-center text-xs">
+      <span class="text-white font-semibold">PHIDE</span>
+      <span class="mx-2">·</span>
+      <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline transition-colors">
+        chiara.martina3@studio.unibo.it
+      </a>
+      <span class="mx-2">·</span>
+      <span>&copy; 2026 CC BY-SA 4.0</span>
+    </div>
+  </footer>
+
+  
 <script type="text/babel">
-/* ================= NAVBAR ================= */
-function Navbar({highlightAuthor}) {
+function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-[5000]" style={{ fontFamily: 'Playfair Display, serif' }}>
+    <nav className={`w-full fixed top-0 left-0 z-[5000] transition-all duration-500 ${
+      scrolled ? 'bg-[#EFF4FA] shadow-lg backdrop-blur-sm bg-opacity-90' : 'bg-[#EFF4FA]'
+    }`} style={{ fontFamily: 'Playfair Display, serif' }}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-          <a href="index.html" className="text-xl font-semibold text-[#010435]">PHIDE</a>
+          {/* Logo */}
+          <a href="index.html" className="text-xl font-semibold text-[#010435] relative group">
+            PHIDE
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#010435] to-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+          </a>
+
+          {/* Desktop menu */}
           <div className="hidden md:flex space-x-6 items-center">
+            {/* Dropdown */}
             <div className="relative">
-              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5A7796]">
-                Browse
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {dropdownOpen && (
-                <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                  <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">Catalogue</a>
-                  <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">Schedule</a>
-                </div>
-              )}
-            </div>
-            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 font-medium hover:text-[#5A7796] transition-all group"
+            >
+              Browse
+              <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute mt-2 w-48 bg-white border rounded shadow-xl flex flex-col animate-fadeIn">
+                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
+                  Catalogue
+                </a>
+                <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
+                  Schedule
+                </a>
+              </div>
+            )}
           </div>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden">
+
+            <a href="map.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+              Map
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="documentation.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+              Documentation
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </div>
+
+          {/* Mobile button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 hover:bg-gray-200 rounded-lg transition-all hover:scale-110"
+          >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -69,63 +421,139 @@ function Navbar({highlightAuthor}) {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="" className="block">Browse</a>
-          <a href="catalogue-period.html" className="block">Catalogue</a>
-          <a href="scheda.html" className="block">Scheda</a>
-          <a href="map.html" className="block">Map</a>
-          <a href="documentation.html" className="block">Documentation</a>
+        <div className="md:hidden bg-white border-t shadow-lg animate-slideDown">
+          <div className="px-4 py-3 space-y-2">
+            <a href="" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Browse</a>
+            <a href="catalogue-period.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Catalogue</a>
+            <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Schedule</a>
+            <a href="map.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Map</a>
+            <a href="documentation.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Documentation</a>
+          </div>
         </div>
       )}
     </nav>
   );
 }
 
-/* ================= MAIN CONTENT ================= */
-function MainContent() {
-  const cards = [
-    { title: "All", href: "catalogue.html", size: "h-64 md:h-72", image: "photo/allimg.png" },
-    { title: "Period", href: "catalogue.html?highlight=epoch", size: "h-64 md:h-72", image: "photo/epoch.png" },
-    { title: "Author", href: "catalogue.html?highlight=author", size: "h-64 md:h-72", image: "photo/author.png" }
-  ];
+    /* ================= MAIN CONTENT ================= */
+    function MainContent() {
+      const [hoveredCard, setHoveredCard] = React.useState(null);
+      const [isLoading, setIsLoading] = React.useState(true);
 
-  return (
-    <main className="pt-28 pb-12">
-      <div className="max-w-4xl mx-auto px-6 mb-12">
-        <a href={cards[0].href} className={`group relative ${cards[0].size} rounded-3xl flex items-center justify-center text-center border-2 hover:scale-105 transition transform shadow-lg overflow-hidden`}>
-          <img src={cards[0].image} className="absolute inset-0 w-full h-full object-cover z-0"/>
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
-          <h2 className="relative z-10 text-4xl md:text-5xl font text-white" style={{ fontFamily: 'Playfair Display, serif' }} >
-  {cards[0].title}
-</h2>
+      React.useEffect(() => {
+        setTimeout(() => setIsLoading(false), 500);
+      }, []);
 
-        </a>
-      </div>
+      const handleCardClick = (href) => {
+        window.location.href = href;
+      };
 
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {cards.slice(1).map((card,index) => (
-          <a key={index} href={card.href} className={`group relative ${card.size} rounded-2xl flex items-center justify-center text-center border-2 hover:scale-105 transition transform shadow-md overflow-hidden`}>
-            <img src={card.image} className="absolute inset-0 w-full h-full object-cover z-0"/>
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 z-0"></div>
-            <h2 className="relative z-10 text-2xl md:text-3xl font text-white" style={{ fontFamily: 'Playfair Display, serif' }}
->
-  {card.title}
-</h2>
+      if (isLoading) {
+        return (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="loading-skeleton w-48 h-8 mb-4"></div>
+              <div className="loading-skeleton w-64 h-48 rounded-2xl"></div>
+            </div>
+          </div>
+        );
+      }
 
-          </a>
-        ))}
-      </div>
-    </main>
-  );
-}
+      return (
+        <main className="h-full flex items-start justify-center pt-14 pb-6">
+          <div className="max-w-6xl mx-auto px-4 w-full">
+            {/* Breadcrumb */}
+            <div className="mb-3">
+              <div className="breadcrumb">
+                <a href="index.html">Home</a>
+                <span className="mx-2">/</span>
+                <span className="text-[#5A7796]">Catalogue</span>
+              </div>
+            </div>
 
-/* ================= RENDER ================= */
-const urlParams = new URLSearchParams(window.location.search);
-const highlightAuthor = urlParams.get("highlight") === "author";
+            {/* Page Header */}
+            <div className="mb-4 text-center">
+              <h1 className="page-title">Explore the Collection</h1>
+            </div>
 
-ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar highlightAuthor={highlightAuthor} />);
-ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
-</script>
+            {/* Cards Container */}
+            <div className="space-y-4">
+              {/* Featured Card */}
+              <div className="animate-fade-scale" style={{ animationDelay: '0.1s' }}>
+                <div 
+                  className="catalogue-card h-56 md:h-72 relative group"
+                  onClick={() => handleCardClick("catalogue.html")}
+                  onMouseEnter={() => setHoveredCard(0)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <img src="photo/allimg.png" alt="All editions" className="absolute inset-0 w-full h-full object-cover"/>
+                  <div className="card-overlay"></div>
+                  <div className="stats-badge">
+                    <span className="font-semibold">59 editions</span>
+                  </div>
+                  <div className="relative z-10 text-center">
+                    <h2 className="card-title text-3xl md:text-4xl mb-1">All</h2>
+                    <p className="card-subtitle">Browse the complete collection</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Grid Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="animate-slide-left" style={{ animationDelay: '0.2s' }}>
+                  <div 
+                    className="catalogue-card h-48 md:h-64 relative group"
+                    onClick={() => handleCardClick("catalogue.html?highlight=epoch")}
+                    onMouseEnter={() => setHoveredCard(1)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <img src="photo/epoch.png" alt="Period" className="absolute inset-0 w-full h-full object-cover"/>
+                    <div className="card-overlay"></div>
+                    <div className="stats-badge">
+                      <span className="font-semibold">4 periods</span>
+                    </div>
+                    <div className="relative z-10 text-center">
+                      <h2 className="card-title text-2xl md:text-3xl mb-1">Period</h2>
+                      <p className="card-subtitle">Filter by historical era</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="animate-slide-right" style={{ animationDelay: '0.2s' }}>
+                  <div 
+                    className="catalogue-card h-48 md:h-64 relative group"
+                    onClick={() => handleCardClick("catalogue.html?highlight=author")}
+                    onMouseEnter={() => setHoveredCard(2)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <img src="photo/author.png" alt="Author" className="absolute inset-0 w-full h-full object-cover"/>
+                    <div className="card-overlay"></div>
+                    <div className="stats-badge">
+                      <span className="font-semibold">25+ authors</span>
+                    </div>
+                    <div className="relative z-10 text-center">
+                      <h2 className="card-title text-2xl md:text-3xl mb-1">Author</h2>
+                      <p className="card-subtitle">Discover by author</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+        </main>
+      );
+    }
+
+    // Estrai parametri URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const highlightAuthor = urlParams.get("highlight") === "author";
+
+    // Renderizza l'applicazione
+    ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar highlightAuthor={highlightAuthor} />);
+    ReactDOM.createRoot(document.getElementById("main-root")).render(<MainContent />);
+  </script>
 </body>
 </html>

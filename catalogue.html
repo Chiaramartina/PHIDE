@@ -3,12 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catalogue</title>
+  <title>PHIDE - Catalogue</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(1,4,53,0.1); }
+      50% { box-shadow: 0 0 20px 5px rgba(1,4,53,0.2); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .slide-in {
+      animation: slideIn 0.5s ease forwards;
+    }
+    
+    .hover-pulse:hover {
+      animation: pulse 1s infinite;
+    }
+    
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .glow-on-hover:hover {
+      animation: glow 1.5s infinite;
+    }
+    
+    .card {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: #010435;
+      transition: height 0.3s ease;
+      z-index: 10;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 30px -10px rgba(1,4,53,0.2);
+    }
+    
+    .card:hover::before {
+      height: 100%;
+    }
+    
+    .card img {
+      transition: transform 0.5s ease;
+    }
+    
+    .card:hover img {
+      transform: scale(1.1);
+    }
+    
+    .filter-btn {
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .filter-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #010435;
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+    
+    .filter-btn:hover::after {
+      transform: scaleX(1);
+    }
+    
+    .filter-btn.active {
+      background: #010435;
+      color: white;
+    }
+    
+    .modal {
+      animation: slideIn 0.4s ease;
+      transform-origin: bottom;
+    }
+    
+    .pagination-btn {
+      transition: all 0.2s ease;
+    }
+    
+    .pagination-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(1,4,53,0.2);
+    }
+    
+    .stat-badge {
+      background: rgba(1,4,53,0.05);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-badge:hover {
+      background: #010435;
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    .search-input {
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .search-input:focus {
+      border-color: #010435;
+      box-shadow: 0 0 0 3px rgba(1,4,53,0.1);
+      transform: scale(1.02);
+    }
+    
+    .loading {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: loading 1.5s infinite;
+    }
+    
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+  </style>
 </head>
 
 <body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
@@ -18,11 +185,11 @@
 <!-- FOOTER -->
 <footer class="bg-[#111827] text-gray-400 py-4 mt-20">
   <div class="max-w-7xl mx-auto px-6 text-center text-sm">
-    <span class="text-white font-semibold">PHIDE</span>
+    <span class="text-white font-semibold hover:text-white/80 transition-colors">PHIDE</span>
     <span class="mx-2">·</span>
     <a
       href="mailto:chiara.martina3@studio.unibo.it"
-      class="hover:text-white underline"
+      class="hover:text-white underline transition-all hover:tracking-wider"
     >
       chiara.martina3@studio.unibo.it
     </a>
@@ -35,52 +202,68 @@
 function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-[5000]" style={{ fontFamily: 'Playfair Display, serif' }}>
+    <nav className={`w-full fixed top-0 left-0 z-[5000] transition-all duration-500 ${
+      scrolled ? 'bg-[#EFF4FA] shadow-lg backdrop-blur-sm bg-opacity-90' : 'bg-[#EFF4FA]'
+    }`} style={{ fontFamily: 'Playfair Display, serif' }}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16 items-center">
-
           {/* Logo */}
-          <a href="index.html" className="text-xl font-semibold text-[#010435]">
+          <a href="index.html" className="text-xl font-semibold text-[#010435] relative group">
             PHIDE
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#010435] to-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
           </a>
 
           {/* Desktop menu */}
           <div className="hidden md:flex space-x-6 items-center">
-
             {/* Dropdown */}
             <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
+              className="flex items-center gap-1 font-medium hover:text-[#5A7796] transition-all group"
             >
               Browse
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
             {dropdownOpen && (
-              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
+              <div className="absolute mt-2 w-48 bg-white border rounded shadow-xl flex flex-col animate-fadeIn">
+                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
                   Catalogue
                 </a>
-                <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">
+                <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
                   Schedule
                 </a>
               </div>
             )}
           </div>
 
-            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
+            <a href="map.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+              Map
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="documentation.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+              Documentation
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+            </a>
           </div>
 
           {/* Mobile button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden"
+            className="md:hidden p-2 hover:bg-gray-200 rounded-lg transition-all hover:scale-110"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (
@@ -95,12 +278,14 @@ function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="" className="block">Browse</a>
-           <a href="catalogue-period.html" className="block">Catalogue</a>
-          <a href="scheda.html" className="block">Scheda</a>
-          <a href="map.html" className="block">Map</a>
-          <a href="documentation.html" className="block">Documentation</a>
+        <div className="md:hidden bg-white border-t shadow-lg animate-slideDown">
+          <div className="px-4 py-3 space-y-2">
+            <a href="" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Browse</a>
+            <a href="catalogue-period.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Catalogue</a>
+            <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Schedule</a>
+            <a href="map.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Map</a>
+            <a href="documentation.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Documentation</a>
+          </div>
         </div>
       )}
     </nav>
@@ -110,11 +295,26 @@ function Navbar() {
 /* ================= ACCORDION ================= */
 function Accordion({ title, open, onClick, children }) {
   return (
-    <div>
-      <button onClick={onClick} className="w-full text-left font-semibold text-lg font-['Playfair Display']">
-        {title}
+    <div className="border-b border-gray-200 py-2">
+      <button 
+        onClick={onClick} 
+        className="w-full text-left font-semibold text-lg font-['Playfair Display'] hover:text-[#5A7796] transition-colors group"
+      >
+        <div className="flex items-center justify-between">
+          {title}
+          <svg 
+            className={`w-4 h-4 transition-transform duration-300 ${open ? 'rotate-90' : ''}`} 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
       </button>
-      {open && <div className="mt-2 text-sm">{children}</div>}
+      <div className={`transition-all duration-300 overflow-hidden ${open ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -139,11 +339,11 @@ function BookBrowserUI() {
   const booksPerPage = 15;
   const [languageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
   const [sortDropdownOpen, setSortDropdownOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const [filterAuthor, setFilterAuthor] = React.useState("");
   const [authors, setAuthors] = React.useState([]);
   const [authorDropdownOpen, setAuthorDropdownOpen] = React.useState(false);
-
 
   /* ================= FOR ADVANCED SEARCH ================= */
   const [filterAdvancedSearch, setFilterAdvancedSearch] = React.useState("");
@@ -156,30 +356,27 @@ function BookBrowserUI() {
   const [filterTool, setFilterTool] = React.useState("");
   const [tools, setTools] = React.useState([]);
 
-
   const [highlightAuthor, setHighlightAuthor] = React.useState(false);
-
   const [highlightEpoch, setHighlightEpoch] = React.useState(false);
+  const [hoveredCard, setHoveredCard] = React.useState(null);
 
-React.useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("highlight") === "epoch") {
-    setHighlightEpoch(true); // evidenzia blu
-    params.delete("highlight");
-    window.history.replaceState({}, "", window.location.pathname); // rimuove ?highlight dall'URL
-  }
-}, []);
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("highlight") === "epoch") {
+      setHighlightEpoch(true);
+      params.delete("highlight");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
-
-React.useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("highlight") === "author") {
-    setHighlightAuthor(true); // evidenzia blu
-    params.delete("highlight");
-    window.history.replaceState({}, "", window.location.pathname); // rimuove il ?highlight dall'URL
-  }
-}, []);
-
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("highlight") === "author") {
+      setHighlightAuthor(true);
+      params.delete("highlight");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   const languageNames = {
     SPA: "Spanish", GER: "German", DAN: "Danish", FRE: "French", FRA: "French",
@@ -216,6 +413,7 @@ React.useEffect(() => {
   }, []);
 
   React.useEffect(() => {
+    setIsLoading(true);
     fetch("./data/list_json.json")
       .then(res => res.json())
       .then(data => {
@@ -230,22 +428,18 @@ React.useEffect(() => {
             author: [b.author_surname?.replace(",", "").trim(), b.author_name?.trim()]
             .filter(Boolean)
             .join(", "),
-
             curators: curatorFullName ? [curatorFullName] : [],
             date: b.date,
             language: b.language?.replace(/"/g, ""),
             branch: b.branch,
             epoch: b.epoch,
             URL: b.URL,
-
             institution: {
               name: b.institution_name,
               lat: b.institution_lat,
               lng: b.institution_lng,
               website: b.institution_website
             },
-
-            // ✅ FLAT FIELDS (come nel JSON)
             writing_support: b.writing_support,
             facsimiles: b.facsimiles,
             advanced_search: b.advanced_search,
@@ -276,19 +470,20 @@ React.useEffect(() => {
         });
         setAuthors([...authorSet].sort());
         
-      
-
-
         const toolSet = new Set();
         books.forEach(b => {
           if (b.tool) {
             b.tool.split(",").map(t => t.trim()).forEach(t => toolSet.add(t));
           }
         });
-        setTools([...toolSet].sort());
+        setTools([...new Set(toolSet)].sort());
 
+        setIsLoading(false);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        setIsLoading(false);
+      });
   }, []);
 
   let filteredBooks = books.filter(b => {
@@ -297,7 +492,6 @@ React.useEffect(() => {
     const indices = b.Features?.index === "yes";
     const bookLanguages = b.language?.replace(/"/g, "").split(/,|;/).map(l => l.trim()) || [];
     const q = filterText.toLowerCase();
-
 
     const matchSearch = !filterText || (
       b.title?.toLowerCase().includes(q) ||
@@ -317,11 +511,7 @@ React.useEffect(() => {
   (filterFacsimiles ? b.facsimiles === filterFacsimiles : true) &&
   (filterAuthor ? b.author === filterAuthor : true) &&
   (filterTool ? b.tool?.split(",").map(t => t.trim()).includes(filterTool) : true)
-  
-
 );
-
-
   });
 
   if (sortField) {
@@ -345,33 +535,41 @@ React.useEffect(() => {
   contemporary: "Contemporary"
 };
 
+  // Stats
+  const totalEditions = books.length;
+  const uniqueLanguages = new Set(books.flatMap(b => b.language?.split(/,|;/).map(l => l.trim()) || [])).size;
+  const uniqueAuthors = new Set(books.map(b => b.author).filter(Boolean)).size;
 
   return (
   <div className="pt-20 pb-32">
     <Navbar />
-    <section className="w-full mt-6">
+    
+    {/* Hero Section with Stats */}
+    <section className="w-full mt-6 fade-in">
       <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
-        <div className="w-full h-1 bg-[#010435] rounded-full"></div>
+        <div className="w-full h-1 bg-gradient-to-r from-transparent via-[#010435] to-transparent rounded-full"></div>
         <p
-          className="text-6xl font-medium text-[black] tracking-wide"
+          className="text-6xl font-medium text-[black] tracking-wide hover:scale-105 transition-transform duration-300"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
           CATALOGUE
         </p>
-        <div className="w-full h-1 bg-[#010435] rounded-full"></div>
+        <div className="w-full h-1 bg-gradient-to-r from-transparent via-[#010435] to-transparent rounded-full"></div>
+    
+        
       </div>
     </section>
 
     {filterBranch && (
-  <div className="max-w-7xl mx-auto px-4 mt-4">
+  <div className="max-w-7xl mx-auto px-4 mt-4 slide-in">
     <a
       href="catalogue.html"
-      className="text-sm underline hover:text-[#5b0909]"
+      className="text-sm underline hover:text-[#5b0909] transition-all hover:gap-2 inline-flex items-center group"
     >
-      ←  Return to the full catalog
+      <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to the full catalog
     </a>
     <p className="text-sm italic mt-1">
-      Filtered by: <strong>{filterBranch}</strong>
+      Filtered by: <strong className="bg-[#010435] text-white px-2 py-0.5 rounded-full">{filterBranch}</strong>
     </p>
   </div>
 )}
@@ -386,7 +584,7 @@ React.useEffect(() => {
 <div className="relative">
   <button 
     onClick={() => setSortDropdownOpen(prev => !prev)}
-    className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+    className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40 filter-btn"
   >
     Sort {sortField ? `: ${sortField.charAt(0).toUpperCase() + sortField.slice(1)}` : ""}
     <svg className={`w-3 h-3 ml-2 transition-transform ${sortDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -395,28 +593,28 @@ React.useEffect(() => {
   </button>
 
   {sortDropdownOpen && (
-    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
+    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow-lg p-2 z-50 flex flex-col gap-1 animate-fadeIn">
       <button 
         onClick={() => { setSortField(null); setSortOrder("asc"); setSortDropdownOpen(false); }} 
-        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
+        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white transition-all"
       >
         None
       </button>
       <button 
         onClick={() => { setSortField("title"); setSortOrder("asc"); setSortDropdownOpen(false); }} 
-        className={`text-left px-2 py-1 border rounded text-xs ${sortField==="title" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+        className={`text-left px-2 py-1 border rounded text-xs transition-all ${sortField==="title" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
       >
         Title (A-Z)
       </button>
       <button 
         onClick={() => { setSortField("author"); setSortOrder("asc"); setSortDropdownOpen(false); }} 
-        className={`text-left px-2 py-1 border rounded text-xs ${sortField==="author" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+        className={`text-left px-2 py-1 border rounded text-xs transition-all ${sortField==="author" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
       >
         Author (A-Z)
       </button>
       <button 
         onClick={() => { setSortField("curator"); setSortOrder("asc"); setSortDropdownOpen(false); }} 
-        className={`text-left px-2 py-1 border rounded text-xs ${sortField==="curator" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+        className={`text-left px-2 py-1 border rounded text-xs transition-all ${sortField==="curator" ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
       >
         Curator (A-Z)
       </button>
@@ -429,7 +627,7 @@ React.useEffect(() => {
     <div className="relative">
       <button 
         onClick={() => setLanguageDropdownOpen(prev => !prev)} 
-        className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40"
+        className="px-3 py-1 border border-black rounded-lg text-xs bg-white flex items-center justify-between w-40 filter-btn"
       >
         <span>Language {filterLanguage ? `: ${languageNames[filterLanguage] || filterLanguage}` : ""}</span>
         <svg className={`w-3 h-3 ml-2 transition-transform ${languageDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -437,10 +635,10 @@ React.useEffect(() => {
         </svg>
       </button>
       {languageDropdownOpen && (
-        <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
-          <button onClick={() => { setFilterLanguage(""); setLanguageDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white">All</button>
+        <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow-lg p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto animate-fadeIn">
+          <button onClick={() => { setFilterLanguage(""); setLanguageDropdownOpen(false); }} className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white transition-all">All</button>
           {languages.map((lang,i)=>(
-            <button key={i} onClick={()=>{setFilterLanguage(lang); setLanguageDropdownOpen(false)}} className={`text-left px-2 py-1 border rounded text-xs ${filterLanguage===lang?"bg-black text-white":"bg-white text-black hover:bg-black hover:text-white"}`}>{languageNames[lang] || lang}</button>
+            <button key={i} onClick={()=>{setFilterLanguage(lang); setLanguageDropdownOpen(false)}} className={`text-left px-2 py-1 border rounded text-xs transition-all ${filterLanguage===lang?"bg-black text-white":"bg-white text-black hover:bg-black hover:text-white"}`}>{languageNames[lang] || lang}</button>
           ))}
         </div>
       )}
@@ -450,10 +648,10 @@ React.useEffect(() => {
     <div className="relative">
   <button 
     onClick={() => {
-      setEpochDropdownOpen(prev => !prev); // apre/chiude la dropdown
-      setHighlightEpoch(false);           // rimuove il blu appena cliccato
+      setEpochDropdownOpen(prev => !prev);
+      setHighlightEpoch(false);
     }} 
-    className={`px-3 py-1 border border-black rounded-lg text-xs flex items-center justify-between w-40
+    className={`px-3 py-1 border border-black rounded-lg text-xs flex items-center justify-between w-40 filter-btn
       ${highlightEpoch ? "bg-[#111827] text-white" : "bg-white text-black"}`
     }
   >
@@ -464,17 +662,17 @@ React.useEffect(() => {
   </button>
 
   {epochDropdownOpen && (
-    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1">
+    <div className="absolute mt-1 w-40 bg-white border border-black rounded shadow-lg p-2 z-50 flex flex-col gap-1 animate-fadeIn">
       <button 
         onClick={() => { setFilterEpoch(""); setEpochDropdownOpen(false); }} 
-        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
+        className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white transition-all"
       >
         All
       </button>
       {epochs.map((ep,i)=>(
         <button key={i} 
           onClick={()=>{ setFilterEpoch(ep); setEpochDropdownOpen(false); }}
-          className={`text-left px-2 py-1 border rounded text-xs ${filterEpoch===ep ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+          className={`text-left px-2 py-1 border rounded text-xs transition-all ${filterEpoch===ep ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
         >
           {epochNames[ep]}
         </button>
@@ -487,10 +685,10 @@ React.useEffect(() => {
     {/* AUTHOR */}
     <div className="relative">
     <button  onClick={() => {
-      setAuthorDropdownOpen(prev => !prev); // apre/chiude la dropdown
-      setHighlightAuthor(false);           // rimuove il blu appena cliccato
+      setAuthorDropdownOpen(prev => !prev);
+      setHighlightAuthor(false);
     }} 
-    className={`px-3 py-1 border border-black rounded-lg text-xs flex items-center justify-between w-40
+    className={`px-3 py-1 border border-black rounded-lg text-xs flex items-center justify-between w-40 filter-btn
       ${highlightAuthor ? "bg-[#111827] text-white" : "bg-white text-black"}`
     }
   >
@@ -500,12 +698,11 @@ React.useEffect(() => {
       </svg>
     </button>
 
-
       {authorDropdownOpen && (
-        <div className="absolute mt-1 w-48 bg-white border border-black rounded shadow p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto">
+        <div className="absolute mt-1 w-48 bg-white border border-black rounded shadow-lg p-2 z-50 flex flex-col gap-1 max-h-40 overflow-y-auto animate-fadeIn">
           <button 
             onClick={() => { setFilterAuthor(""); setAuthorDropdownOpen(false); }} 
-            className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white"
+            className="text-left px-2 py-1 border rounded text-xs bg-white hover:bg-black hover:text-white transition-all"
           >
             All
           </button>
@@ -514,20 +711,21 @@ React.useEffect(() => {
             <button 
               key={i} 
               onClick={()=>{ setFilterAuthor(a); setAuthorDropdownOpen(false); }}
-              className={`text-left px-2 py-1 border rounded text-xs ${filterAuthor===a ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
+              className={`text-left px-2 py-1 border rounded text-xs transition-all ${filterAuthor===a ? "bg-black text-white" : "bg-white text-black hover:bg-black hover:text-white"}`}
             >
               {a}
             </button>
           ))}
         </div>
-
-        
       )}
     </div>
 
 
         {/* ADVANCED SEARCH */}
-        <button onClick={() => setShowAdvanced(!showAdvanced)} className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition"> Advanced search </button>
+        <button onClick={() => setShowAdvanced(!showAdvanced)} 
+          className="px-3 py-1 border border-black rounded-lg text-xs bg-white hover:bg-black hover:text-white transition-all hover:scale-105">
+          {showAdvanced ? '−' : '+'} Advanced search
+        </button>
       </div>
 
       {/* INPUT DI RICERCA A DESTRA */}
@@ -536,20 +734,18 @@ React.useEffect(() => {
         placeholder="Search..."
         value={filterText}
         onChange={e => setFilterText(e.target.value)}
-        className="p-1 w-40 border text-xs rounded-lg ml-auto"
+        className="p-2 w-48 border text-xs rounded-lg ml-auto search-input"
       />
     </div>
 
        
         {/* ADVANCED PANEL */}
         {showAdvanced && (
-        <div className="mt-4 p-4 border bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-
-
+        <div className="mt-4 p-4 border bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm rounded-lg slide-in">
           {/* ADVANCED SEARCH */}
           <div>
-            <label className="font-semibold">Advanced search</label>
-            <select value={filterAdvancedSearch} onChange={e=>setFilterAdvancedSearch(e.target.value)} className="w-full p-2 border rounded">
+            <label className="font-semibold block mb-1">Advanced search</label>
+            <select value={filterAdvancedSearch} onChange={e=>setFilterAdvancedSearch(e.target.value)} className="w-full p-2 border rounded focus:border-black focus:ring-1 focus:ring-black transition-all">
               <option value="">All</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
@@ -558,8 +754,8 @@ React.useEffect(() => {
 
           {/* INDEX */}
           <div>
-            <label className="font-semibold">Index</label>
-            <select value={filterIndex} onChange={e=>setFilterIndex(e.target.value)} className="w-full p-2 border rounded">
+            <label className="font-semibold block mb-1">Index</label>
+            <select value={filterIndex} onChange={e=>setFilterIndex(e.target.value)} className="w-full p-2 border rounded focus:border-black focus:ring-1 focus:ring-black transition-all">
               <option value="">All</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
@@ -568,19 +764,18 @@ React.useEffect(() => {
 
           {/* GLOSSARY */}
           <div>
-            <label className="font-semibold">Glossary</label>
-            <select value={filterGlossary} onChange={e=>setFilterGlossary(e.target.value)} className="w-full p-2 border rounded">
+            <label className="font-semibold block mb-1">Glossary</label>
+            <select value={filterGlossary} onChange={e=>setFilterGlossary(e.target.value)} className="w-full p-2 border rounded focus:border-black focus:ring-1 focus:ring-black transition-all">
               <option value="">All</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
 
-
           {/* FACSIMILES */}
           <div>
-            <label className="font-semibold">Facsimiles</label>
-            <select value={filterFacsimiles} onChange={e=>setFilterFacsimiles(e.target.value)} className="w-full p-2 border rounded">
+            <label className="font-semibold block mb-1">Facsimiles</label>
+            <select value={filterFacsimiles} onChange={e=>setFilterFacsimiles(e.target.value)} className="w-full p-2 border rounded focus:border-black focus:ring-1 focus:ring-black transition-all">
               <option value="">All</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
@@ -589,11 +784,11 @@ React.useEffect(() => {
 
            {/* TOOL FILTER */}
           <div>
-            <label className="font-semibold">Tool</label>
+            <label className="font-semibold block mb-1">Tool</label>
             <select 
               value={filterTool} 
               onChange={e => setFilterTool(e.target.value)} 
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded focus:border-black focus:ring-1 focus:ring-black transition-all"
             >
               <option value="">All</option>
               {tools.map((t,i) => (
@@ -601,44 +796,91 @@ React.useEffect(() => {
               ))}
             </select>
           </div>
-
         </div>
       )}
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {[1,2,3,4,5,6].map(n => (
+              <div key={n} className="bg-white border p-4 h-80 loading rounded-lg"></div>
+            ))}
+          </div>
+        )}
 
         {/* CARDS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {paginatedBooks.map((b,i)=>(
-            <div key={i} onClick={()=>{setSelected(b); setShowSchedule(false); setOpenAccordion(null)}} className="cursor-pointer bg-white border p-4 hover:shadow-lg hover:scale-105 transition duration-300">
-              <div className="w-full h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
-                <img src={b.cover} alt={b.title} className="w-full h-full object-cover" onError={e=>e.target.src='https://via.placeholder.com/120x180?text=Buch'} />
+        {!isLoading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {paginatedBooks.map((b,i)=>(
+              <div 
+                key={i} 
+                onClick={()=>{setSelected(b); setShowSchedule(false); setOpenAccordion(null)}} 
+                className="card bg-white border p-4 rounded-lg"
+                onMouseEnter={() => setHoveredCard(i)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{ animationDelay: `${i * 0.05}s` }}
+              >
+                <div className="w-full h-56 bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg">
+                  <img 
+                    src={b.cover} 
+                    alt={b.title} 
+                    className="w-full h-full object-cover transition-transform duration-500"
+                    onError={e=>e.target.src='https://via.placeholder.com/120x180?text=Buch'} 
+                  />
+                </div>
+                <div className="mt-3 px-1 font-['Playfair Display']">
+                  <p className="font-semibold text-base truncate group-hover:text-[#5A7796]">{b.title}</p>
+                  <p className="text-sm text-gray-500 truncate">{b.author}</p>
+                </div>
+                
+                {/* Quick preview on hover */}
+                {hoveredCard === i && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-white p-2 text-xs transform translate-y-full transition-transform">
+                    Click for details
+                  </div>
+                )}
               </div>
-              <div className="mt-3 px-1 font-['Playfair Display']">
-                <p className="font-semibold text-base truncate">{b.title}</p>
-                <p className="text-sm text-gray-500 truncate">{b.author}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* PAGINAZIONE */}
-        <div className="flex justify-center gap-2 mt-6">
-          {Array.from({length: totalPages}, (_, i)=>i+1).map(n=>(
-            <button key={n} onClick={()=>setCurrentPage(n)} className={`px-3 py-1 rounded-xl shadow ${n===currentPage?"bg-[black] text-white":"bg-white text-[#010435] hover:bg-[#111827] hover:text-white"}`}>
-              {n}
+        {!isLoading && filteredBooks.length > 0 && (
+          <div className="flex justify-center gap-2 mt-6">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className={`px-3 py-1 rounded-xl shadow transition-all ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110 hover:bg-black hover:text-white'}`}
+            >
+              ←
             </button>
-          ))}
-        </div>
+            {Array.from({length: totalPages}, (_, i)=>i+1).map(n=>(
+              <button 
+                key={n} 
+                onClick={()=>setCurrentPage(n)} 
+                className={`px-3 py-1 rounded-xl shadow transition-all pagination-btn ${n===currentPage ? "bg-[black] text-white scale-110" : "bg-white text-[#010435] hover:bg-[#111827] hover:text-white"}`}
+              >
+                {n}
+              </button>
+            ))}
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className={`px-3 py-1 rounded-xl shadow transition-all ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110 hover:bg-black hover:text-white'}`}
+            >
+              →
+            </button>
+          </div>
+        )}
         
 
         {/* MODALE */}
       {selected && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-10 bg-white border-t border-black max-h-[80vh] overflow-auto font-['Playfair Display']">
-      
+        <div className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-10 bg-white border-t border-black max-h-[80vh] overflow-auto font-['Playfair Display'] modal">
           
           {/* CLOSE BUTTON */}
           <button 
-            className="absolute right-4 top-4 md:right-6 md:top-6 text-3xl" 
+            className="absolute right-4 top-4 md:right-6 md:top-6 text-3xl hover:rotate-90 transition-transform duration-300" 
             onClick={()=>setSelected(null)}
           >
             ×
@@ -653,7 +895,7 @@ React.useEffect(() => {
         <img
           src={selected.cover}
           alt={selected.title}
-          className="w-full md:w-[250px] h-[150px] object-cover border"
+          className="w-full md:w-[250px] h-[150px] object-cover border rounded-lg hover:scale-105 transition-transform duration-300"
         />
 
         {/* BOTTONI SEMPRE VISIBILI */}
@@ -663,7 +905,7 @@ React.useEffect(() => {
               href={selected.URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display']"
+              className="px-3 py-1 bg-[#5b0909] text-white rounded-xl font-['Playfair Display'] hover:bg-[#7b0b0b] hover:scale-105 transition-all"
             >
               URL
             </a>
@@ -671,7 +913,7 @@ React.useEffect(() => {
 
           <button 
             onClick={()=>setShowSchedule(prev=>!prev)} 
-            className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display']"
+            className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display'] hover:bg-[#3a4a2a] hover:scale-105 transition-all"
           >
             Schedule
           </button>
@@ -679,7 +921,7 @@ React.useEffect(() => {
           {selected.institution?.lat && selected.institution?.lng && (
         <a 
           href={`map.html?id=${selected.id}`} 
-          className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] transition"
+          className="px-3 py-1 bg-[#1e40af] text-white rounded-xl flex items-center gap-2 hover:bg-[#1e3a8a] hover:scale-105 transition-all"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -692,7 +934,7 @@ React.useEffect(() => {
 
       {/* DETTAGLI */}
       <div className="flex flex-col flex-grow min-w-0">
-        <h2 className="text-3xl mb-2 font-['Playfair_Display']">„{selected.title}“</h2>
+        <h2 className="text-3xl mb-2 font-['Playfair_Display'] hover:translate-x-1 transition-transform">„{selected.title}“</h2>
 
         <div className="grid grid-cols-2 gap-x-12 gap-y-2 mb-4 text-sm md:text-base">
           <p><strong>Author</strong><br />{selected.author}</p>
@@ -704,101 +946,57 @@ React.useEffect(() => {
         {selected.branch && (
           <div className="flex flex-wrap gap-2 mb-6">
             {selected.branch.split(",").map(b=>b.trim()).map((branch,i)=>(
-              <button key={i} onClick={()=>{setFilterBranch(branch); setSelected(null); setCurrentPage(1);}}
-                className="px-3 py-1 border border-black rounded-xl text-sm hover:bg-black hover:text-white transition">{branch}</button>
+              <button 
+                key={i} 
+                onClick={()=>{setFilterBranch(branch); setSelected(null); setCurrentPage(1);}}
+                className="px-3 py-1 border border-black rounded-xl text-sm hover:bg-black hover:text-white transition-all hover:scale-105"
+              >
+                {branch}
+              </button>
             ))}
           </div>
         )}
 
         {/* SCHEDULE / ACCORDION */}
         {showSchedule && (
-          <div className="border-t pt-4 space-y-4">
-
+          <div className="border-t pt-4 space-y-2">
             <Accordion
-              title={
-                <div className="flex items-center justify-between">
-                  Content
-                  <svg
-                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="content" ? "rotate-90" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              }
+              title="Content"
               open={openAccordion==="content"}
               onClick={() => setOpenAccordion(openAccordion==="content" ? null : "content")}
             >
               <ul className="list-disc ml-5">
-                <li><strong>Writing support:</strong> {selected.Content?.["Writing support"] ?? "N/A"}</li>
-                <li><strong>Facsimiles:</strong> {selected.Content?.facsimiles ?? "N/A"}</li>
+                <li><strong>Writing support:</strong> {selected.writing_support ?? "N/A"}</li>
+                <li><strong>Facsimiles:</strong> {selected.facsimiles ?? "N/A"}</li>
               </ul>
             </Accordion>
 
             <Accordion
-              title={
-                <div className="flex items-center justify-between">
-                  Features
-                  <svg
-                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="features" ? "rotate-90" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              }
+              title="Features"
               open={openAccordion==="features"}
               onClick={() => setOpenAccordion(openAccordion==="features" ? null : "features")}
             >
               <ul className="list-disc ml-5">
-                <li>Advanced search: {selected.Features?.advanced_search === "yes" ? "Yes" : "No"}</li>
-                <li>Index: {selected.Features?.index === "yes" ? "Yes" : "No"}</li>
-                <li>Glossary: {selected.Features?.glossary === "yes" ? "Yes" : "No"}</li>
+                <li>Advanced search: {selected.advanced_search === "yes" ? "Yes" : "No"}</li>
+                <li>Index: {selected.index === "yes" ? "Yes" : "No"}</li>
+                <li>Glossary: {selected.glossary === "yes" ? "Yes" : "No"}</li>
               </ul>
             </Accordion>
 
             <Accordion
-              title={
-                <div className="flex items-center justify-between">
-                  Data & Reuse
-                  <svg
-                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="data" ? "rotate-90" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              }
+              title="Data & Reuse"
               open={openAccordion==="data"}
               onClick={() => setOpenAccordion(openAccordion==="data" ? null : "data")}
             >
               <ul className="list-disc ml-5">
-                <li><strong>Encoding:</strong> {selected.dataReuse?.encoding ?? "N/A"}</li>
-                <li><strong>Download:</strong> {selected.dataReuse?.download ?? "N/A"}</li>
-                <li><strong>License:</strong> {selected.dataReuse?.license ?? "N/A"}</li>
+                <li><strong>Encoding:</strong> {selected.encoding ?? "N/A"}</li>
+                <li><strong>Download:</strong> {selected.download ?? "N/A"}</li>
+                <li><strong>License:</strong> {selected.creative_commons_license ?? "N/A"}</li>
               </ul>
             </Accordion>
 
            <Accordion
-              title={
-                <div className="flex items-center justify-between">
-                  Tool
-                  <svg
-                    className={`w-4 h-4 ml-2 transition-transform ${openAccordion==="tool" ? "rotate-90" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              }
+              title="Tool"
               open={openAccordion==="tool"}
               onClick={() => setOpenAccordion(openAccordion==="tool" ? null : "tool")}
             >
@@ -811,10 +1009,6 @@ React.useEffect(() => {
                 }
               </ul>
             </Accordion>
-
-
-
-
           </div>
         )}
 
@@ -829,9 +1023,29 @@ React.useEffect(() => {
   );
 }
 
+// Aggiungi stili per le animazioni
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease forwards;
+  }
+  .animate-slideDown {
+    animation: slideDown 0.3s ease forwards;
+  }
+`;
+document.head.appendChild(style);
+
 /* RENDER */
 ReactDOM.createRoot(document.getElementById("root")).render(<BookBrowserUI />);
 
 </script>
 </body>
-</html>  
+</html>

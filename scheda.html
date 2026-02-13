@@ -2,461 +2,542 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Schedule</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHIDE · Schedule</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+  <!-- DataTables & dependencies -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  
+  <!-- React solo per navbar -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-</head>
-<body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
 
-  <div id="navbar-root"></div>
-  <main class="max-w-7xl mx-auto px-4 py-2">
-
-
-    <section class="text-center mb-10">
-      <div class="w-full h-1 bg-[#010435] rounded-full mb-4"></div>
-      <h1 class="text-4xl md:text-6xl font-medium text-[#010435]">SCHEDULE</h1>
-      <div class="w-full h-1 bg-[#010435] rounded-full mt-4"></div>
-    </section>
-  
-  </main>
-  
   <style>
-    body {
-      font-family: 'Playfair Display', serif;
-      padding-top: 80px;
-      background-color: #EFF4FA;
-      margin: 0;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .container {
-      max-width: 1400px;
-      margin: auto;
-      padding: 0 40px;
+    
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .slide-in {
+      animation: slideIn 0.5s ease forwards;
+    }
+    
+    /* DataTables custom styling */
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(1, 4, 53, 0.08);
+      background: white;
+      font-family: 'Inter', sans-serif;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
+    table.dataTable thead th {
+      background-color: #f8fafd;
       color: #010435;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 16px 12px;
+      border-bottom: 2px solid #e2e8f0;
+      font-family: 'Playfair Display', serif;
+      position: relative;
+    }
+
+    table.dataTable tbody td {
+      padding: 12px;
+      border-bottom: 1px solid #edf2f7;
+      color: #1e293b;
+      font-size: 0.85rem;
+      transition: background-color 0.2s ease;
+    }
+
+    table.dataTable tbody tr:hover td {
+      background-color: #f1f5f9;
+    }
+
+    .filter-input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      background: white;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .filter-input:focus {
+      outline: none;
+      border-color: #010435;
+      box-shadow: 0 0 0 3px rgba(1, 4, 53, 0.1);
+    }
+
+    .dt-buttons {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dt-button {
+      background: #010435 !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 8px !important;
+      padding: 8px 18px !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      font-family: 'Inter', sans-serif !important;
+      letter-spacing: 0.02em;
+      transition: all 0.2s ease !important;
+      box-shadow: 0 2px 4px rgba(1, 4, 53, 0.2) !important;
+    }
+
+    .dt-button:hover {
+      background: #2c3e6d !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(1, 4, 53, 0.3) !important;
+    }
+
+    .dataTables_paginate {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .paginate_button {
+      background: white !important;
+      color: #010435 !important;
+      border: 1px solid #010435 !important;
+      border-radius: 8px !important;
+      padding: 6px 14px !important;
+      font-size: 0.85rem !important;
+      font-weight: 500 !important;
+      transition: all 0.2s ease !important;
+      cursor: pointer;
+    }
+
+    .paginate_button.current {
+      background: #010435 !important;
+      color: white !important;
+    }
+
+    .paginate_button:hover:not(.current) {
+      background: #e2e8f0 !important;
+      transform: scale(1.05);
+    }
+
+    .data-table-link {
+      color: #010435;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #010435;
+      transition: all 0.2s ease;
+    }
+
+    .data-table-link:hover {
+      color: #5A7796;
+      border-bottom-color: #5A7796;
+    }
+
+    .tool-badge {
+      background: #e9eef3;
+      color: #010435;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .tool-badge:hover {
+      background: #010435;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Fix per evitare contenuti tagliati */
+    body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
 
     .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .dataTables_wrapper {
+      width: 100%;
       overflow-x: auto;
     }
 
     table.dataTable {
-      width: auto !important;
-      margin: auto;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      background-color: #fff;
+      min-width: 1800px; /* Larghezza minima per mostrare tutte le colonne */
     }
-
-    table.dataTable th, table.dataTable td {
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      padding: 10px 8px;
-    }
-
-    table.dataTable th:last-child,
-    table.dataTable td:last-child {
-      border-right: none;
-    }
-
-    table.dataTable thead {
-      background-color: #e2e8f0;
-    }
-
-    table.dataTable thead input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 4px 6px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .dt-button {
-      background-color: #1F426A !important;
-      color: #ffffff !important;
-      border: none !important;
-      border-radius: 6px !important;
-      padding: 6px 14px !important;
-      font-weight: 600;
-    }
-
-    .dt-button:hover,
-    .dt-button:focus,
-    .dt-button:active {
-      background-color: #1F426A !important;
-      color: #ffffff !important;
-      box-shadow: none !important;
-      outline: none !important;
-    }
-
-    .dataTables_paginate .paginate_button {
-      background: #1F426A !important;
-      color: #ffffff !important;
-      border: 2px solid #1F426A !important;
-      border-radius: 6px !important;
-      margin: 0 3px !important;
-      padding: 4px 10px !important;
-      box-shadow: none !important;
-    }
-
-    .dataTables_paginate .paginate_button:not(.current):not(.disabled):hover {
-      background: #ffffff !important;
-      color: #1F426A !important;
-      border: 2px solid #1F426A !important;
-    }
-
-    .dataTables_paginate .paginate_button.current {
-      background: #ffffff !important;
-      color: #1F426A !important;
-      border: 2px solid #1F426A !important;
-      font-weight: 700;
-    }
-
-    .dataTables_paginate .paginate_button.disabled {
-      background: #cccccc !important;
-      color: #666666 !important;
-      border: 2px solid #cccccc !important;
-      cursor: not-allowed !important;
-    }
-    .dataTables_wrapper .dt-buttons {
-  margin-bottom: 4px; /* oppure 0 */
-}
-
-
-
   </style>
 </head>
-<body>
 
+<body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
 
-<div class="container">
-  <div class="table-wrapper">
-    <table id="catalog" class="display">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Author Surname</th>
-          <th>Author Name</th>
-          <th>Curator Surname</th>
-          <th>Curator Name</th>
-          <th>Institution</th>
-          <th>Place</th>
-          <th>Country</th>
-          <th>Date</th>
-          <th>Language</th>
-          <th>Epoch</th>
-          <th>Branch</th>
-          <th>Writing Support</th>
-          <th>Facsimiles</th>
-          <th>Advanced Search</th>
-          <th>Index</th>
-          <th>Glossary</th>
-          <th>Encoding</th>
-          <th>Download</th>
-          <th>License</th>
-          <th>Tool</th>
-        </tr>
-        <tr>
-          <!-- Filtri -->
-          <th><input></th><th><input></th><th><input></th><th><input></th>
-          <th><input></th><th><input></th><th><input></th><th><input></th>
-          <th><input></th><th><input></th><th><input></th><th><input></th>
-          <th><input></th><th><input></th><th><input></th><th><input></th>
-          <th><input></th><th><input></th><th><input></th><th><input></th><th><input></th>
-          <th><input></th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-</div>
+  <!-- Navbar React -->
+  <div id="navbar-root"></div>
 
- <!-- FOOTER -->
-<footer class="bg-[#111827] text-gray-400 py-4 mt-20">
-  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
-    <span class="text-white font-semibold">PHIDE</span>
-    <span class="mx-2">·</span>
-    <a
-      href="mailto:chiara.martina3@studio.unibo.it"
-      class="hover:text-white underline"
-    >
-      chiara.martina3@studio.unibo.it
-    </a>
-    <span class="mx-2">·</span>
-    <span>&copy; 2026 CC BY-SA 4.0</span>
-  </div>
-</footer>
+  <!-- Hero Section -->
+  <section class="w-full mt-24 fade-in">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#010435] to-transparent rounded-full"></div>
+      <p class="text-6xl font-medium text-[black] tracking-wide hover:scale-105 transition-transform duration-300" style="font-family: 'Playfair Display', serif">
+        SCHEDULE
+      </p>
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#010435] to-transparent rounded-full"></div>
+    </div>
+  </section>
 
+  <!-- DataTable Container -->
+  <main class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+    <div class="bg-[#EFF4FA] rounded-2xl p-9 slide-in">
+      <div class="table-wrapper">
+        <table id="catalog-table" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Author Surname</th>
+              <th>Author Name</th>
+              <th>Curator Surname</th>
+              <th>Curator Name</th>
+              <th>Institution</th>
+              <th>Place</th>
+              <th>Country</th>
+              <th>Date</th>
+              <th>Language</th>
+              <th>Epoch</th>
+              <th>Branch</th>
+              <th>Writing Support</th>
+              <th>Facsimiles</th>
+              <th>Advanced Search</th>
+              <th>Index</th>
+              <th>Glossary</th>
+              <th>Encoding</th>
+              <th>Download</th>
+              <th>License</th>
+              <th>Tool</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </main>
 
+  <!-- FOOTER -->
+  <footer class="bg-[#111827] text-gray-400 py-8 mt-20 w-full">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+      <span class="text-white font-semibold text-lg tracking-wider hover:text-white/80 transition-colors">PHIDE</span>
+      <span class="mx-3 text-gray-500">·</span>
+      <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline underline-offset-2 transition-all hover:tracking-wider">
+        chiara.martina3@studio.unibo.it
+      </a>
+      <span class="mx-3 text-gray-500">·</span>
+      <span>&copy; 2026 CC BY-SA 4.0</span>
+    </div>
+  </footer>
 
-  <!-- React Navbar Script -->
-<script type="text/babel">
-function Navbar() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  <!-- Scripts -->
+  <script type="text/babel">
+    // Navbar Component (solo React qui)
+    function Navbar() {
+      const [mobileOpen, setMobileOpen] = React.useState(false);
+      const [dropdownOpen, setDropdownOpen] = React.useState(false);
+      const [scrolled, setScrolled] = React.useState(false);
 
-  return (
-    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-[5000]" style={{ fontFamily: 'Playfair Display, serif' }}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between h-16 items-center">
+      React.useEffect(() => {
+        const handleScroll = () => {
+          setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
 
-          {/* Logo */}
-          <a href="index.html" className="text-xl font-semibold text-[#010435]">
-            PHIDE
-          </a>
+      return (
+        <nav className={`w-full fixed top-0 left-0 z-[5000] transition-all duration-500 ${
+          scrolled ? 'bg-[#EFF4FA] shadow-lg backdrop-blur-sm bg-opacity-90' : 'bg-[#EFF4FA]'
+        }`} style={{ fontFamily: 'Playfair Display, serif' }}>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex justify-between h-16 items-center">
+              <a href="index.html" className="text-xl font-semibold text-[#010435] relative group">
+                PHIDE
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#010435] to-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+              </a>
 
-          {/* Desktop menu */}
-          <div className="hidden md:flex space-x-6 items-center">
+              <div className="hidden md:flex space-x-6 items-center">
+                <div className="relative">
+                  <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-1 font-medium hover:text-[#5A7796] transition-all group">
+                    Browse
+                    <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
 
-            {/* Dropdown */}
-            <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5A7796]"
-            >
-              Browse
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+                  {dropdownOpen && (
+                    <div className="absolute mt-2 w-48 bg-white border rounded shadow-xl flex flex-col animate-fadeIn">
+                      <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">Catalogue</a>
+                      <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">Schedule</a>
+                    </div>
+                  )}
+                </div>
 
-            {dropdownOpen && (
-              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Catalogue
+                <a href="map.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+                  Map
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/scheda.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Schedule
+                <a href="documentation.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+                  Documentation
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
                 </a>
               </div>
-            )}
+
+              <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 hover:bg-gray-200 rounded-lg transition-all hover:scale-110">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mobileOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
 
+          {mobileOpen && (
+            <div className="md:hidden bg-white border-t shadow-lg animate-slideDown">
+              <div className="px-4 py-3 space-y-2">
+                <a href="" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Browse</a>
+                <a href="catalogue-period.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Catalogue</a>
+                <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Schedule</a>
+                <a href="map.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Map</a>
+                <a href="documentation.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Documentation</a>
+              </div>
+            </div>
+          )}
+        </nav>
+      );
+    }
 
-            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
-          </div>
-
-          {/* Mobile button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="" className="block">Browse</a>
-           <a href="catalogue-period.html" className="block">Catalogue</a>
-          <a href="scheda.html" className="block">Scheda</a>
-          <a href="map.html" className="block">Map</a>
-          <a href="documentation.html" className="block">Documentation</a>
-        </div>
-      )}
-    </nav>
-  );
-}
-
-
+    // Render navbar
     ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
   </script>
 
-<!-- DataTables Script -->
-<script>
-$(document).ready(function(){
-  fetch('./data/list.csv')
-    .then(response => response.text())
-    .then(csv => {
-      const parsed = Papa.parse(csv, { header:true, skipEmptyLines:true });
-      const data = parsed.data;
+  <script>
+    // DataTables initialization - Puro JavaScript, fuori da React
+    $(document).ready(function() {
+      // Prima distruggiamo qualsiasi tabella esistente
+      if ($.fn.DataTable.isDataTable('#catalog-table')) {
+        $('#catalog-table').DataTable().destroy();
+      }
+      
+      // Poi carichiamo i dati e inizializziamo
+      fetch('./data/list.csv')
+        .then(response => response.text())
+        .then(csv => {
+          const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true, dynamicTyping: false });
+          const data = parsed.data;
 
-      const table = $('#catalog').DataTable({
-        data: data,
-        searching: false, // disattiva ricerca globale
-        dom: 'Btip',
-        buttons: [
-          // Scarica CSV originale
-          {
-            text: 'CSV',
-            action: function ( e, dt, node, config ) {
-              fetch('./data/list.csv')
-                .then(resp => resp.blob())
-                .then(blob => {
-                  const url = window.URL.createObjectURL(blob);
+          const table = $('#catalog-table').DataTable({
+            data: data,
+            searching: false,
+            dom: 'Btip',
+            buttons: [
+              {
+                text: 'CSV',
+                action: function() {
+                  fetch('./data/list.csv')
+                    .then(resp => resp.blob())
+                    .then(blob => {
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = 'phide_schedule.csv';
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                    });
+                }
+              },
+              {
+                text: 'EXCEL',
+                action: function() {
+                  fetch('./data/list_ex.xlsx')
+                    .then(resp => resp.blob())
+                    .then(blob => {
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = 'phide_schedule.xlsx';
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                    });
+                }
+              },
+              {
+                text: 'JSON',
+                action: function(e, dt) {
+                  const jsonData = dt.data().toArray();
+                  const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
                   const a = document.createElement('a');
                   a.href = url;
-                  a.download = 'list.csv';
+                  a.download = 'phide_schedule.json';
                   a.click();
-                  window.URL.revokeObjectURL(url);
-                });
+                  URL.revokeObjectURL(url);
+                }
+              }
+            ],
+            columns: [
+              { data: 'ID' },
+              { 
+                data: 'title',
+                render: function(data, type, row) {
+                  if (data && row.URL) {
+                    return `<a href="${row.URL}" target="_blank" class="data-table-link">${data}</a>`;
+                  }
+                  return data || '';
+                }
+              },
+              { data: 'author_surname' },
+              { data: 'author_name' },
+              { data: 'curator_surname' },
+              { data: 'curator_name' },
+              { 
+                data: 'institution_name',
+                render: function(data, type, row) {
+                  if (data && row.institution_website) {
+                    return `<a href="${row.institution_website}" target="_blank" class="data-table-link">${data}</a>`;
+                  }
+                  return data || '';
+                }
+              },
+              { data: 'located_at' },
+              { data: 'part_of' },
+              { data: 'date' },
+              { data: 'language' },
+              { data: 'epoch' },
+              { data: 'branch' },
+              { data: 'writing_support' },
+              { data: 'facsimiles' },
+              { data: 'advanced_search' },
+              { data: 'index' },
+              { data: 'glossary' },
+              { data: 'encoding' },
+              { data: 'download' },
+              { data: 'creative_commons_license' },
+              {
+                data: 'tool',
+                render: function(data) {
+                  if (!data) return '';
+                  return `<span class="tool-badge">${data}</span>`;
+                }
+              }
+            ],
+            orderCellsTop: true,
+            fixedHeader: true,
+            pageLength: 25,
+            scrollX: true,  // Abilita lo scroll orizzontale
+            scrollCollapse: true,
+            language: {
+              lengthMenu: "Mostra _MENU_ elementi",
+              info: "Mostrando _START_ a _END_ di _TOTAL_ risultati",
+              paginate: {
+                first: "Prima",
+                last: "Ultima",
+                next: "→",
+                previous: "←"
+              }
+            },
+            initComplete: function() {
+              // Aggiungiamo i filtri dopo l'inizializzazione
+              const api = this.api();
+              
+              // Aggiungiamo input di filtro a ogni colonna
+              api.columns().every(function() {
+                const column = this;
+                const header = $(column.header());
+                
+                // Creiamo l'input
+                const input = $('<input class="filter-input" placeholder="Filtra...">')
+                  .appendTo(header)
+                  .on('keyup change', function() {
+                    if (column.search() !== this.value) {
+                      column.search(this.value).draw();
+                    }
+                  });
+              });
+              
+              // Aggiustiamo la larghezza dopo l'inizializzazione
+              api.columns.adjust();
             }
-          },
-          // Excel
-          {
-            text: 'EXCEL',
-            action: function ( e, dt, node, config ) {
-              fetch('./data/list_ex.xlsx')
-                .then(resp => resp.blob())
-                .then(blob => {
-                  const url = window.URL.createObjectURL(blob);
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = 'list_ex.xlsx';
-                  a.click();
-                  window.URL.revokeObjectURL(url);
-                });
-            }
-          },
-          // JSON
-          {
-            text: 'JSON',
-            action: function ( e, dt, node, config ) {
-              const jsonData = dt.data().toArray();
-              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: '.data/list_json.json' });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = 'list_json.json';
-              a.click();
-              URL.revokeObjectURL(url);
-            }
-          }
-        ],
-        columns: [
-  { data: 'ID' },
-  { 
-    data: 'title',
-    render: function(data, type, row) {
-      if(data && row.URL) {
-        return `<a href="${row.URL}" target="_blank" class="text-blue-600 hover:underline">${data}</a>`;
-      }
-      return data;
-    }
-  },
-  { data: 'author_surname' },
-  { data: 'author_name' },
-  { 
-    data: 'curator_surname'
-  },
-  { data: 'curator_name' },
-  { 
-    data: 'institution_name',
-    render: function(data, type, row) {
-      if(data && row.institution_website) {
-        return `<a href="${row.institution_website}" target="_blank" class="text-blue-600 hover:underline">${data}</a>`;
-      }
-      return data;
-    }
-  },
-  { data: 'located_at' },
-  { data: 'part_of' },
-  { data: 'date' },
-  { data: 'language' },
-  { data: 'epoch' },
-  { data: 'branch' },
-  { data: 'writing_support' },
-  { data: 'facsimiles' },
-  { data: 'advanced_search' },
-  { data: 'index' },
-  { data: 'glossary' },
-  { data: 'encoding' },
-  { data: 'download' },
-  { data: 'creative_commons_license' },
-  {
-  data: 'tool',
-  render: function (data) {
-    if (!data) return '';
-    return `
-      <span class="text-black-800">
-        ${data}
-      </span>
-    `;
-  }
-},
-],
-        orderCellsTop: true,
-        fixedHeader: true
-      });
+          });
+          
+          // Aggiustiamo la larghezza quando la finestra viene ridimensionata
+          $(window).on('resize', function() {
+            table.columns.adjust();
+          });
+        })
+        .catch(error => {
+          console.error('Errore nel caricamento del CSV:', error);
+          document.getElementById('catalog-table').innerHTML = '<tr><td colspan="22" class="text-center p-8 text-red-600">Errore nel caricamento dei dati</td></tr>';
+        });
     });
-});
+  </script>
 
-</script>
-
-<style>
-.full-screen-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.branch-carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 1rem;
-  padding: 0 1rem;
-}
-.branch-card {
-  flex: 0 0 auto;
-  width: 250px;
-  background: #f9f9f9;
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  padding: 1rem;
-}
-.branch-card img.branch-img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-.carousel-btn {
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-</style>
-
-<script>
-const carousel = document.getElementById('branch-carousel');
-
-function prevBranch() {
-  carousel.scrollBy({ left: -300, behavior: 'smooth' });
-}
-
-function nextBranch() {
-  carousel.scrollBy({ left: 300, behavior: 'smooth' });
-}
-</script>
-
+  <!-- Animation styles -->
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .animate-slideDown {
+      animation: slideDown 0.3s ease forwards;
+    }
+  </style>
 
 </body>
 </html>

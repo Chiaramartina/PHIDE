@@ -3,238 +3,1377 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PHIDE</title>
+  <title>PHIDE - Philosophical Digital Edition Catalogue</title>
+  
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #EFF4FA;
+      color: #010435;
+      overflow-x: hidden;
+      font-family: 'Playfair Display', serif;
+    }
+
+    h1, h2, h3, h4, .font-serif {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* Palette linee */
+    :root {
+      --blu-scuro: #010435;
+      --celeste: #5A7796;
+      --arancio: #E67E22;
+    }
+
+    /* Riduzione animazioni per preferenza utente */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Animazioni principali */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Animazioni linee */
+    @keyframes nagareHorizontal {
+      0% {
+        transform: translateX(-40px) scaleX(0.98);
+      }
+      50% {
+        transform: translateX(40px) scaleX(1.02);
+      }
+      100% {
+        transform: translateX(-40px) scaleX(0.98);
+      }
+    }
+
+    @keyframes nagareVertical {
+      0% {
+        transform: translateY(-40px) scaleY(0.98);
+      }
+      50% {
+        transform: translateY(40px) scaleY(1.02);
+      }
+      100% {
+        transform: translateY(-40px) scaleY(0.98);
+      }
+    }
+
+    @keyframes mawaru {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.05);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes yuragi {
+      0% {
+        transform: translateY(0) translateX(0) skew(0deg);
+      }
+      25% {
+        transform: translateY(-8px) translateX(4px) skew(1deg);
+      }
+      50% {
+        transform: translateY(0) translateX(8px) skew(0deg);
+      }
+      75% {
+        transform: translateY(8px) translateX(4px) skew(-1deg);
+      }
+      100% {
+        transform: translateY(0) translateX(0) skew(0deg);
+      }
+    }
+
+    @keyframes kaze {
+      0%, 100% {
+        opacity: 0.15;
+        filter: blur(1px);
+      }
+      50% {
+        opacity: 0.35;
+        filter: blur(2px);
+      }
+    }
+
+    @keyframes kaori {
+      0% {
+        stroke-dashoffset: 800;
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.4;
+      }
+      100% {
+        stroke-dashoffset: 0;
+        opacity: 0.25;
+      }
+    }
+
+    /* Sezioni a schermo intero */
+    .full-screen-section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      padding-top: 80px;
+      padding-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      background: #EFF4FA;
+      overflow: hidden;
+    }
+
+    /* Container linee */
+    .lines-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Linee orizzontali */
+    .thin-line-h {
+      position: absolute;
+      height: 1px;
+      opacity: 0.25;
+    }
+
+    .thin-line-h-1 {
+      top: 15%;
+      left: -5%;
+      width: 110%;
+      background: linear-gradient(90deg, transparent, var(--blu-scuro), transparent);
+      animation: nagareHorizontal 25s ease-in-out infinite;
+    }
+
+    .thin-line-h-2 {
+      top: 40%;
+      left: -10%;
+      width: 120%;
+      background: linear-gradient(90deg, transparent, var(--celeste), transparent);
+      animation: nagareHorizontal 22s ease-in-out infinite reverse;
+    }
+
+    .thin-line-h-3 {
+      bottom: 25%;
+      right: -5%;
+      width: 110%;
+      background: linear-gradient(90deg, transparent, var(--arancio), transparent);
+      animation: nagareHorizontal 28s ease-in-out infinite;
+    }
+
+    .thin-line-h-4 {
+      top: 70%;
+      left: -8%;
+      width: 115%;
+      background: linear-gradient(90deg, transparent, var(--blu-scuro), transparent);
+      animation: nagareHorizontal 24s ease-in-out infinite reverse;
+    }
+
+    .thin-line-h-5 {
+      bottom: 10%;
+      left: -15%;
+      width: 130%;
+      background: linear-gradient(90deg, transparent, var(--celeste), transparent);
+      animation: nagareHorizontal 30s ease-in-out infinite;
+    }
+
+    /* Linee verticali */
+    .thin-line-v {
+      position: absolute;
+      width: 1px;
+      opacity: 0.25;
+    }
+
+    .thin-line-v-1 {
+      left: 10%;
+      top: -10%;
+      height: 120%;
+      background: linear-gradient(180deg, transparent, var(--blu-scuro), transparent);
+      animation: nagareVertical 26s ease-in-out infinite;
+    }
+
+    .thin-line-v-2 {
+      left: 30%;
+      top: -15%;
+      height: 130%;
+      background: linear-gradient(180deg, transparent, var(--celeste), transparent);
+      animation: nagareVertical 23s ease-in-out infinite reverse;
+    }
+
+    .thin-line-v-3 {
+      right: 20%;
+      top: -8%;
+      height: 115%;
+      background: linear-gradient(180deg, transparent, var(--arancio), transparent);
+      animation: nagareVertical 27s ease-in-out infinite;
+    }
+
+    .thin-line-v-4 {
+      right: 45%;
+      top: -12%;
+      height: 125%;
+      background: linear-gradient(180deg, transparent, var(--blu-scuro), transparent);
+      animation: nagareVertical 21s ease-in-out infinite reverse;
+    }
+
+    .thin-line-v-5 {
+      left: 70%;
+      top: -5%;
+      height: 110%;
+      background: linear-gradient(180deg, transparent, var(--celeste), transparent);
+      animation: nagareVertical 29s ease-in-out infinite;
+    }
+
+    /* Linee diagonali */
+    .diagonal-line {
+      position: absolute;
+      width: 2px;
+      height: 250px;
+      opacity: 0.2;
+      transform-origin: center;
+    }
+
+    .diag-1 {
+      top: 5%;
+      left: 15%;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, transparent, var(--blu-scuro), transparent);
+      animation: mawaru 50s linear infinite;
+    }
+
+    .diag-2 {
+      bottom: 10%;
+      right: 20%;
+      transform: rotate(-30deg);
+      background: linear-gradient(135deg, transparent, var(--celeste), transparent);
+      animation: mawaru 55s linear infinite reverse;
+    }
+
+    .diag-3 {
+      top: 30%;
+      right: 35%;
+      transform: rotate(15deg);
+      background: linear-gradient(135deg, transparent, var(--arancio), transparent);
+      animation: yuragi 30s ease-in-out infinite;
+    }
+
+    .diag-4 {
+      top: 60%;
+      left: 25%;
+      transform: rotate(60deg);
+      background: linear-gradient(135deg, transparent, var(--blu-scuro), transparent);
+      animation: mawaru 60s linear infinite;
+    }
+
+    .diag-5 {
+      bottom: 30%;
+      left: 40%;
+      transform: rotate(-15deg);
+      background: linear-gradient(135deg, transparent, var(--celeste), transparent);
+      animation: yuragi 35s ease-in-out infinite reverse;
+    }
+
+    /* Archi/curve */
+    .curve-line {
+      position: absolute;
+      border: 1px solid;
+      border-radius: 50%;
+      opacity: 0.15;
+      filter: blur(0.5px);
+    }
+
+    .curve-1 {
+      top: -150px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      border-color: var(--blu-scuro);
+      animation: mawaru 70s linear infinite;
+    }
+
+    .curve-2 {
+      bottom: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      border-color: var(--celeste);
+      border-style: dashed;
+      animation: mawaru 65s linear infinite reverse;
+    }
+
+    .curve-3 {
+      top: 20%;
+      left: 5%;
+      width: 300px;
+      height: 300px;
+      border-color: var(--arancio);
+      border-style: dotted;
+      animation: kaze 12s ease-in-out infinite, yuragi 28s ease-in-out infinite;
+    }
+
+    .curve-4 {
+      bottom: 15%;
+      right: 10%;
+      width: 350px;
+      height: 350px;
+      border-color: var(--blu-scuro);
+      border-width: 2px;
+      border-style: double;
+      animation: yuragi 32s ease-in-out infinite;
+    }
+
+    .curve-5 {
+      top: 50%;
+      right: 30%;
+      width: 200px;
+      height: 200px;
+      border-color: var(--celeste);
+      border-width: 1px;
+      animation: mawaru 45s linear infinite;
+    }
+
+    /* Linee che si disegnano */
+    .draw-line {
+      position: absolute;
+      height: 2px;
+      background: transparent;
+      border-bottom: 1px dashed;
+      width: 250px;
+      transform-origin: left;
+      filter: blur(0.5px);
+    }
+
+    .draw-1 {
+      top: 12%;
+      left: 8%;
+      transform: rotate(12deg);
+      border-color: var(--blu-scuro);
+      animation: kaori 12s ease-in-out infinite;
+    }
+
+    .draw-2 {
+      bottom: 20%;
+      right: 5%;
+      transform: rotate(-18deg) scaleX(-1);
+      border-color: var(--arancio);
+      animation: kaori 14s ease-in-out infinite reverse;
+    }
+
+    .draw-3 {
+      top: 45%;
+      left: 20%;
+      transform: rotate(25deg);
+      border-color: var(--celeste);
+      animation: kaori 16s ease-in-out infinite 2s;
+    }
+
+    .draw-4 {
+      bottom: 35%;
+      right: 15%;
+      transform: rotate(-25deg);
+      border-color: var(--blu-scuro);
+      animation: kaori 13s ease-in-out infinite 1s;
+    }
+
+    .draw-5 {
+      top: 70%;
+      left: 40%;
+      transform: rotate(5deg);
+      border-color: var(--arancio);
+      animation: kaori 15s ease-in-out infinite 3s;
+    }
+
+    /* Punti */
+    .dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      opacity: 0.2;
+      filter: blur(0.5px);
+    }
+
+    .dot-1 {
+      top: 25%;
+      left: 15%;
+      background: var(--blu-scuro);
+      animation: kaze 6s ease-in-out infinite;
+    }
+
+    .dot-2 {
+      top: 55%;
+      left: 75%;
+      width: 5px;
+      height: 5px;
+      background: var(--celeste);
+      animation: kaze 8s ease-in-out infinite 1s;
+    }
+
+    .dot-3 {
+      top: 80%;
+      left: 35%;
+      background: var(--arancio);
+      animation: kaze 7s ease-in-out infinite 2s;
+    }
+
+    .dot-4 {
+      top: 15%;
+      left: 85%;
+      width: 4px;
+      height: 4px;
+      background: var(--blu-scuro);
+      animation: kaze 9s ease-in-out infinite 1.5s;
+    }
+
+    .dot-5 {
+      top: 45%;
+      left: 45%;
+      width: 2px;
+      height: 2px;
+      background: var(--celeste);
+      animation: kaze 5s ease-in-out infinite 0.5s;
+    }
+
+    .dot-6 {
+      bottom: 20%;
+      left: 60%;
+      width: 4px;
+      height: 4px;
+      background: var(--arancio);
+      animation: kaze 7s ease-in-out infinite 2.5s;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: #010435;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 4px rgba(1, 4, 53, 0.1);
+    }
+
+    .hero h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 150px;
+      height: 1px;
+      background: linear-gradient(90deg, #010435, #5A7796, #E67E22, transparent);
+      animation: slideInLeft 1s ease 0.5s both;
+    }
+
+    .hero-small {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 800px;
+      color: #010435;
+      line-height: 1.8;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      animation: fadeInUp 1s ease 0.2s both;
+      position: relative;
+      z-index: 10;
+      padding: 1.5rem 2rem;
+      border-left: 1px solid #5A7796;
+      background: rgba(255, 255, 255, 0.15);
+      margin-bottom: 2rem;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeInUp 1s ease 1s both;
+      z-index: 20;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-indicator:hover {
+      opacity: 1;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.5rem;
+      letter-spacing: 2px;
+      color: #010435;
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+
+    .line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, #010435, #5A7796, #E67E22, transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(0.5); opacity: 0.3; }
+      50% { transform: scaleY(1); opacity: 0.6; }
+    }
+
+    /* Stats Section */
+    .stats-section {
+      min-height: 100vh;
+      padding: 80px 0;
+      background: white;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      width: 100%;
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stats-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .stats-line-h {
+      position: absolute;
+      height: 1px;
+      opacity: 0.1;
+    }
+
+    .stats-line-h-1 {
+      top: 30%;
+      left: -5%;
+      width: 110%;
+      background: linear-gradient(90deg, transparent, #010435, transparent);
+      animation: nagareHorizontal 30s ease-in-out infinite;
+    }
+
+    .stats-line-h-2 {
+      bottom: 40%;
+      right: -10%;
+      width: 120%;
+      background: linear-gradient(90deg, transparent, #E67E22, transparent);
+      animation: nagareHorizontal 25s ease-in-out infinite reverse;
+    }
+
+    .stats-line-v {
+      position: absolute;
+      width: 1px;
+      opacity: 0.1;
+    }
+
+    .stats-line-v-1 {
+      left: 15%;
+      top: -10%;
+      height: 120%;
+      background: linear-gradient(180deg, transparent, #5A7796, transparent);
+      animation: nagareVertical 28s ease-in-out infinite;
+    }
+
+    .stats-line-v-2 {
+      right: 25%;
+      top: -5%;
+      height: 110%;
+      background: linear-gradient(180deg, transparent, #010435, transparent);
+      animation: nagareVertical 22s ease-in-out infinite reverse;
+    }
+
+    .stats-curve {
+      position: absolute;
+      border: 1px solid;
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+
+    .stats-curve-1 {
+      top: -250px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      border-color: #010435;
+      animation: mawaru 80s linear infinite;
+    }
+
+    .stats-curve-2 {
+      bottom: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      border-color: #5A7796;
+      border-style: dashed;
+      animation: mawaru 70s linear infinite reverse;
+    }
+
+    .stats-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      opacity: 0.1;
+      filter: blur(1px);
+    }
+
+    .stats-dot-1 {
+      top: 20%;
+      left: 30%;
+      background: #E67E22;
+      animation: kaze 10s ease-in-out infinite;
+    }
+
+    .stats-dot-2 {
+      bottom: 30%;
+      right: 40%;
+      background: #010435;
+      animation: kaze 12s ease-in-out infinite 2s;
+    }
+
+    .display-main {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: #2d3748;
+      font-family: 'Playfair Display', serif;
+      max-width: 900px;
+      animation: fadeInUp 0.8s ease;
+      margin-bottom: 3rem;
+      letter-spacing: 0.02em;
+    }
+
+    .counter-wrapper {
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 400;
+      color: #010435;
+      line-height: 1;
+      font-family: 'Playfair Display', serif;
+      display: inline-block;
+      padding-bottom: 10px;
+      animation: fadeInScale 0.8s ease 0.3s both;
+      position: relative;
+    }
+
+    .counter-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, #010435, #5A7796, #E67E22, transparent);
+    }
+
+    .counter-label {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-left: 15px;
+      color: #5A7796;
+      font-weight: 300;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: #5A7796;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    /* Featured Editions Section */
+    .featured-section {
+      min-height: 100vh;
+      padding: 100px 0;
+      background: #EFF4FA;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .featured-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      width: 100%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: #010435;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, #010435, #5A7796, #E67E22, transparent);
+    }
+
+    .edition-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(1, 4, 53, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .edition-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(1, 4, 53, 0.1);
+    }
+
+    .edition-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(to bottom, #010435, #5A7796, #E67E22);
+      transition: height 0.3s ease;
+    }
+
+    .edition-card:hover::before {
+      height: 100%;
+    }
+
+    .edition-title {
+      font-size: 1.3rem;
+      color: #010435;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .edition-meta {
+      color: #5A7796;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .edition-author {
+      color: #E67E22;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .edition-institution {
+      color: #010435;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: transparent;
+      border: 1px solid #010435;
+      color: #010435;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-top: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(90, 119, 150, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover {
+      background: #010435;
+      color: white;
+      border-color: #010435;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 100vh;
+        padding-bottom: 0;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-small {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+      }
+      
+      .counter-wrapper {
+        font-size: 3.5rem;
+      }
+      
+      .counter-label {
+        font-size: 1.2rem;
+        margin-left: 5px;
+      }
+      
+      .thin-line-h-3, .thin-line-v-4, .curve-2, .curve-4, .diag-4, .diag-5 {
+        display: none;
+      }
+      
+      .stats-container,
+      .featured-container {
+        padding: 0 1.5rem;
+      }
+      
+      .scroll-indicator {
+        bottom: 15px;
+      }
+      
+      .scroll-indicator span {
+        font-size: 0.5rem;
+      }
+      
+      .line {
+        height: 30px;
+      }
+
+      .featured-section {
+        padding: 60px 0;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .edition-card {
+        padding: 1.5rem;
+      }
+
+      .grid {
+        gap: 1rem;
+      }
+
+      .stats-section {
+        padding: 60px 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+    }
+
+    /* Tablet */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .grid {
+        gap: 1.5rem;
+      }
+      
+      .edition-title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-[#EFF4FA] text-[#010435]" style="font-family: 'Playfair Display', serif;">
+<body>
   <div id="navbar-root"></div>
-  <!-- HERO -->
-  <section class="hero" style="min-height: 100vh; padding-top: 80px;">
+  
+  <!-- HERO SECTION -->
+  <section class="hero full-screen-section">
+    <div class="lines-container">
+      <div class="thin-line-h thin-line-h-1"></div>
+      <div class="thin-line-h thin-line-h-2"></div>
+      <div class="thin-line-h thin-line-h-3"></div>
+      <div class="thin-line-h thin-line-h-4"></div>
+      <div class="thin-line-h thin-line-h-5"></div>
+      
+      <div class="thin-line-v thin-line-v-1"></div>
+      <div class="thin-line-v thin-line-v-2"></div>
+      <div class="thin-line-v thin-line-v-3"></div>
+      <div class="thin-line-v thin-line-v-4"></div>
+      <div class="thin-line-v thin-line-v-5"></div>
+      
+      <div class="diagonal-line diag-1"></div>
+      <div class="diagonal-line diag-2"></div>
+      <div class="diagonal-line diag-3"></div>
+      <div class="diagonal-line diag-4"></div>
+      <div class="diagonal-line diag-5"></div>
+      
+      <div class="curve-line curve-1"></div>
+      <div class="curve-line curve-2"></div>
+      <div class="curve-line curve-3"></div>
+      <div class="curve-line curve-4"></div>
+      <div class="curve-line curve-5"></div>
+      
+      <div class="draw-line draw-1"></div>
+      <div class="draw-line draw-2"></div>
+      <div class="draw-line draw-3"></div>
+      <div class="draw-line draw-4"></div>
+      <div class="draw-line draw-5"></div>
+      
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+      <div class="dot dot-4"></div>
+      <div class="dot dot-5"></div>
+      <div class="dot dot-6"></div>
+    </div>
+    
     <div class="hero-content">
       <h1>
-        PHIDE: Philosophical<br>
-        digital edition<br>
-        catalogue
+        PHIDE:<br>
+        Philosophical Digital<br>
+        Edition Catalogue
       </h1>
-      <p class="hero-small bottom">
-        PHIDE aims to provide a comprehensive overview of the current landscape of digital scholarly editions in philosophy. It serves as a structured entry point for students and researchers to access and discover digital editions.
+      <p class="hero-small">
+        PHIDE aims to provide a comprehensive overview of the current landscape 
+        of digital scholarly editions in philosophy. It serves as a structured 
+        entry point for students and researchers to access and discover digital 
+        editions.
       </p>
     </div>
+    
     <div class="scroll-indicator">
       <span>SCROLL</span>
       <div class="line"></div>
     </div>
   </section>
 
-
-  <!-- SECOND SECTION -->
-  <section class="stats-section">
-    <div class="container-fluid px-md-5">
-      <div class="row">
-        <div class="col-12 col-lg-10">
+  <!-- STATS SECTION - FULL HEIGHT WITH ALL COUNTERS -->
+  <section class="stats-section full-screen-section">
+    <div class="stats-lines">
+      <div class="stats-line-h stats-line-h-1"></div>
+      <div class="stats-line-h stats-line-h-2"></div>
+      <div class="stats-line-v stats-line-v-1"></div>
+      <div class="stats-line-v stats-line-v-2"></div>
+      <div class="stats-curve stats-curve-1"></div>
+      <div class="stats-curve stats-curve-2"></div>
+      <div class="stats-dot stats-dot-1"></div>
+      <div class="stats-dot stats-dot-2"></div>
+    </div>
+    
+    <div class="stats-container">
+      <div>
         <h4 class="display-main">
-          Development of PHIDE began in 2026, with the goal of mapping the landscape of digital scholarly editions in philosophy and delivering an interactive, user-friendly platform. Students and researchers can browse, search, filter, and organize digital editions by language, historical period, tools and other research interests.
+          Development of PHIDE began in 2026, with the goal of mapping the 
+          landscape of digital scholarly editions in philosophy and delivering 
+          an interactive, user-friendly platform. Students and researchers can 
+          browse, search, filter, and organize digital editions by language, 
+          historical period, tools and other research interests.
         </h4>        
+      </div>
+      
+      <div class="mt-5">
+        <div class="counter-wrapper">
+          <span id="counter">0</span><span class="counter-label">editions</span>
         </div>
       </div>
-      <div class="row mt-5 align-items-start" style="font-family: 'Playfair Display', serif;">
-        <div class="col-12 col-md-6">
-          <div class="counter-wrapper">
-            <span id="counter">0</span><span class="counter-label">editions</span>
-          </div>
+      
+     
+    </div>
+  </section>
+
+  <!-- FEATURED EDITIONS SECTION -->
+  <section class="featured-section full-screen-section">
+    <div class="featured-container">
+      <h2 class="section-title">Some Editions from the Catalogue</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- MEGAdigital -->
+        <div class="edition-card">
+          <div class="edition-title">MEGAdigital - Online-Abteilung der historisch-kritischen Gesamtausgabe von Karl Marx und Friedrich Engels</div>
+          <div class="edition-author">Hubmann, Gerald</div>
+          <div class="edition-meta">Published: 2016</div>
+          <div class="edition-institution">Berlin-Brandenburgische Akademie der Wissenschaften</div>
         </div>
+
+        <!-- Hannah Arendt -->
+        <div class="edition-card">
+          <div class="edition-title">Hannah Arendt. Kritische Gesamtausgabe</div>
+          <div class="edition-author">Gerlach, Hannah; Kieslich Ingo</div>
+          <div class="edition-meta">Published: 2023</div>
+          <div class="edition-institution">Freie Universität Berlin</div>
+        </div>
+
+        <!-- Kant Opus Postumum -->
+        <div class="edition-card">
+          <div class="edition-title">Kant – Opus Postumum Online Edition</div>
+          <div class="edition-author">Gerhardt Volker; Karl, Jacqueline</div>
+          <div class="edition-meta">Published: 2013</div>
+          <div class="edition-institution">Berlin-Brandenburgische Akademie der Wissenschaften (BBAW)</div>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="text-center">
+        <a href="catalogue.html" class="cta-button">
+          EXPLORE THE COMPLETE CATALOG →
+        </a>
       </div>
     </div>
   </section>
 
-<!-- FOOTER -->
-<footer class="bg-[#111827] text-gray-400 py-4">
-  <div class="max-w-7xl mx-auto px-6 text-center text-sm">
-    <span class="text-white font-semibold">PHIDE</span>
-    <span class="mx-2">·</span>
-    <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline">
-      chiara.martina3@studio.unibo.it
-    </a>
-    <span class="mx-2">·</span>
-    <span>&copy; 2026 CC BY-SA 4.0</span>
-  </div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="bg-[#111827] text-gray-400 py-6">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+      <span class="text-white font-serif tracking-widest">PHIDE</span>
+      <span class="mx-2">·</span>
+      <a href="mailto:chiara.martina3@studio.unibo.it" class="hover:text-white underline transition-colors">
+        chiara.martina3@studio.unibo.it
+      </a>
+      <span class="mx-2">·</span>
+      <span>&copy; 2026 CC BY-SA 4.0</span>
+    </div>
+  </footer>
 
-<!-- Counter -->
-<script>
-  const counterElement = document.getElementById("counter");
-  const maxCount = 59;
-  let counter = 0;
-  let countingStarted = false; // evita di ripartire più volte
-  const counterSection = document.querySelector(".stats-section");
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !countingStarted) {
-        countingStarted = true;
-        const interval = setInterval(() => {
-          counter++;
-          counterElement.textContent = counter;
-          if (counter >= maxCount) {
-            clearInterval(interval);
+  <!-- Enhanced Counter Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Elementi contatore
+      const counterElement = document.getElementById("counter");
+      const languagesEl = document.getElementById("languages-counter");
+      const centuriesEl = document.getElementById("centuries-counter");
+      const authorsEl = document.getElementById("authors-counter");
+      const institutionsEl = document.getElementById("institutions-counter");
+      const countriesEl = document.getElementById("countries-counter");
+      const toolsEl = document.getElementById("tools-counter");
+      
+      // Valori target
+      const targets = {
+        editions: 59,
+        languages: 12,
+        centuries: 5,
+        authors: 23,
+        institutions: 15,
+        countries: 8,
+        tools: 31
+      };
+      
+      // Stati contatori
+      let counters = {
+        editions: 0,
+        languages: 0,
+        centuries: 0,
+        authors: 0,
+        institutions: 0,
+        countries: 0,
+        tools: 0
+      };
+      
+      let countingStarted = false;
+      let intervals = [];
+      
+      const counterSection = document.querySelector(".stats-section");
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !countingStarted) {
+            countingStarted = true;
+            
+            // Funzione per creare un intervallo per ogni contatore
+            const startCounter = (element, target, property) => {
+              return setInterval(() => {
+                if (counters[property] < target) {
+                  counters[property]++;
+                  if (element) element.textContent = counters[property];
+                }
+              }, 30);
+            };
+            
+            // Avvia tutti i contatori
+            intervals.push(startCounter(counterElement, targets.editions, 'editions'));
+            intervals.push(startCounter(languagesEl, targets.languages, 'languages'));
+            intervals.push(startCounter(centuriesEl, targets.centuries, 'centuries'));
+            intervals.push(startCounter(authorsEl, targets.authors, 'authors'));
+            intervals.push(startCounter(institutionsEl, targets.institutions, 'institutions'));
+            intervals.push(startCounter(countriesEl, targets.countries, 'countries'));
+            intervals.push(startCounter(toolsEl, targets.tools, 'tools'));
+            
+            // Ferma tutti gli intervalli dopo il completamento
+            setTimeout(() => {
+              intervals.forEach(interval => clearInterval(interval));
+              // Assicura che tutti i valori siano ai target
+              counterElement.textContent = targets.editions;
+              languagesEl.textContent = targets.languages;
+              centuriesEl.textContent = targets.centuries;
+              authorsEl.textContent = targets.authors;
+              institutionsEl.textContent = targets.institutions;
+              countriesEl.textContent = targets.countries;
+              toolsEl.textContent = targets.tools;
+            }, 2000);
           }
-        }, 50); 
-      }
+        });
+      }, { threshold: 0.3 }); 
+
+      observer.observe(counterSection);
     });
-  }, { threshold: 0.5 }); 
-
-  observer.observe(counterSection);
-</script>
-
-
-<!-- React Navbar Script -->
-<script type="text/babel">
-function Navbar() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [dropdownOpen, setDropdownOpen] = React.useState(false);
-  return (
-    <nav className="w-full bg-[#EFF4FA] border-b border-black fixed top-0 left-0 z-[5000]" style={{ fontFamily: 'Playfair Display, serif' }}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
-          <a href="index.html" className="text-xl font-semibold text-[#010435]">
-            PHIDE
-          </a>
-          {/* Desktop menu */}
-          <div className="hidden md:flex space-x-6 items-center">
-            {/* Dropdown */}
-            <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 font-medium hover:text-[#5A7796]">
-              Browse
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {dropdownOpen && (
-              <div className="absolute mt-2 w-48 bg-white border rounded shadow flex flex-col">
-                <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Catalogue
-                </a>
-                <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100">
-                  Schedule
-                </a>
-              </div>
-            )}
-          </div>
-            <a href="map.html" className="font-medium hover:text-[#5A7796]">Map</a>
-            <a href="documentation.html" className="font-medium hover:text-[#5A7796]">Documentation</a>
-          </div>
-          {/* Mobile button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white border-t px-4 py-3 space-y-2">
-          <a href="" className="block">Browse</a>
-           <a href="catalogue-period.html" className="block">Catalogue</a>
-          <a href="scheda.html" className="block">Scheda</a>
-          <a href="map.html" className="block">Map</a>
-          <a href="documentation.html" className="block">Documentation</a>
-        </div>
-      )}
-    </nav>
-  );
-}
-    ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
   </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+  <!-- React Navbar Script -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script type="text/babel">
+    function Navbar() {
+      const [mobileOpen, setMobileOpen] = React.useState(false);
+      const [dropdownOpen, setDropdownOpen] = React.useState(false);
+      const [scrolled, setScrolled] = React.useState(false);
 
-  let branches = [];
-  let currentIndex = 0;
+      React.useEffect(() => {
+        const handleScroll = () => {
+          setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
 
-  fetch(".data/list_json.json")
-    .then(res => {
-      if (!res.ok) throw new Error("JSON non trovato");
-      return res.json();
-    })
-    .then(data => {
-      const set = new Set();
-      data.forEach(item => {
-        if (item.branch) {
-          item.branch.split(",").forEach(b => set.add(b.trim()));
-        }
-      });
+      return (
+        <nav className={`w-full fixed top-0 left-0 z-[5000] transition-all duration-500 ${
+          scrolled ? 'bg-[#EFF4FA] shadow-lg backdrop-blur-sm bg-opacity-90' : 'bg-[#EFF4FA]'
+        }`} style={{ fontFamily: 'Playfair Display, serif' }}>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex justify-between h-16 items-center">
+              {/* Logo */}
+              <a href="index.html" className="text-xl font-semibold text-[#010435] relative group">
+                PHIDE
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#010435] to-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+              </a>
 
-      branches = [...set];
-      renderCarousel();
-    })
-    .catch(err => {
-      console.error("Errore caricamento JSON:", err);
-    });
+              {/* Desktop menu */}
+              <div className="hidden md:flex space-x-6 items-center">
+                {/* Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center gap-1 font-medium hover:text-[#5A7796] transition-all group"
+                  >
+                    Browse
+                    <svg className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
 
-  function renderCarousel() {
-    const container = document.getElementById("branch-carousel");
-    if (!container) return;
+                  {dropdownOpen && (
+                    <div className="absolute mt-2 w-48 bg-white border rounded shadow-xl flex flex-col animate-fadeIn">
+                      <a href="catalogue-period.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
+                        Catalogue
+                      </a>
+                      <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
+                        Schedule
+                      </a>
+                    </div>
+                  )}
+                </div>
 
-    container.innerHTML = "";
+                <a href="map.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+                  Map
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="documentation.html" className="font-medium hover:text-[#5A7796] transition-colors relative group">
+                  Documentation
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#5A7796] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </div>
 
-    branches.forEach((branch, index) => {
-      const card = document.createElement("div");
-      card.className = "branch-card";
+              {/* Mobile button */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="md:hidden p-2 hover:bg-gray-200 rounded-lg transition-all hover:scale-110"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mobileOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
 
-      if (index === currentIndex) card.classList.add("active");
-      else if (index === currentIndex - 1) card.classList.add("left");
-      else if (index === currentIndex + 1) card.classList.add("right");
+          {/* Mobile menu */}
+          {mobileOpen && (
+            <div className="md:hidden bg-white border-t shadow-lg animate-slideDown">
+              <div className="px-4 py-3 space-y-2">
+                <a href="catalogue-period.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Catalogue</a>
+                <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Scheda</a>
+                <a href="map.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Map</a>
+                <a href="documentation.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Documentation</a>
+              </div>
+            </div>
+          )}
+        </nav>
+      );
+    }
 
-      card.innerHTML = `
-        <h3>${branch}</h3>
-        <p>
-          Explore scholarly digital editions related to
-          <strong>${branch}</strong>.
-        </p>
-      `;
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease forwards;
+      }
+      .animate-slideDown {
+        animation: slideDown 0.3s ease forwards;
+      }
+    `;
+    document.head.appendChild(style);
 
-      card.onclick = () => {
-        window.location.href =
-          `catalogue.html?branch=${encodeURIComponent(branch)}`;
-      };
-
-      container.appendChild(card);
-    });
-  }
-
-  window.nextBranch = function () {
-    currentIndex = (currentIndex + 1) % branches.length;
-    renderCarousel();
-  };
-
-  window.prevBranch = function () {
-    currentIndex =
-      (currentIndex - 1 + branches.length) % branches.length;
-    renderCarousel();
-  };
-
-});
-</script>
-
+    ReactDOM.createRoot(document.getElementById("navbar-root")).render(<Navbar />);
+  </script>
 </body>
 </html>
