@@ -1228,24 +1228,13 @@
             
             // Avvia tutti i contatori
             intervals.push(startCounter(counterElement, targets.editions, 'editions'));
-            intervals.push(startCounter(languagesEl, targets.languages, 'languages'));
-            intervals.push(startCounter(centuriesEl, targets.centuries, 'centuries'));
-            intervals.push(startCounter(authorsEl, targets.authors, 'authors'));
-            intervals.push(startCounter(institutionsEl, targets.institutions, 'institutions'));
-            intervals.push(startCounter(countriesEl, targets.countries, 'countries'));
-            intervals.push(startCounter(toolsEl, targets.tools, 'tools'));
+            
             
             // Ferma tutti gli intervalli dopo il completamento
             setTimeout(() => {
               intervals.forEach(interval => clearInterval(interval));
               // Assicura che tutti i valori siano ai target
               counterElement.textContent = targets.editions;
-              languagesEl.textContent = targets.languages;
-              centuriesEl.textContent = targets.centuries;
-              authorsEl.textContent = targets.authors;
-              institutionsEl.textContent = targets.institutions;
-              countriesEl.textContent = targets.countries;
-              toolsEl.textContent = targets.tools;
             }, 2000);
           }
         });

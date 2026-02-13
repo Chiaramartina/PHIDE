@@ -19,6 +19,8 @@
     html, body {
       height: 100vh;
       overflow: hidden;
+      margin: 0;
+      padding: 0;
     }
 
     body {
@@ -72,11 +74,6 @@
       }
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -92,10 +89,6 @@
       100% { background-position: -200% 0; }
     }
 
-    .animate-fade-up {
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
     .animate-fade-scale {
       animation: fadeInScale 0.6s ease forwards;
     }
@@ -106,10 +99,6 @@
 
     .animate-slide-right {
       animation: slideInRight 0.8s ease forwards;
-    }
-
-    .animate-float {
-      animation: float 3s ease-in-out infinite;
     }
 
     .animate-fadeIn {
@@ -126,10 +115,10 @@
       animation: loading 1.5s infinite;
     }
 
-    /* Card Styles */
+    /* Card Styles - leggermente più piccole */
     .catalogue-card {
       position: relative;
-      border-radius: 1.5rem;
+      border-radius: 1.75rem;
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
@@ -141,6 +130,7 @@
       border: 2px solid rgba(1, 4, 53, 0.1);
       transform-origin: center;
       height: 100%;
+      width: 100%;
     }
 
     .catalogue-card::before {
@@ -157,7 +147,7 @@
     }
 
     .catalogue-card:hover {
-      transform: scale(1.02) translateY(-3px);
+      transform: scale(1.02) translateY(-4px);
       border-color: #010435;
       box-shadow: 0 20px 40px rgba(1, 4, 53, 0.2);
     }
@@ -172,7 +162,7 @@
     }
 
     .catalogue-card:hover img {
-      transform: scale(1.1);
+      transform: scale(1.12);
     }
 
     .card-overlay {
@@ -192,15 +182,16 @@
       z-index: 2;
       color: white;
       font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
       transition: all 0.3s ease;
       transform: translateY(0);
+      letter-spacing: 0.02em;
     }
 
     .catalogue-card:hover .card-title {
-      transform: translateY(-3px);
-      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+      transform: translateY(-4px);
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
     }
 
     .card-subtitle {
@@ -208,12 +199,13 @@
       z-index: 2;
       color: white;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.4s ease;
       max-width: 80%;
       margin: 0 auto;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .catalogue-card:hover .card-subtitle {
@@ -224,20 +216,22 @@
     /* Stats Badge */
     .stats-badge {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255, 255, 255, 0.9);
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 2rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 500;
       color: #010435;
       border: 1px solid rgba(1, 4, 53, 0.1);
       z-index: 3;
       opacity: 0;
       transform: translateY(-10px);
       transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .catalogue-card:hover .stats-badge {
@@ -257,6 +251,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       position: relative;
+      font-weight: 500;
     }
 
     .breadcrumb a::after {
@@ -276,21 +271,25 @@
 
     /* Page Title */
     .page-title {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 700;
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      font-weight: 500;
       color: #010435;
       line-height: 1.2;
       font-family: 'Playfair Display', serif;
+      letter-spacing: -0.02em;
     }
 
     /* Layout */
     #navbar-root {
       flex-shrink: 0;
+      height: 64px;
     }
 
     #main-root {
-      flex: 1;
+      flex: 1 1 auto;
       min-height: 0;
+      height: calc(100vh - 64px - 40px);
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
     }
@@ -300,18 +299,61 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding-top: 70px; /* Altezza navbar */
-      padding-bottom: 20px;
+      padding: 0.75rem 1rem 0 1rem;
+    }
+
+    footer {
+      flex-shrink: 0;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Scrollbar styling */
+    #main-root::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #main-root::-webkit-scrollbar-track {
+      background: #EFF4FA;
+    }
+
+    #main-root::-webkit-scrollbar-thumb {
+      background: #5A7796;
+      border-radius: 3px;
+    }
+
+    #main-root::-webkit-scrollbar-thumb:hover {
+      background: #010435;
     }
 
     /* Mobile Optimizations */
     @media (max-width: 768px) {
       .catalogue-card {
-        border-radius: 1rem;
+        border-radius: 1.25rem;
       }
       
       .page-title {
         font-size: 1.8rem;
+      }
+
+      #navbar-root {
+        height: 56px;
+      }
+
+      #main-root {
+        height: calc(100vh - 56px - 40px);
+      }
+
+      .stats-badge {
+        top: 0.75rem;
+        right: 0.75rem;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.85rem;
+      }
+
+      .card-subtitle {
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -323,14 +365,14 @@
   <!-- Main Content Container -->
   <div id="main-root">
     <div class="main-container">
-      <div class="max-w-6xl mx-auto px-4 w-full">
+      <div class="max-w-6xl mx-auto w-full h-full">
         {/* Il contenuto verrà renderizzato qui da React */}
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-[#111827] text-gray-400 py-2 flex-shrink-0">
+  <footer class="bg-[#111827] text-gray-400">
     <div class="max-w-7xl mx-auto px-6 text-center text-xs">
       <span class="text-white font-semibold">PHIDE</span>
       <span class="mx-2">·</span>
@@ -360,9 +402,9 @@ function Navbar() {
   return (
     <nav className={`w-full fixed top-0 left-0 z-[5000] transition-all duration-500 ${
       scrolled ? 'bg-[#EFF4FA] shadow-lg backdrop-blur-sm bg-opacity-90' : 'bg-[#EFF4FA]'
-    }`} style={{ fontFamily: 'Playfair Display, serif' }}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between h-16 items-center">
+    }`} style={{ fontFamily: 'Playfair Display, serif', height: '64px' }}>
+      <div className="max-w-7xl mx-auto px-4 h-full">
+        <div className="flex justify-between h-full items-center">
           {/* Logo */}
           <a href="index.html" className="text-xl font-semibold text-[#010435] relative group">
             PHIDE
@@ -462,10 +504,10 @@ function Navbar() {
       }
 
       return (
-        <main className="h-full flex items-start justify-center pt-14 pb-6">
-          <div className="max-w-6xl mx-auto px-4 w-full">
+        <main className="h-full w-full">
+          <div className="max-w-6xl mx-auto px-4 h-full flex flex-col">
             {/* Breadcrumb */}
-            <div className="mb-3">
+            <div className="mb-2 flex-shrink-0">
               <div className="breadcrumb">
                 <a href="index.html">Home</a>
                 <span className="mx-2">/</span>
@@ -474,73 +516,74 @@ function Navbar() {
             </div>
 
             {/* Page Header */}
-            <div className="mb-4 text-center">
+            <div className="mb-3 text-center flex-shrink-0">
               <h1 className="page-title">Explore the Collection</h1>
             </div>
 
             {/* Cards Container */}
-            <div className="space-y-4">
-              {/* Featured Card */}
-              <div className="animate-fade-scale" style={{ animationDelay: '0.1s' }}>
-                <div 
-                  className="catalogue-card h-56 md:h-72 relative group"
-                  onClick={() => handleCardClick("catalogue.html")}
-                  onMouseEnter={() => setHoveredCard(0)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                >
-                  <img src="photo/allimg.png" alt="All editions" className="absolute inset-0 w-full h-full object-cover"/>
-                  <div className="card-overlay"></div>
-                  <div className="stats-badge">
-                    <span className="font-semibold">59 editions</span>
-                  </div>
-                  <div className="relative z-10 text-center">
-                    <h2 className="card-title text-3xl md:text-4xl mb-1">All</h2>
-                    <p className="card-subtitle">Browse the complete collection</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Grid Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="animate-slide-left" style={{ animationDelay: '0.2s' }}>
+            <div className="flex-1 min-h-0 pb-2">
+              <div className="h-full flex flex-col gap-3">
+                {/* Featured Card - leggermente ridotta */}
+                <div className="animate-fade-scale h-[48%]" style={{ animationDelay: '0.1s' }}>
                   <div 
-                    className="catalogue-card h-48 md:h-64 relative group"
-                    onClick={() => handleCardClick("catalogue.html?highlight=epoch")}
-                    onMouseEnter={() => setHoveredCard(1)}
+                    className="catalogue-card h-full relative group"
+                    onClick={() => handleCardClick("catalogue.html")}
+                    onMouseEnter={() => setHoveredCard(0)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
-                    <img src="photo/epoch.png" alt="Period" className="absolute inset-0 w-full h-full object-cover"/>
+                    <img src="photo/allimg.png" alt="All editions" className="absolute inset-0 w-full h-full object-cover"/>
                     <div className="card-overlay"></div>
                     <div className="stats-badge">
-                      <span className="font-semibold">4 periods</span>
+                      <span className="font-semibold">59 editions</span>
                     </div>
-                    <div className="relative z-10 text-center">
-                      <h2 className="card-title text-2xl md:text-3xl mb-1">Period</h2>
-                      <p className="card-subtitle">Filter by historical era</p>
+                    <div className="relative z-10 text-center px-4">
+                      <h2 className="card-title text-3xl md:text-4xl mb-1">All</h2>
+                      <p className="card-subtitle text-sm md:text-base">Browse the complete collection</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="animate-slide-right" style={{ animationDelay: '0.2s' }}>
-                  <div 
-                    className="catalogue-card h-48 md:h-64 relative group"
-                    onClick={() => handleCardClick("catalogue.html?highlight=author")}
-                    onMouseEnter={() => setHoveredCard(2)}
-                    onMouseLeave={() => setHoveredCard(null)}
-                  >
-                    <img src="photo/author.png" alt="Author" className="absolute inset-0 w-full h-full object-cover"/>
-                    <div className="card-overlay"></div>
-                    <div className="stats-badge">
-                      <span className="font-semibold">25+ authors</span>
+                {/* Grid Cards - leggermente ridotte */}
+                <div className="h-[48%] grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="animate-slide-left h-full" style={{ animationDelay: '0.2s' }}>
+                    <div 
+                      className="catalogue-card h-full relative group"
+                      onClick={() => handleCardClick("catalogue.html?highlight=epoch")}
+                      onMouseEnter={() => setHoveredCard(1)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                    >
+                      <img src="photo/epoch.png" alt="Period" className="absolute inset-0 w-full h-full object-cover"/>
+                      <div className="card-overlay"></div>
+                      <div className="stats-badge">
+                        <span className="font-semibold">4 periods</span>
+                      </div>
+                      <div className="relative z-10 text-center px-3">
+                        <h2 className="card-title text-2xl md:text-3xl mb-1">Period</h2>
+                        <p className="card-subtitle text-xs md:text-sm">Filter by epoch</p>
+                      </div>
                     </div>
-                    <div className="relative z-10 text-center">
-                      <h2 className="card-title text-2xl md:text-3xl mb-1">Author</h2>
-                      <p className="card-subtitle">Discover by author</p>
+                  </div>
+
+                  <div className="animate-slide-right h-full" style={{ animationDelay: '0.2s' }}>
+                    <div 
+                      className="catalogue-card h-full relative group"
+                      onClick={() => handleCardClick("catalogue.html?highlight=author")}
+                      onMouseEnter={() => setHoveredCard(2)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                    >
+                      <img src="photo/author.png" alt="Author" className="absolute inset-0 w-full h-full object-cover"/>
+                      <div className="card-overlay"></div>
+                      <div className="stats-badge">
+                        <span className="font-semibold">25+ authors</span>
+                      </div>
+                      <div className="relative z-10 text-center px-3">
+                        <h2 className="card-title text-2xl md:text-3xl mb-1">Author</h2>
+                        <p className="card-subtitle text-xs md:text-sm">Discover by author</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-          
             </div>
           </div>
         </main>
