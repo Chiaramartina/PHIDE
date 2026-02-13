@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PHIDE - Documentation</title>
+  <title>Documentation</title>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -254,13 +254,13 @@
       <h2 class="text-2xl font-bold mb-4 font-serif text-[#010435]">Navigation Structure</h2>
       <p class="mb-4 text-gray-700 leading-relaxed">
         The main navigation bar includes the <strong class="text-[#010435]">Browse</strong> menu, which
-        provides access to two sections: <strong class="text-[#010435]">Schedule</strong> and
+        provides access to two sections: <strong class="text-[#010435]">Table of Contents</strong> and
         <strong class="text-[#010435]">Catalogue</strong>.
       </p>
 
-      <h3 class="text-xl font-semibold mt-6 mb-2 font-serif text-[#010435]">Schedule</h3>
+      <h3 class="text-xl font-semibold mt-6 mb-2 font-serif text-[#010435]">Table of Contents</h3>
       <p class="mb-4 text-gray-700 leading-relaxed">
-        The Schedule section provides a tabular overview of the digital scholarly
+        The Table of Contents section provides a tabular overview of the digital scholarly
         editions included in PHIDE. It is structured as a dataset that can be
         browsed, filtered, and exported in CSV, JSON, and Excel formats.
       </p>
@@ -280,7 +280,7 @@
       </ul>
       <p class="text-gray-700 leading-relaxed">
         Each record may include direct links to external resources (the
-        website of the digital edition), the Schedule entry, and the geographical
+        website of the digital edition), the Description entry, and the geographical
         localization of the project via the interactive map.
       </p>
 
@@ -370,8 +370,7 @@
     <section id="acknowledgements" class="animate-fade-up" style="animation-delay: 0.5s;">
       <h2 class="text-2xl font-bold mb-4 font-serif text-[#010435]">Acknowledgements</h2>
       <p class="text-gray-700 leading-relaxed">
-        I would like to thank <strong class="text-[#010435]">Paola Italia</strong> for her guidance and valuable directions
-        throughout this work.
+        I wish to thank <strong class="text-[#010435]">Paola Italia</strong> for her guidance and valuable advice throughout this work.
       </p>
     </section>
 
@@ -445,7 +444,7 @@ function Navbar() {
                   Catalogue
                 </a>
                 <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
-                  Schedule
+                  Table of Contents
                 </a>
               </div>
             )}
@@ -483,7 +482,7 @@ function Navbar() {
           <div className="px-4 py-3 space-y-2">
             <a href="" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Browse</a>
             <a href="catalogue-period.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Catalogue</a>
-            <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Schedule</a>
+            <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Table of Contents</a>
             <a href="map.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Map</a>
             <a href="documentation.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Documentation</a>
           </div>

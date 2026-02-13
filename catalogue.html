@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PHIDE - Catalogue</title>
+  <title>Catalogue</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
@@ -244,7 +244,7 @@ function Navbar() {
                   Catalogue
                 </a>
                 <a href="scheda.html" className="block px-4 py-2 hover:bg-gray-100 transition-all hover:pl-6">
-                  Schedule
+                  Table of Contents
                 </a>
               </div>
             )}
@@ -282,7 +282,7 @@ function Navbar() {
           <div className="px-4 py-3 space-y-2">
             <a href="" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Browse</a>
             <a href="catalogue-period.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Catalogue</a>
-            <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Schedule</a>
+            <a href="scheda.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Table of Contents</a>
             <a href="map.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Map</a>
             <a href="documentation.html" className="block px-3 py-2 hover:bg-gray-100 transition-all hover:pl-5">Documentation</a>
           </div>
@@ -915,7 +915,7 @@ function BookBrowserUI() {
             onClick={()=>setShowSchedule(prev=>!prev)} 
             className="px-3 py-1 bg-[#29341d] text-white rounded-xl font-['Playfair Display'] hover:bg-[#3a4a2a] hover:scale-105 transition-all"
           >
-            Schedule
+            Description
           </button>
 
           {selected.institution?.lat && selected.institution?.lng && (
