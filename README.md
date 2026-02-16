@@ -1,6 +1,6 @@
 # PHIDE – Philosophical Digital Scholarly Editions Catalogue
 
-**PHIDE** is a portal and catalogue of **philosophical digital scholarly editions (DSEs)**, designed to make these resources **findable, accessible, and understandable** for both students and specialists. It integrates descriptive metadata, visual browsing, interactive maps, and search tools.  
+**PHIDE** is a portal and catalogue of **philosophical digital scholarly editions (DSEs)**, designed to make these resources findable and understandable for both students and specialists. It integrates descriptive metadata, visual browsing, interactive maps, and search tools.  
 
 ## Features
 
